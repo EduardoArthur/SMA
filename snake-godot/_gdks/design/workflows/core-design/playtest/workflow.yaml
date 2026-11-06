@@ -1,0 +1,27 @@
+name: playtest-plan
+description: Plan and document playtesting sessions
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: 'Playtest Plan'
+  icon: '🧪'
+  time_estimate: '30-45 minutes'
+  output_path: '_gdks-output/02-design/core-design/playtest/'
+agents:
+  primary: playtest-coordinator
+outputs:
+  - playtest/playtest-plan.md
+steps:
+  - id: goals
+    name: 'Test Goals'
+    type: prompt
+  - id: protocol
+    name: 'Test Protocol'
+    type: prompt
+  - id: questions
+    name: 'Test Questions'
+    type: prompt
+  - id: document
+    name: 'Generate Playtest Plan'
+    type: template

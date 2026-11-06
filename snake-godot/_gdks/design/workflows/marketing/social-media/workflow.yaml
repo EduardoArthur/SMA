@@ -1,0 +1,27 @@
+name: social-media
+description: Create social media strategy and content plan
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Social Media Strategy"
+  icon: "📱"
+  time_estimate: "45-60 minutes"
+  output_path: "_gdks-output/02-design/marketing/social-media-plan.md"
+agents:
+  primary: marketing-strategist
+outputs:
+  - social-media-plan.md
+steps:
+  - id: platforms
+    name: "Platform Strategy"
+    type: prompt
+  - id: content
+    name: "Content Types"
+    type: prompt
+  - id: calendar
+    name: "Posting Calendar"
+    type: prompt
+  - id: document
+    name: "Generate Social Plan"
+    type: template

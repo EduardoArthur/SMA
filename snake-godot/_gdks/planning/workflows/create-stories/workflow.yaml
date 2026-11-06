@@ -1,0 +1,6 @@
+name: create-stories
+description: create-stories workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

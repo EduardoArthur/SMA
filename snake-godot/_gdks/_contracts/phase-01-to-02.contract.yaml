@@ -1,0 +1,38 @@
+schema_version: "1.0"
+from_phase: 1
+to_phase: 2
+name: "Ideation → Design Handoff"
+description: |
+  Requirements for advancing from Ideation to Design.
+  The Design team needs a clear concept, validated mechanics, and a
+  rough sense of scope and audience before creating a GDD.
+
+required_deliverables:
+  - id: concept-brief
+    path_glob: "_gdks-output/01-ideation/concept-brief.md"
+    min_word_count: 300
+    required_sections:
+      - "Core Concept"
+      - "Target Audience"
+
+  - id: mechanics-exploration
+    path_glob: "_gdks-output/01-ideation/mechanics-exploration.md"
+    min_word_count: 200
+    required_sections:
+      - "Core Mechanics"
+
+  - id: ideation-handoff
+    path_glob: "_gdks-output/01-ideation/ideation-handoff.md"
+    min_word_count: 100
+
+optional_deliverables:
+  - id: market-analysis
+    path_glob: "_gdks-output/01-ideation/market-analysis.md"
+
+quality_gates:
+  - type: no_open_blockers
+    description: "No unresolved blocker-level open questions"
+
+  - type: min_completion_pct
+    value: 75
+    description: "Phase 1 should be at least 75% complete"

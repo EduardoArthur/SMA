@@ -1,0 +1,29 @@
+name: quest-design
+description: Design quests, missions, and objectives
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Quest Design"
+  icon: "📜"
+  time_estimate: "30-45 minutes per quest"
+  output_path: "_gdks-output/02-design/narrative/quests/"
+agents:
+  primary: narrative-designer
+  support:
+    - game-design-director
+outputs:
+  - quests/[quest-name].md
+steps:
+  - id: overview
+    name: "Quest Overview"
+    type: prompt
+  - id: objectives
+    name: "Objectives & Rewards"
+    type: prompt
+  - id: narrative
+    name: "Story Integration"
+    type: prompt
+  - id: document
+    name: "Generate Quest Doc"
+    type: template

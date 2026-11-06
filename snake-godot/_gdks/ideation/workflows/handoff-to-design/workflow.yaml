@@ -1,0 +1,39 @@
+name: handoff-to-design
+title: "Handoff to Design Team"
+description: "Create handoff package for Design Team"
+agent: ideation-coordinator
+version: 1.0.0
+
+inputs:
+  - name: all_ideation_docs
+    type: folder
+    required: true
+    path: "_gdks-output/01-ideation/"
+
+outputs:
+  - name: ideation-handoff.md
+    path: "_gdks-output/01-ideation/ideation-handoff.md"
+    description: "Complete handoff package"
+
+config:
+  estimated_time: "30-45 minutes"
+  prerequisites:
+    - "concept-brief.md"
+    - "market-analysis.md"
+    - "mechanics-exploration.md"
+  next_team: "design"
+  next_agent: "game-design-director"
+
+steps:
+  - id: review
+    name: "Review All Documents"
+    type: read
+  - id: validate
+    name: "Final Validation"
+    type: validation
+  - id: compile
+    name: "Compile Handoff"
+    type: generate
+  - id: intro
+    name: "Design Team Intro"
+    type: display

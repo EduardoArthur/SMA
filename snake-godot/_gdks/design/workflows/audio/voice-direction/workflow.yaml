@@ -1,0 +1,29 @@
+name: voice-direction
+description: Create voice over direction and casting guidelines
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Voice Direction"
+  icon: "🎤"
+  time_estimate: "45-60 minutes"
+  output_path: "_gdks-output/02-design/audio/voice-direction.md"
+agents:
+  primary: audio-director
+  support:
+    - narrative-designer
+outputs:
+  - voice-direction.md
+steps:
+  - id: casting
+    name: "Casting Guidelines"
+    type: prompt
+  - id: direction
+    name: "Performance Direction"
+    type: prompt
+  - id: technical
+    name: "Technical Requirements"
+    type: prompt
+  - id: document
+    name: "Generate Voice Doc"
+    type: template

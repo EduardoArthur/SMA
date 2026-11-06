@@ -1,0 +1,54 @@
+name: godot-architecture
+description: Design the Godot 4 architecture for the project (scene tree, autoloads, signal map, script hierarchy)
+version: 1.0.0
+module: engine
+phase: 4
+
+metadata:
+  display_name: "Godot 4 Architecture"
+  icon: "🏗️"
+  time_estimate: "60-90 minutes"
+  difficulty: "advanced"
+  output_path: "_gdks-output/04-engine/godot-architecture.md"
+
+agents:
+  primary: godot-architect
+
+inputs:
+  required:
+    - sprint-plan.md
+    - stories.md
+
+outputs:
+  - godot-architecture.md
+  - scene-tree-overview.md
+
+steps:
+  - id: review-planning
+    name: "Review Planning Output"
+    type: analysis
+    description: "Read sprint-plan and stories to understand what needs to be built"
+
+  - id: scene-tree
+    name: "Design Top-Level Scene Tree"
+    type: prompt
+    description: "Sketch Main, World, UI, Camera structure"
+
+  - id: autoloads
+    name: "Plan Autoloads"
+    type: prompt
+    description: "Identify genuine global state (GameManager, AudioManager, EventBus, SaveSystem)"
+
+  - id: signal-map
+    name: "Draft Signal Map"
+    type: prompt
+    description: "Who emits what, who consumes what, via EventBus or direct"
+
+  - id: script-hierarchy
+    name: "Script Inheritance Chains"
+    type: prompt
+    description: "Base classes, component scripts, what extends what"
+
+  - id: document
+    name: "Generate godot-architecture.md"
+    type: template

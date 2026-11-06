@@ -1,0 +1,39 @@
+# Workflow: Party Mode
+# Multi-agent collaboration session
+
+name: party-mode
+title: Party Mode - Multi-Agent Collaboration
+description: Facilitate a collaborative session with multiple GD-KS agents
+
+# Input requirements
+inputs:
+  - name: topic
+    type: string
+    required: true
+    description: Topic or problem to discuss
+  
+  - name: agents
+    type: array
+    required: false
+    default: ["concept-brainstormer", "game-design-director", "ue5-architect"]
+    description: Agents to include in the party
+
+# Workflow steps
+steps:
+  - id: setup-party
+    name: Set Up Party
+    type: prompt
+    
+  - id: facilitate-discussion
+    name: Facilitate Discussion
+    type: multi-agent
+    
+  - id: synthesize-results
+    name: Synthesize Results
+    type: summary
+
+# Party configuration
+config:
+  max_agents: 5
+  turn_order: round_robin
+  moderator: gdks-master

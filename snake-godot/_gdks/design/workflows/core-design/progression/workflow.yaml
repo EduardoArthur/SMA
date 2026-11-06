@@ -1,0 +1,53 @@
+name: progression-system
+description: Design comprehensive progression and reward systems
+version: 1.0.0
+module: design
+phase: 2
+
+metadata:
+  display_name: 'Progression System'
+  icon: '📈'
+  time_estimate: '60-90 minutes'
+  difficulty: 'intermediate'
+  output_path: '_gdks-output/02-design/core-design/progression/'
+
+agents:
+  primary: progression-architect
+  support:
+    - game-design-director
+    - balance-engineer
+
+outputs:
+  - progression/progression-system.md
+  - progression/rewards-structure.md
+  - progression/economy.md
+
+steps:
+  - id: goals
+    name: 'Player Goals'
+    type: prompt
+    description: 'What are short, medium, and long-term player goals?'
+    
+  - id: rewards
+    name: 'Reward Types'
+    type: prompt
+    description: 'What rewards exist and when are they given?'
+    
+  - id: unlocks
+    name: 'Unlock System'
+    type: prompt
+    description: 'What do players unlock and how?'
+    
+  - id: economy
+    name: 'Economy Design'
+    type: prompt
+    description: 'What currencies and resources exist?'
+    
+  - id: pacing
+    name: 'Progression Pacing'
+    type: prompt
+    description: 'How fast do players progress?'
+    
+  - id: document
+    name: 'Generate Progression Spec'
+    type: template

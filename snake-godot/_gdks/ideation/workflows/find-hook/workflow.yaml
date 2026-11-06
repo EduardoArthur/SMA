@@ -1,0 +1,27 @@
+name: find-hook
+title: "Find Your Game's Hook"
+description: "Identify what makes your game unique"
+agent: concept-brainstormer
+version: 1.0.0
+
+outputs:
+  - name: hook-definition.md
+    path: "_gdks-output/01-ideation/hook-definition.md"
+    description: "Documented unique hook"
+
+config:
+  estimated_time: "20-30 minutes"
+
+steps:
+  - id: explore
+    name: "Explore Uniqueness"
+    type: interactive
+  - id: test
+    name: "Test Hook Strength"
+    type: analysis
+  - id: refine
+    name: "Refine Hook"
+    type: interactive
+  - id: document
+    name: "Document Hook"
+    type: generate

@@ -1,0 +1,68 @@
+name: tutorial
+title: GD-KS Guided Tutorial
+description: Walk through a complete mini-project (Cosmic Explorer) to learn the full GD-KS flow in ~15 minutes.
+version: 1.0.0
+module: core
+phase: 0
+
+metadata:
+  display_name: 'GD-KS Tutorial'
+  icon: '🎓'
+  time_estimate: '15-20 minutes (fast mode: 5-7 min)'
+  difficulty: 'beginner'
+
+agents:
+  primary: gdks-master
+
+inputs:
+  required: []
+  optional: []
+
+outputs:
+  - tutorial-state.yaml
+
+steps:
+  - id: welcome
+    name: 'Welcome'
+    type: prompt
+    description: 'Introduction to GD-KS and the 4 phases'
+
+  - id: project-setup
+    name: 'Project Setup'
+    type: generate
+    description: 'Create the Cosmic Explorer sample project in sandbox mode'
+
+  - id: meet-sparky
+    name: 'Meet Sparky (Ideation)'
+    type: prompt
+    description: 'Introduction to the first agent (Concept Brainstormer)'
+
+  - id: brainstorm
+    name: 'Run *brainstorm'
+    type: prompt
+    description: 'Guided brainstorm session producing concept-brief.md'
+
+  - id: handoff-to-design
+    name: 'Handoff to Design'
+    type: prompt
+    description: 'Explain contracts and handoff flow'
+
+  - id: create-gdd
+    name: 'Create GDD (Design)'
+    type: prompt
+    description: 'Introduction to Diana and the Design team'
+
+  - id: planning-intro
+    name: 'Planning Team Tour'
+    type: prompt
+    description: 'Introduction to Sam and sprint planning'
+
+  - id: engine-intro
+    name: 'Engine Team Tour'
+    type: prompt
+    description: 'Introduction to Ulysses and the code prompt workflow'
+
+  - id: wrap-up
+    name: 'Wrap-up and next steps'
+    type: prompt
+    description: 'Review, suggested next actions, links to docs'
