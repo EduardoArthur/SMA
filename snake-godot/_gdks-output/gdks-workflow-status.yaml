@@ -26,7 +26,7 @@ team:
 status:
   current_phase: "engine"
   current_agent: "gabi"
-  current_workflow: "M7-polish"
+  current_workflow: "M3-web-export"
   started_at: "2026-11-06"
   last_activity: "2026-11-07"
 
@@ -80,6 +80,18 @@ phases:
 
 # Activity Log
 activity_log:
+  - timestamp: "2026-11-07"
+    action: "milestone_completed"
+    agent: "erico"
+    details: "M3 verified by user: web build runs in PC browser and on phone (same Wi-Fi). All milestones M1-M7 done; open: M1 headless test run, Fredoka font file, optional publish."
+  - timestamp: "2026-11-07"
+    action: "milestone_setup"
+    agent: "erico"
+    details: "M3 project setup done: export_presets.cfg (Web, single-threaded, build/web/index.html, tests excluded), /build/ in .gitignore, checklist in 03-engine/web-export.md. Waiting on user: export templates, Run in Browser, phone test, speed cap tuning."
+  - timestamp: "2026-11-07"
+    action: "milestone_completed"
+    agent: "gina"
+    details: "M7 code polish verified by user (new screens, icon, generated audio, icon-matched face). Remaining: Fredoka font file, M3 web export + phone tuning, M1 test run."
   - timestamp: "2026-11-07"
     action: "art_updated"
     agent: "aurora"
