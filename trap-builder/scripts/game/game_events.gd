@@ -13,10 +13,23 @@ signal trap_selected(trap: TrapData)
 signal trap_placed(trap: TrapData, cell: Vector2i)
 signal trap_removed(trap: TrapData, cell: Vector2i)
 
+signal trap_rotated(cell: Vector2i)
+signal invalid_action()
+
 # --- Ação (relay da Simulation) ---
 signal trap_triggered(trap_id: int, kind: StringName, cell: Vector2i)
+signal trap_resolved(trap_id: int, kind: StringName, cell: Vector2i)
+signal pig_spawned(pig_id: int)
+signal pig_pushed(pig_id: int)
+signal pig_turned_back(pig_id: int)
 signal pig_captured(pig_id: int, cause: StringName)
 signal pig_escaped(pig_id: int, path_edges: PackedInt32Array)
+## Quantos ventiladores ligados na onda atual (0 fora da Ação). Usado pelo áudio.
+signal fan_count_changed(count: int)
+
+# --- visuais que o áudio acompanha ---
+signal wolf_reacted(expression: StringName)
+signal star_stamped(index: int)
 
 # --- controles ---
 signal speed_changed(mult: int)

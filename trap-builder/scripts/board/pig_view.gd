@@ -6,6 +6,9 @@ extends Node2D
 const BODY := Color("f4a6b8")
 const SNOUT := Color("e77f9b")
 const INK := Color("2b1b17")
+# Arte SVG (S21). Sem os arquivos, cai no desenho placeholder.
+static var TEX_IDLE: Texture2D = load("res://art/pigs/pig.svg") if ResourceLoader.exists("res://art/pigs/pig.svg") else null
+static var TEX_WALK: Texture2D = load("res://art/pigs/pig_walk.svg") if ResourceLoader.exists("res://art/pigs/pig_walk.svg") else null
 
 var pig_id: int = -1
 var _state: int = -1
@@ -49,6 +52,15 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	var bob := absf(sin(_bob_time)) * -3.0
 	var o := Vector2(0, bob)
+	if TEX_IDLE != null and TEX_WALK != null:
+		# arte SVG (S21): 128 px desenhado a 64 px, espelhado pela direção
+		var walking := _state == PigState.State.WALK or _state == PigState.State.BACK
+		var tex: Texture2D = TEX_WALK if walking and int(_bob_time / PI) % 2 == 1 else TEX_IDLE
+		draw_set_transform(o, 0.0, Vector2(0.5 * _facing, 0.5))
+		draw_texture(tex, -tex.get_size() / 2.0 + Vector2(0, -10))
+		draw_set_transform(Vector2.ZERO)
+		_draw_state_mark(o)
+		return
 	# corpo (elipse)
 	draw_set_transform(o, 0.0, Vector2(1.25, 1.0))
 	draw_circle(Vector2.ZERO, 16.0, BODY)
@@ -62,7 +74,10 @@ func _draw() -> void:
 	draw_circle(snout, 6.0, SNOUT)
 	draw_arc(snout, 6.0, 0.0, TAU, 16, INK, 2.0)
 	draw_circle(o + Vector2(9.0 * _facing, -6), 2.5, INK)
-	# indicadores de estado (placeholder até a S17/S21)
+	_draw_state_mark(o)
+
+
+func _draw_state_mark(o: Vector2) -> void:
 	var font := ThemeDB.fallback_font
 	var mark := ""
 	match _state:
@@ -72,4 +87,4 @@ func _draw() -> void:
 		PigState.State.CLIMB: mark = "^"
 		PigState.State.STUN: mark = "*"
 	if mark != "":
-		draw_string(font, o + Vector2(-10, -26), mark, HORIZONTAL_ALIGNMENT_CENTER, 20, 18, INK)
+		draw_string(font, o + Vector2(-10, -40), mark, HORIZONTAL_ALIGNMENT_CENTER, 20, 20, INK)

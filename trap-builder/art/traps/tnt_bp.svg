@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<rect x="22" y="30" width="84" height="78" rx="6" fill="none" stroke="#f2f6ff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="22" y="56" width="84" height="26" rx="0" fill="none" stroke="#f2f6ff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="36" y1="62" x2="50" y2="62" stroke="#f2f6ff" stroke-width="4" stroke-linecap="round"/>
+<line x1="43" y1="62" x2="43" y2="76" stroke="#f2f6ff" stroke-width="4" stroke-linecap="round"/>
+<line x1="56" y1="76" x2="56" y2="62" stroke="#f2f6ff" stroke-width="4" stroke-linecap="round"/>
+<line x1="56" y1="62" x2="70" y2="76" stroke="#f2f6ff" stroke-width="4" stroke-linecap="round"/>
+<line x1="70" y1="76" x2="70" y2="62" stroke="#f2f6ff" stroke-width="4" stroke-linecap="round"/>
+<line x1="78" y1="62" x2="92" y2="62" stroke="#f2f6ff" stroke-width="4" stroke-linecap="round"/>
+<line x1="85" y1="62" x2="85" y2="76" stroke="#f2f6ff" stroke-width="4" stroke-linecap="round"/>
+<path d="M86 30 q6 -14 18 -16" fill="none" stroke="#f2f6ff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="106" cy="14" r="5" fill="none" />
+</svg>

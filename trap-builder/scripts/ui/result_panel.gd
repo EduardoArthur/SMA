@@ -69,6 +69,7 @@ func show_result(result: SimResult, level: LevelData, has_next: bool) -> void:
 		var s := _stars[i]
 		tw.tween_interval(0.15)
 		tw.tween_callback(s.add_theme_color_override.bind("font_color", UiStyle.STAR_ON))
+		tw.tween_callback(GameEvents.star_stamped.emit.bind(i))
 		tw.tween_property(s, "scale", Vector2(1.5, 1.5), 0.0)
 		tw.tween_property(s, "scale", Vector2.ONE, 0.2)
 

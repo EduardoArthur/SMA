@@ -76,6 +76,8 @@ phases:
       S06_S08: "código escrito (Input Map em código, posicionar/girar/remover, tiles válidos, fantasma, visual da bigorna)"
       S09: "pendente: paridade da Fase 1 via tests/run_tests.gd (testes adiados pelo usuário)"
       S10_S16: "código escrito (catálogo, HUD, barra de ação, visuais e FX de TNT/isca/ventilador/piche, barranco lotado, resultado com estrelas, menu de fases); paridade das fases 2–5 pendente (testes)"
+      manual_check: "2026-11-07: usuário testou o jogo no Godot (S01–S16): tudo funcionando; testes headless (S09/S16) ainda não rodados"
+      S17_S22: "código escrito (lobo reativo, transição wipe, prévia de bigorna + caminho da fuga, áudio gerado + AudioDirector, 22 SVGs gerados + integração, preset Web + CREDITS); não testado no Godot"
       llm_prompts: false
 
 # Activity Log
@@ -136,6 +138,14 @@ activity_log:
     action: "implementation"
     agent: "godot-gdscript-lead"
     details: "S10–S16: layout com tabuleiro a 86% + coluna lateral; catálogo Catapimba, HUD, ActionBar, ResultPanel, MenuScreen; visuais/FX das 5 armadilhas; aviso de isca sem bifurcação; contador de barranco; fases 2–5 jogáveis"
+  - timestamp: "2026-11-07"
+    action: "manual_playtest"
+    agent: "user"
+    details: "Jogo testado no Godot: S01–S16 funcionando"
+  - timestamp: "2026-11-07"
+    action: "implementation"
+    agent: "godot-gdscript-lead"
+    details: "S17–S22: WolfView, transição de 0,7 s, prévia tracejada da bigorna e caminho da fuga, tools/generate_audio.js (25 SFX + 4 músicas) + AudioDirector, tools/generate_art.js (22 SVGs), export_presets.cfg (Web), CREDITS.md"
 
 # Notes
 notes:

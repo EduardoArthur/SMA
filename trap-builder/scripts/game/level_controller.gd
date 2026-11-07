@@ -198,6 +198,7 @@ func _click_cell(cell: Vector2i) -> void:
 	if selected_trap == null:
 		return
 	if not plan.can_place(graph, selected_trap, cell, level.budget):
+		GameEvents.invalid_action.emit()
 		return
 	var dir: Vector2i = selected_dir if selected_trap.has_direction else Vector2i.RIGHT
 	plan.add(selected_trap, cell, dir)
@@ -219,9 +220,11 @@ func _rotate_at(cell: Vector2i) -> void:
 	var placed := plan.at(cell)
 	if placed != null and placed.trap.has_direction:
 		placed.dir = _rotated(placed.dir)
+		GameEvents.trap_rotated.emit(cell)
 		_plan_changed()
 	elif selected_trap != null and selected_trap.has_direction:
 		selected_dir = _rotated(selected_dir)
+		GameEvents.trap_rotated.emit(cell)
 		_refresh_board_cursor()
 
 
@@ -273,12 +276,17 @@ func _play() -> void:
 	_accum = 0.0
 	paused = false
 	_enter(Phase.TRANSICAO)
-	# S18: aqui entra a transição visual (0,7 s). Por enquanto vai direto.
-	_enter(Phase.ACAO)
+	# S18: a planta azul se desfaz (0,7 s) antes de a simulação começar.
+	var this_sim := sim
+	await board.play_transition()
+	if phase == Phase.TRANSICAO and sim == this_sim:
+		_enter(Phase.ACAO)
+		GameEvents.fan_count_changed.emit(_fan_count())
 
 
 ## Ajustar / abortar / repetir: descarta a simulação e mantém o plano.
 func _back_to_blueprint() -> void:
+	GameEvents.fan_count_changed.emit(0)
 	board.detach_sim()
 	sim = null
 	paused = false
@@ -304,7 +312,11 @@ func _center_result_panel() -> void:
 func _connect_relays(s: Simulation) -> void:
 	s.pig_captured.connect(GameEvents.pig_captured.emit)
 	s.pig_escaped.connect(GameEvents.pig_escaped.emit)
+	s.pig_spawned.connect(GameEvents.pig_spawned.emit)
+	s.pig_pushed.connect(_relay_pig_pushed)
+	s.pig_state_changed.connect(_relay_pig_state)
 	s.trap_triggered.connect(_relay_trap_triggered)
+	s.trap_resolved.connect(_relay_trap_resolved)
 
 
 func _relay_trap_triggered(trap_id: int) -> void:
@@ -312,6 +324,30 @@ func _relay_trap_triggered(trap_id: int) -> void:
 		return
 	var t: TrapState = sim.traps[trap_id]
 	GameEvents.trap_triggered.emit(trap_id, t.kind, t.cell)
+
+
+func _relay_trap_resolved(trap_id: int) -> void:
+	if sim == null:
+		return
+	var t: TrapState = sim.traps[trap_id]
+	GameEvents.trap_resolved.emit(trap_id, t.kind, t.cell)
+
+
+func _relay_pig_pushed(pig_id: int, _to_cell: Vector2i) -> void:
+	GameEvents.pig_pushed.emit(pig_id)
+
+
+func _relay_pig_state(pig_id: int, state: int) -> void:
+	if state == PigState.State.BACK:
+		GameEvents.pig_turned_back.emit(pig_id)
+
+
+func _fan_count() -> int:
+	var n: int = 0
+	for p in plan.placements:
+		if p.trap.id == &"fan":
+			n += 1
+	return n
 
 
 # --- planos de referência (atalho de desenvolvimento) ------------------------

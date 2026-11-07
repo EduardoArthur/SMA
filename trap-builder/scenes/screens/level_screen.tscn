@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/game/level_controller.gd" id="1_ctrl"]
 [ext_resource type="PackedScene" path="res://scenes/board/board.tscn" id="2_board"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/ui/catalog_panel.gd" id="4_catalog"]
 [ext_resource type="Script" path="res://scripts/ui/action_bar.gd" id="5_action"]
 [ext_resource type="Script" path="res://scripts/ui/result_panel.gd" id="6_result"]
+[ext_resource type="Script" path="res://scripts/board/wolf_view.gd" id="7_wolf"]
 
 [node name="LevelScreen" type="Node2D"]
 script = ExtResource("1_ctrl")
@@ -43,6 +44,10 @@ offset_top = 66.0
 offset_right = 1264.0
 offset_bottom = 330.0
 script = ExtResource("5_action")
+
+[node name="Wolf" type="Node2D" parent="UI"]
+position = Vector2(1142, 450)
+script = ExtResource("7_wolf")
 
 [node name="ResultPanel" type="PanelContainer" parent="UI"]
 visible = false

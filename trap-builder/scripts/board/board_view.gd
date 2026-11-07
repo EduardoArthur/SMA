@@ -52,6 +52,16 @@ var _cursor_dir: Vector2i = Vector2i.UP
 var _cursor_valid: bool = false
 var _cursor_visible: bool = true
 
+# texturas SVG das armadilhas (S21), por nome
+var _art: Dictionary[String, Texture2D] = {}
+
+# transição (S18): -1 = parada; 0..1 = progresso do wipe
+var _transition: float = -1.0
+# célula -> direções para as células vizinhas na rota (para desenhar por tile)
+var _route_links: Dictionary[Vector2i, Array] = {}
+# caminhos das fugas (S19): Array de Array[int] (ids de aresta)
+var _escape_paths: Array = []
+
 # efeitos temporários (só visual): {kind, pos, t0, dur}
 var _fx: Array = []  # sem tipo: recebe o retorno de filter()
 
@@ -62,6 +72,8 @@ func setup(p_level: LevelData, p_graph: RouteGraph) -> void:
 	level = p_level
 	graph = p_graph
 	_build_decor()
+	_build_route_links()
+	_load_art()
 	queue_redraw()
 
 
@@ -94,11 +106,14 @@ func attach_sim(p_sim: Simulation) -> void:
 	sim = p_sim
 	sim.trap_resolved.connect(_on_sim_trap_resolved)
 	sim.pig_captured.connect(_on_sim_pig_captured)
+	sim.pig_escaped.connect(_on_sim_pig_escaped)
 
 
 func detach_sim() -> void:
 	sim = null
 	_fx.clear()
+	_escape_paths.clear()
+	_transition = -1.0
 	for view in _pig_views.values():
 		if is_instance_valid(view):
 			view.queue_free()
@@ -178,6 +193,50 @@ func _draw() -> void:
 	_draw_traps()
 	if blueprint_mode:
 		_draw_cursor()
+	elif _transition >= 0.0:
+		# S18: a planta azul por cima, ainda não "apagada" pelo wipe diagonal
+		_draw_blueprint_cells(_transition)
+		_draw_nodes(BP_LINE, BP_BG, _transition)
+
+
+# --- transição Blueprint -> Ação (S18) ---------------------------------------
+
+## Anima o wipe diagonal (0,7 s). Retorna o sinal de término do Tween.
+func play_transition(duration: float = 0.7) -> Signal:
+	_transition = 0.0
+	var tw := create_tween()
+	tw.tween_method(_set_transition, 0.0, 1.0, duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	tw.tween_callback(_set_transition.bind(-1.0))
+	return tw.finished
+
+
+func _set_transition(value: float) -> void:
+	_transition = value
+	queue_redraw()
+
+
+## 0..1: em que momento do wipe esta célula deixa de ser planta azul.
+func _wipe_value(c: Vector2i) -> float:
+	var total := float(level.grid_size.x) + float(level.grid_size.y) * 0.3
+	return (float(c.x) + float(c.y) * 0.3) / total
+
+
+func _build_route_links() -> void:
+	_route_links.clear()
+	for e in graph.edge_cells.size():
+		var chain: Array[Vector2i] = [graph.node_cells[graph.edge_from[e]]]
+		for c: Vector2i in graph.edge_cells[e]:
+			chain.append(c)
+		chain.append(graph.node_cells[graph.edge_to[e]])
+		for i in chain.size() - 1:
+			var a: Vector2i = chain[i]
+			var b: Vector2i = chain[i + 1]
+			if not _route_links.has(a):
+				_route_links[a] = []
+			if not _route_links.has(b):
+				_route_links[b] = []
+			_route_links[a].append(b - a)
+			_route_links[b].append(a - b)
 
 
 func _rect(c: Vector2i) -> Rect2:
@@ -189,25 +248,53 @@ func _center(c: Vector2i) -> Vector2:
 
 
 func _draw_blueprint() -> void:
-	var size := board_size_px()
-	draw_rect(Rect2(Vector2.ZERO, size), BP_BG)
-	for x in level.grid_size.x + 1:
-		draw_line(Vector2(x * TILE, 0), Vector2(x * TILE, size.y), BP_GRID, 1.0)
-	for y in level.grid_size.y + 1:
-		draw_line(Vector2(0, y * TILE), Vector2(size.x, y * TILE), BP_GRID, 1.0)
-	for c in level.ravine:
-		_draw_hatch(_rect(c), BP_DANGER)
-	for c in level.marked:
-		draw_rect(_rect(c).grow(-10), BP_LINE, false, 2.0)
-	# rotas iluminadas
-	for e in graph.edge_cells.size():
-		var pts := PackedVector2Array([_center(graph.node_cells[graph.edge_from[e]])])
-		for c: Vector2i in graph.edge_cells[e]:
-			pts.append(_center(c))
-		pts.append(_center(graph.node_cells[graph.edge_to[e]]))
-		draw_polyline(pts, BP_ROUTE, 6.0)
+	_draw_blueprint_cells(-1.0)
+	_draw_blocked_preview()
 	_draw_nodes(BP_LINE, BP_BG)
 	_draw_spawn_count()
+
+
+## Desenha a planta azul tile a tile. Com threshold >= 0 (transição), só as
+## células cujo wipe ainda não passou.
+func _draw_blueprint_cells(threshold: float) -> void:
+	for y in level.grid_size.y:
+		for x in level.grid_size.x:
+			var c := Vector2i(x, y)
+			if threshold >= 0.0 and _wipe_value(c) < threshold:
+				continue
+			var r := _rect(c)
+			draw_rect(r, BP_BG)
+			draw_line(r.position, r.position + Vector2(TILE, 0), BP_GRID, 1.0)
+			draw_line(r.position, r.position + Vector2(0, TILE), BP_GRID, 1.0)
+			match graph.tile_type(c):
+				RouteGraph.TileType.RAVINE:
+					_draw_hatch(r, BP_DANGER)
+				RouteGraph.TileType.MARKED:
+					draw_rect(r.grow(-10), BP_LINE, false, 2.0)
+			# rotas iluminadas: meio-segmento do centro até cada vizinho
+			if _route_links.has(c):
+				var center := r.get_center()
+				for d: Vector2i in _route_links[c]:
+					draw_line(center, center + Vector2(d) * (TILE * 0.5), BP_ROUTE, 6.0)
+				draw_circle(center, 3.0, BP_ROUTE)
+
+
+# S19: aresta que a bigorna vai bloquear aparece tracejada no Blueprint.
+func _draw_blocked_preview() -> void:
+	if plan == null:
+		return
+	for p in plan.placements:
+		if p.trap.id != &"anvil":
+			continue
+		var edge_id: int = graph.edge_at(p.cell).x
+		if edge_id < 0:
+			continue
+		for c: Vector2i in graph.edge_cells[edge_id]:
+			var center := _center(c)
+			for d: Vector2i in _route_links.get(c, []):
+				var end := center + Vector2(d) * (TILE * 0.5)
+				draw_line(center, end, BP_BG, 8.0)
+				draw_dashed_line(center, end, BP_ROUTE, 4.0, 7.0)
 
 
 func _draw_action() -> void:
@@ -242,11 +329,33 @@ func _draw_action() -> void:
 				for c: Vector2i in graph.edge_cells[e]:
 					draw_rect(_rect(c), Color(0, 0, 0, 0.12))
 	_draw_nodes(INK, PAPER)
+	_draw_escape_paths()
 
 
-func _draw_nodes(line: Color, fill: Color) -> void:
+# S19: caminho de cada porco que fugiu, em vermelho (visível até voltar ao Blueprint).
+func _draw_escape_paths() -> void:
+	for path: Array in _escape_paths:
+		for e: int in path:
+			var pts := PackedVector2Array([_center(graph.node_cells[graph.edge_from[e]])])
+			for c: Vector2i in graph.edge_cells[e]:
+				pts.append(_center(c))
+			pts.append(_center(graph.node_cells[graph.edge_to[e]]))
+			draw_polyline(pts, Color(BP_DANGER, 0.75), 5.0)
+	if not _escape_paths.is_empty():
+		for i in graph.node_cells.size():
+			if graph.node_kinds[i] == RouteNode.Kind.EXIT:
+				draw_arc(_center(graph.node_cells[i]), 28.0, 0.0, TAU, 24, BP_DANGER, 4.0)
+
+
+func _on_sim_pig_escaped(_pig_id: int, path_edges: PackedInt32Array) -> void:
+	_escape_paths.append(Array(path_edges))
+
+
+func _draw_nodes(line: Color, fill: Color, threshold: float = -1.0) -> void:
 	var font := ThemeDB.fallback_font
 	for i in graph.node_cells.size():
+		if threshold >= 0.0 and _wipe_value(graph.node_cells[i]) < threshold:
+			continue
 		var center := _center(graph.node_cells[i])
 		match graph.node_kinds[i]:
 			RouteNode.Kind.SPAWN:
@@ -258,7 +367,7 @@ func _draw_nodes(line: Color, fill: Color) -> void:
 				draw_colored_polygon(PackedVector2Array([center + Vector2(-8, -24), center + Vector2(20, -14), center + Vector2(-8, -4)]), BP_DANGER)
 				draw_string(font, center + Vector2(-24, 30), "SAÍDA", HORIZONTAL_ALIGNMENT_CENTER, 48, 12, line)
 			RouteNode.Kind.FORK:
-				if blueprint_mode:
+				if blueprint_mode or threshold >= 0.0:
 					draw_colored_polygon(PackedVector2Array([center + Vector2(0, -10), center + Vector2(10, 0), center + Vector2(0, 10), center + Vector2(-10, 0)]), line)
 
 
@@ -363,9 +472,13 @@ func _draw_traps() -> void:
 func _draw_trap_blueprint(p: Placement) -> void:
 	var font := ThemeDB.fallback_font
 	var r := _rect(p.cell).grow(-12)
-	draw_rect(r, BP_LINE, false, 3.0)
-	draw_string(font, r.position + Vector2(0, r.size.y * 0.7), TRAP_LETTERS.get(p.trap.id, "?"),
-			HORIZONTAL_ALIGNMENT_CENTER, r.size.x, 22, BP_LINE)
+	var bp_name := "%s_bp" % ("fan_base" if p.trap.id == &"fan" else String(p.trap.id))
+	if _tex(bp_name) != null:
+		_draw_tex(bp_name, _center(p.cell))
+	else:
+		draw_rect(r, BP_LINE, false, 3.0)
+		draw_string(font, r.position + Vector2(0, r.size.y * 0.7), TRAP_LETTERS.get(p.trap.id, "?"),
+				HORIZONTAL_ALIGNMENT_CENTER, r.size.x, 22, BP_LINE)
 	match p.trap.id:
 		&"fan":
 			_draw_arrow(_center(p.cell), p.dir, BP_ROUTE)
@@ -395,6 +508,8 @@ func _draw_trap_action(p: Placement, state: TrapState) -> void:
 	var r := _rect(p.cell).grow(-12)
 	var color: Color = TRAP_COLORS.get(p.trap.id, Color.MAGENTA)
 	var now := Time.get_ticks_msec() / 1000.0
+	if _draw_trap_textured(p, state, center, now):
+		return
 	match p.trap.id:
 		&"anvil":
 			if state != null and state.fallen:
@@ -457,6 +572,83 @@ func _draw_trap_action(p: Placement, state: TrapState) -> void:
 			var bubble := fmod(now * 0.8, 1.0)
 			draw_arc(center + Vector2(-8, 2), 3.0 + 3.0 * bubble, 0.0, TAU, 12, Color("4a4458"), 2.0)
 			draw_arc(center + Vector2(9, 6), 2.0 + 2.0 * fmod(bubble + 0.5, 1.0), 0.0, TAU, 12, Color("4a4458"), 2.0)
+
+
+# --- arte SVG (S21) ----------------------------------------------------------
+
+const ART_TRAPS: Array[String] = [
+	"anvil", "anvil_fallen", "tnt", "bait", "bait_empty", "fan_base", "fan_blades", "tar",
+	"anvil_bp", "tnt_bp", "bait_bp", "fan_base_bp", "tar_bp",
+]
+const ART_SCALE: float = 0.5  # SVGs desenhados a 128 px; tile de 64 px
+
+
+func _load_art() -> void:
+	for art_name in ART_TRAPS:
+		var path := "res://art/traps/%s.svg" % art_name
+		if ResourceLoader.exists(path):
+			_art[art_name] = load(path)
+
+
+func _tex(art_name: String) -> Texture2D:
+	return _art.get(art_name)
+
+
+func _draw_tex(art_name: String, center: Vector2, rotation_rad: float = 0.0, scale_mult: float = 1.0) -> void:
+	var tex := _tex(art_name)
+	if tex == null:
+		return
+	draw_set_transform(center, rotation_rad, Vector2.ONE * ART_SCALE * scale_mult)
+	draw_texture(tex, -tex.get_size() / 2.0)
+	draw_set_transform(Vector2.ZERO)
+
+
+## Desenha a armadilha com a arte SVG. Retorna false se faltar textura (usa o placeholder).
+func _draw_trap_textured(p: Placement, state: TrapState, center: Vector2, now: float) -> bool:
+	match p.trap.id:
+		&"anvil":
+			if _tex("anvil") == null or _tex("anvil_fallen") == null:
+				return false
+			if state != null and state.fallen:
+				_draw_tex("anvil_fallen", center)
+			elif state != null and state.triggered:
+				var k := 1.0 - float(state.timer) / float(SimConst.ANVIL_SHADOW)
+				draw_circle(center + Vector2(0, 10), 8.0 + 18.0 * k, Color(0, 0, 0, 0.35))
+				_draw_tex("anvil", center + Vector2(0, -130.0 * (1.0 - k)))
+			else:
+				draw_circle(center, 5.0, Color(0, 0, 0, 0.2))
+		&"tnt":
+			if _tex("tnt") == null:
+				return false
+			if state != null and state.consumed:
+				return true
+			_draw_tex("tnt", center)
+			if state != null and state.triggered:
+				var tip := center + Vector2(21, -25)
+				var flicker := 5.0 + 3.0 * sin(now * 40.0)
+				draw_circle(tip, flicker, Color("ffd84d"))
+				draw_circle(tip, flicker * 0.5, Color.WHITE)
+		&"bait":
+			if _tex("bait") == null or _tex("bait_empty") == null:
+				return false
+			_draw_tex("bait_empty" if state != null and state.consumed else "bait", center)
+		&"fan":
+			if _tex("fan_base") == null or _tex("fan_blades") == null:
+				return false
+			_draw_tex("fan_base", center)
+			_draw_tex("fan_blades", center, now * 12.0, 0.9)
+			_draw_arrow(center, p.dir, INK)
+			if state != null:
+				_draw_fan_current(state, now)
+		&"tar":
+			if _tex("tar") == null:
+				return false
+			_draw_tex("tar", center)
+			var bubble := fmod(now * 0.8, 1.0)
+			draw_arc(center + Vector2(-10, -2), 3.0 + 3.0 * bubble, 0.0, TAU, 12, Color("4a4458"), 2.0)
+		_:
+			return false
+	return true
 
 
 # Ventilador: linhas de vento correndo na corrente (S13).
