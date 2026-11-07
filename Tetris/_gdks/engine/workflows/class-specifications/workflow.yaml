@@ -1,0 +1,6 @@
+name: class-specifications
+description: class-specifications workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

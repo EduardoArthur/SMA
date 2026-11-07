@@ -1,0 +1,6 @@
+name: ue5-architecture
+description: ue5-architecture workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

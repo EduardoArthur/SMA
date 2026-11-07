@@ -1,0 +1,28 @@
+schema_version: '1.0'
+project:
+  id: tetris
+  name: Tetris
+  created_at: '2026-11-07T19:34:00.861Z'
+  updated_at: '2026-11-07T19:34:00.861Z'
+preset: solo-indie
+target_engine: unreal-5
+language: pt-BR
+current_phase: 1
+phases_completed: []
+phases_in_progress: []
+phase_progress:
+  '1':
+    status: not_started
+    deliverables: []
+  '2':
+    status: not_started
+    deliverables: []
+  '3':
+    status: not_started
+    deliverables: []
+  '4':
+    status: not_started
+    deliverables: []
+active_agents: []
+decisions: []
+open_questions: []

@@ -1,0 +1,6 @@
+name: blueprint-specifications
+description: blueprint-specifications workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

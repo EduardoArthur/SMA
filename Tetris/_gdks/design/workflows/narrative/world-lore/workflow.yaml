@@ -1,0 +1,30 @@
+name: world-lore
+description: Create comprehensive world lore including history, mythology, and cultures
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "World Lore"
+  icon: "🌍"
+  time_estimate: "60-90 minutes"
+  output_path: "_gdks-output/02-design/narrative/world-lore.md"
+agents:
+  primary: world-builder
+outputs:
+  - world-lore.md
+steps:
+  - id: history
+    name: "World History"
+    type: prompt
+  - id: mythology
+    name: "Mythology & Religion"
+    type: prompt
+  - id: cultures
+    name: "Cultures & Societies"
+    type: prompt
+  - id: rules
+    name: "World Rules"
+    type: prompt
+  - id: document
+    name: "Generate Lore Document"
+    type: template

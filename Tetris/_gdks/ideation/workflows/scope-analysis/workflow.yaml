@@ -1,0 +1,27 @@
+name: scope-analysis
+title: "Project Scope Analysis"
+description: "Assess and define realistic project scope"
+agent: concept-brainstormer
+version: 1.0.0
+
+outputs:
+  - name: scope-assessment.md
+    path: "_gdks-output/01-ideation/scope-assessment.md"
+    description: "Scope analysis document"
+
+config:
+  estimated_time: "20-30 minutes"
+
+steps:
+  - id: assess
+    name: "Assess Ambition"
+    type: interactive
+  - id: resources
+    name: "Consider Resources"
+    type: interactive
+  - id: scope
+    name: "Define Scope Tiers"
+    type: analysis
+  - id: recommend
+    name: "Recommend Scope"
+    type: generate

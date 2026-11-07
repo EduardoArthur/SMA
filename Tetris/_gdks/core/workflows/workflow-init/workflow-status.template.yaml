@@ -1,0 +1,86 @@
+# GD-KS Workflow Status Template
+# This template is used to generate the initial workflow status file
+
+# Project Information
+project:
+  name: "{{project_name}}"
+  codename: "{{project_codename}}"
+  description: "{{project_description}}"
+  game_type: "{{game_type}}"
+  created_at: "{{created_at}}"
+  updated_at: "{{updated_at}}"
+
+# Selected Track
+track:
+  selected: "{{track}}"  # quick, standard, or full
+  phases: {{phases}}
+
+# Team Configuration
+team:
+  size: "{{team_size}}"
+  experience_level: "{{experience_level}}"
+
+# Current Status
+status:
+  current_phase: "ideation"
+  current_agent: null
+  current_workflow: null
+  started_at: "{{created_at}}"
+  last_activity: "{{updated_at}}"
+
+# Phase Progress
+phases:
+  ideation:
+    status: "not_started"  # not_started, in_progress, completed
+    started_at: null
+    completed_at: null
+    deliverables:
+      concept_brief: false
+      market_analysis: false
+      mechanics_exploration: false
+      ideation_handoff: false
+  
+  design:
+    status: "not_started"
+    started_at: null
+    completed_at: null
+    deliverables:
+      gdd: false
+      level_design: false
+      narrative_design: false
+      technical_design: false
+      art_bible: false
+      audio_bible: false
+      design_handoff: false
+  
+  planning:
+    status: "not_started"
+    started_at: null
+    completed_at: null
+    deliverables:
+      roadmap: false
+      epics: false
+      stories: false
+      sprint_plan: false
+      planning_handoff: false
+  
+  engine:
+    status: "not_started"
+    started_at: null
+    completed_at: null
+    deliverables:
+      ue5_architecture: false
+      cpp_specifications: false
+      blueprint_specifications: false
+      implementation_guides: false
+      llm_prompts: false
+
+# Activity Log
+activity_log:
+  - timestamp: "{{created_at}}"
+    action: "workflow_initialized"
+    agent: "gdks-master"
+    details: "Project initialized with {{track}} track"
+
+# Notes
+notes: []

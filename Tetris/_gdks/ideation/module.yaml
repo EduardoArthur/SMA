@@ -1,0 +1,135 @@
+# GD-KS Ideation Module
+# Team 1: Brainstorming and Concept Development
+
+name: ideation
+version: 1.0.0
+description: "Ideation Team - Transform ideas into validated game concepts"
+
+metadata:
+  display_name: "🧠 Ideation Team"
+  icon: "🧠"
+  team_number: 1
+  phase: "ideation"
+  color: "#FFD700"
+
+# Team overview
+overview: |
+  The Ideation Team is your first stop in the GD-KS pipeline.
+  We help you transform vague ideas into clear, validated concepts
+  ready for the Design Team.
+  
+  Our Four Specialists:
+  - Sparky (💡) - Creative brainstorming and concept development
+  - Marcus (📊) - Market research and audience analysis
+  - Mira (⚙️) - Gameplay mechanics and core loop design
+  - Ivy (🎯) - Team coordination and handoff preparation
+
+# Agents in this module
+agents:
+  - id: concept-brainstormer
+    name: "Sparky"
+    title: "Concept Brainstormer"
+    icon: "💡"
+    description: "Creative ideation and concept development"
+    primary_workflow: "brainstorm-concept"
+  
+  - id: market-analyst
+    name: "Marcus"
+    title: "Market Analyst"
+    icon: "📊"
+    description: "Market research and competitor analysis"
+    primary_workflow: "market-analysis"
+  
+  - id: mechanics-explorer
+    name: "Mira"
+    title: "Mechanics Explorer"
+    icon: "⚙️"
+    description: "Gameplay mechanics and core loop design"
+    primary_workflow: "mechanics-exploration"
+  
+  - id: ideation-coordinator
+    name: "Ivy"
+    title: "Ideation Coordinator"
+    icon: "🎯"
+    description: "Team synthesis and handoff coordination"
+    primary_workflow: "concept-synthesis"
+
+# Workflows
+workflows:
+  # Sparky's workflows
+  - id: brainstorm-concept
+    agent: concept-brainstormer
+    description: "Creative brainstorming session"
+  - id: find-hook
+    agent: concept-brainstormer
+    description: "Identify unique selling point"
+  - id: scope-analysis
+    agent: concept-brainstormer
+    description: "Assess project scope"
+  
+  # Marcus's workflows
+  - id: market-analysis
+    agent: market-analyst
+    description: "Comprehensive market research"
+  
+  # Mira's workflows
+  - id: mechanics-exploration
+    agent: mechanics-explorer
+    description: "Deep dive into gameplay mechanics"
+  
+  # Ivy's workflows
+  - id: concept-synthesis
+    agent: ideation-coordinator
+    description: "Synthesize all ideation work"
+  - id: concept-validation
+    agent: ideation-coordinator
+    description: "Validate concept completeness"
+  - id: handoff-to-design
+    agent: ideation-coordinator
+    description: "Prepare handoff package"
+
+# Output documents
+outputs:
+  folder: "_gdks-output/01-ideation"
+  documents:
+    - name: "concept-brief.md"
+      description: "Core game concept documentation"
+      created_by: "concept-brainstormer"
+    - name: "market-analysis.md"
+      description: "Market research and positioning"
+      created_by: "market-analyst"
+    - name: "mechanics-exploration.md"
+      description: "Gameplay mechanics documentation"
+      created_by: "mechanics-explorer"
+    - name: "ideation-handoff.md"
+      description: "Handoff package for Design Team"
+      created_by: "ideation-coordinator"
+
+# Recommended workflow order
+recommended_flow:
+  - step: 1
+    agent: "concept-brainstormer"
+    workflow: "brainstorm-concept"
+    output: "concept-brief.md"
+  - step: 2
+    agent: "market-analyst"
+    workflow: "market-analysis"
+    output: "market-analysis.md"
+  - step: 3
+    agent: "mechanics-explorer"
+    workflow: "mechanics-exploration"
+    output: "mechanics-exploration.md"
+  - step: 4
+    agent: "ideation-coordinator"
+    workflow: "concept-synthesis"
+    output: "ideation-handoff.md"
+
+# Handoff to next team
+handoff:
+  next_team: "design"
+  next_agent: "game-design-director"
+  required_documents:
+    - "concept-brief.md"
+    - "market-analysis.md"
+    - "mechanics-exploration.md"
+    - "ideation-handoff.md"

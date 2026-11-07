@@ -1,0 +1,16 @@
+name: engine
+version: 0.1.0
+description: Engine Team - Unreal Engine 5 implementation guidance
+required: false
+default_selected: true
+agents:
+  - ue5-architect
+  - ue5-programmer-lead
+  - ue5-systems-specialist
+  - ue5-blueprint-specialist
+  - engine-coordinator
+workflows:
+  - ue5-architecture
+  - class-specifications
+  - blueprint-specifications
+  - code-generation-prompt

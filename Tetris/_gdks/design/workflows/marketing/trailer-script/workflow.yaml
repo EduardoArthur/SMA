@@ -1,0 +1,29 @@
+name: trailer-script
+description: Create trailer script with beats and timing
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Trailer Script"
+  icon: "🎬"
+  time_estimate: "45-60 minutes"
+  output_path: "_gdks-output/02-design/marketing/trailer-script.md"
+agents:
+  primary: marketing-strategist
+  support:
+    - narrative-designer
+outputs:
+  - trailer-script.md
+steps:
+  - id: hook
+    name: "Opening Hook"
+    type: prompt
+  - id: beats
+    name: "Story Beats"
+    type: prompt
+  - id: timing
+    name: "Timing & Pacing"
+    type: prompt
+  - id: document
+    name: "Generate Trailer Script"
+    type: template

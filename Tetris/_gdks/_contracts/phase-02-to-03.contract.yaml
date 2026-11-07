@@ -1,0 +1,83 @@
+schema_version: "1.0"
+from_phase: 2
+to_phase: 3
+name: "Design → Planning Handoff"
+description: |
+  Requirements for advancing from Design to Planning.
+  This is the contract that explicitly prevents the bug that motivated
+  the v0.2 expansion: Planning was starting before Design had finished
+  narrative, art, audio, and marketing documentation.
+
+required_deliverables:
+  # Core GDD
+  - id: gdd-main
+    path_glob: "_gdks-output/02-design/gdd/main.md"
+    min_word_count: 500
+    required_sections:
+      - "Pillars"
+      - "Core Mechanics"
+      - "Target Audience"
+
+  - id: design-pillars
+    path_glob: "_gdks-output/02-design/core-design/pillars/design-pillars.md"
+
+  # Core Design (v0.3 additions)
+  - id: core-mechanics-spec
+    path_glob: "_gdks-output/02-design/core-design/mechanics/core-mechanics.md"
+    min_word_count: 200
+
+  - id: gameplay-loops
+    path_glob: "_gdks-output/02-design/core-design/loops/gameplay-loops.md"
+
+  - id: progression-system
+    path_glob: "_gdks-output/02-design/core-design/progression/progression-system.md"
+
+  # Narrative (conditional — only required for narrative-heavy games)
+  - id: story-bible
+    path_glob: "_gdks-output/02-design/narrative/story-bible.md"
+    min_word_count: 300
+    required_when:
+      preset: ["narrative-heavy", "studio", "small-studio"]
+
+  - id: character-profiles
+    path_glob: "_gdks-output/02-design/narrative/character-profiles.md"
+    required_when:
+      preset: ["narrative-heavy", "studio"]
+
+  # Art direction
+  - id: art-bible
+    path_glob: "_gdks-output/02-design/art/art-bible.md"
+    required_when:
+      preset: ["studio", "small-studio", "solo-indie", "narrative-heavy"]
+
+  # Audio direction
+  - id: audio-bible
+    path_glob: "_gdks-output/02-design/audio/audio-bible.md"
+    required_when:
+      preset: ["studio", "small-studio", "solo-indie"]
+
+  # Level design (at least one documented level)
+  - id: level-documentation
+    path_glob: "_gdks-output/02-design/level-design/levels.md"
+
+optional_deliverables:
+  - id: marketing-strategy
+    path_glob: "_gdks-output/02-design/marketing/strategy.md"
+
+  - id: balance-framework
+    path_glob: "_gdks-output/02-design/core-design/balance/balance-framework.md"
+
+  - id: playtest-plan
+    path_glob: "_gdks-output/02-design/core-design/playtest/playtest-plan.md"
+
+quality_gates:
+  - type: no_open_blockers
+    description: "No unresolved blocker-level open questions"
+
+  - type: min_completion_pct
+    value: 80
+    description: "Phase 2 should be at least 80% complete"
+
+  - type: all_agents_signoff
+    agents: ["diana", "dylan"]
+    description: "Diana (GDD) and Dylan (Coordinator) must have been active"

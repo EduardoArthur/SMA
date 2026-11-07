@@ -1,0 +1,44 @@
+name: mechanics-exploration
+title: "Gameplay Mechanics Deep Dive"
+description: "Explore core loop, mechanics, and systems"
+agent: mechanics-explorer
+version: 1.0.0
+
+inputs:
+  - name: concept_brief
+    type: file
+    required: true
+    description: "Path to concept-brief.md"
+
+outputs:
+  - name: mechanics-exploration.md
+    path: "_gdks-output/01-ideation/mechanics-exploration.md"
+    description: "Complete mechanics documentation"
+
+config:
+  estimated_time: "45-90 minutes"
+  difficulty: "intermediate"
+  prerequisites:
+    - "concept-brief.md"
+  next_workflows:
+    - "concept-synthesis"
+
+steps:
+  - id: core-loop
+    name: "Design Core Loop"
+    type: interactive
+  - id: mechanics
+    name: "Inventory Mechanics"
+    type: interactive
+  - id: systems
+    name: "Map Systems"
+    type: analysis
+  - id: depth
+    name: "Analyze Depth"
+    type: analysis
+  - id: feel
+    name: "Define Game Feel"
+    type: interactive
+  - id: document
+    name: "Create Documentation"
+    type: generate

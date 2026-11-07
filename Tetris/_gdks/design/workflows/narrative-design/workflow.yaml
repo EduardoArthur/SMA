@@ -1,0 +1,6 @@
+name: narrative-design
+description: narrative-design workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

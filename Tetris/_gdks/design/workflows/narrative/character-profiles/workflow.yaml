@@ -1,0 +1,41 @@
+name: character-profiles
+description: Create detailed character documentation for all major characters
+version: 1.0.0
+module: design
+phase: 2
+
+metadata:
+  display_name: "Character Profiles"
+  icon: "👤"
+  time_estimate: "30-60 minutes per character"
+  difficulty: "intermediate"
+  output_path: "_gdks-output/02-design/narrative/characters/"
+
+agents:
+  primary: character-designer
+  support:
+    - narrative-designer
+
+outputs:
+  - characters/[character-name].md
+
+steps:
+  - id: basics
+    name: "Character Basics"
+    type: prompt
+    
+  - id: psychology
+    name: "Psychology & Motivation"
+    type: prompt
+    
+  - id: arc
+    name: "Character Arc"
+    type: prompt
+    
+  - id: relationships
+    name: "Relationships"
+    type: prompt
+    
+  - id: document
+    name: "Generate Profile"
+    type: template

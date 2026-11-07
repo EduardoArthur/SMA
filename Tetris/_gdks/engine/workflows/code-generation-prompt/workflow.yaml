@@ -1,0 +1,6 @@
+name: code-generation-prompt
+description: code-generation-prompt workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

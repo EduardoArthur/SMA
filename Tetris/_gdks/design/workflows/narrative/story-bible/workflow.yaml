@@ -1,0 +1,58 @@
+name: story-bible
+description: Create comprehensive story documentation including plot, themes, and narrative structure
+version: 1.0.0
+module: design
+phase: 2
+
+metadata:
+  display_name: "Story Bible"
+  icon: "📚"
+  time_estimate: "60-90 minutes"
+  difficulty: "intermediate"
+  output_path: "_gdks-output/02-design/narrative/story-bible.md"
+
+agents:
+  primary: narrative-designer
+  support:
+    - world-builder
+    - character-designer
+
+inputs:
+  required:
+    - concept-brief.md
+  optional:
+    - character-profiles/
+
+outputs:
+  - story-bible.md
+
+steps:
+  - id: overview
+    name: "Story Overview"
+    type: prompt
+    description: "Define the core story premise and genre"
+    
+  - id: themes
+    name: "Themes & Messages"
+    type: prompt
+    description: "Identify major themes and what the story explores"
+    
+  - id: structure
+    name: "Story Structure"
+    type: prompt
+    description: "Map out the narrative arc and major beats"
+    
+  - id: conflicts
+    name: "Central Conflicts"
+    type: prompt
+    description: "Define main conflicts and stakes"
+    
+  - id: resolution
+    name: "Resolution & Endings"
+    type: prompt
+    description: "Plan story resolution and possible endings"
+    
+  - id: document
+    name: "Generate Story Bible"
+    type: template
+    template: story-bible.template.md

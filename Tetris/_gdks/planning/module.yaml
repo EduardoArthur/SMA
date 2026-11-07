@@ -1,0 +1,14 @@
+name: planning
+version: 0.1.0
+description: Planning Team - Sprint planning, epics, stories
+required: false
+default_selected: true
+agents:
+  - scrum-master
+  - technical-producer
+  - documentation-specialist
+  - planning-coordinator
+workflows:
+  - sprint-planning
+  - create-epics
+  - create-stories

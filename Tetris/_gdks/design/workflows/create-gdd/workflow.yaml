@@ -1,0 +1,6 @@
+name: create-gdd
+description: create-gdd workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

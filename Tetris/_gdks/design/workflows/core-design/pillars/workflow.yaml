@@ -1,0 +1,27 @@
+name: design-pillars
+description: Define core design pillars that guide all decisions
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: 'Design Pillars'
+  icon: '🏛️'
+  time_estimate: '30-45 minutes'
+  output_path: '_gdks-output/02-design/core-design/'
+agents:
+  primary: game-design-director
+outputs:
+  - design-pillars.md
+steps:
+  - id: fantasy
+    name: 'Core Fantasy'
+    type: prompt
+  - id: pillars
+    name: 'Define Pillars'
+    type: prompt
+  - id: filter
+    name: 'Pillar Filter Test'
+    type: prompt
+  - id: document
+    name: 'Generate Pillars Document'
+    type: template

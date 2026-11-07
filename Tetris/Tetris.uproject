@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{A7D54A38-4C15-2B29-F25E-53AAFF8CE48A}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "Tetris",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}

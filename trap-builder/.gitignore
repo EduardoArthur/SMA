@@ -1,5 +1,15 @@
 # Godot 4+ specific ignores
 .godot/
+
+# Godot 3.x import cache and legacy import metadata.
+.import/
+*.import
+
+# Imported translations are regenerated from their source files.
+*.translation
+
+# Local IDE settings.
+.idea/
 /android/
 
 # Export output (web build etc.)

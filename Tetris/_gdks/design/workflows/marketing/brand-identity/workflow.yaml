@@ -1,0 +1,29 @@
+name: brand-identity
+description: Define brand identity, voice, and visual guidelines
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Brand Identity"
+  icon: "🎯"
+  time_estimate: "45-60 minutes"
+  output_path: "_gdks-output/02-design/marketing/brand-identity.md"
+agents:
+  primary: marketing-strategist
+  support:
+    - art-director
+outputs:
+  - brand-identity.md
+steps:
+  - id: voice
+    name: "Brand Voice"
+    type: prompt
+  - id: visual
+    name: "Visual Identity"
+    type: prompt
+  - id: messaging
+    name: "Key Messages"
+    type: prompt
+  - id: document
+    name: "Generate Brand Doc"
+    type: template

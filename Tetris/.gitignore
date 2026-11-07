@@ -1,0 +1,23 @@
+# Unreal Engine generated files and caches.
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# IDE-local files and generated Visual Studio project files.
+.vs/
+.idea/
+*.sln
+*.slnx
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.opensdf
+*.sdf
+*.suo
+
+# Platform/editor build outputs.
+*.xcodeproj
+*.xcworkspace
+*.xcuserdata/
+*.xcscmblueprint
