@@ -9,6 +9,7 @@
 #include "NSDefaultAssets.h"
 #include "Game/NSSceneBootstrap.h"
 #include "Misc/PackageName.h"
+#include "NSDebug.h"
 
 ANSGameMode::ANSGameMode()
 {
@@ -35,17 +36,24 @@ void ANSGameMode::BeginPlay()
 	}
 	if (!Board.IsValid())
 	{
-		UE_LOG(LogNeonStack, Error, TEXT("NSGameMode: nenhum ANSBoardActor (BP_Board) no mapa."));
+		NSDebug::Screen(TEXT("NSGameMode: nenhum NSBoardActor no mapa."), true);
 		return;
 	}
 	Board->OnGameOver.AddDynamic(this, &ANSGameMode::HandleGameOver);
 
-	if (ANSPlayerController* PC = Cast<ANSPlayerController>(GetWorld()->GetFirstPlayerController()))
+	APlayerController* AnyPC = GetWorld()->GetFirstPlayerController();
+	if (ANSPlayerController* PC = Cast<ANSPlayerController>(AnyPC))
 	{
 		PC->SetBoard(Board.Get());
 		PC->InitUI(this, Board.Get());
 	}
+	else
+	{
+		NSDebug::Screen(FString::Printf(TEXT("NSGameMode: PlayerController é '%s', esperado NSPlayerController. Sem input/UI."),
+			*GetNameSafe(AnyPC ? AnyPC->GetClass() : nullptr)), true);
+	}
 
+	UE_LOG(LogNeonStack, Log, TEXT("NSGameMode: pronto (board %s)."), *Board->GetName());
 	bStartPending = true;
 	SetFlowState(ENSFlowState::Countdown);
 }
@@ -151,5 +159,17 @@ void ANSGameMode::ShowResults()
 void ANSGameMode::SetFlowState(ENSFlowState NewState)
 {
 	FlowState = NewState;
+	UE_LOG(LogNeonStack, Log, TEXT("NSGameMode: estado -> %s"), *UEnum::GetValueAsString(NewState));
+
+	// Rede de segurança: se o widget de contagem não terminar (ex.: UI com problema), começa mesmo assim
+	if (NewState == ENSFlowState::Countdown)
+	{
+		GetWorldTimerManager().SetTimer(CountdownSafetyTimer, this, &ANSGameMode::FinishCountdown, CountdownSafetyTime, false);
+	}
+	else
+	{
+		GetWorldTimerManager().ClearTimer(CountdownSafetyTimer);
+	}
+
 	OnFlowStateChanged.Broadcast(NewState); // sempre transmite (inclusive Countdown -> Countdown)
 }

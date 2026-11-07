@@ -32,6 +32,12 @@ void ANSMenuGameMode::BeginPlay()
 	}
 
 	UNSMainMenuWidget* Menu = CreateWidget<UNSMainMenuWidget>(PC, MainMenuClass);
+	if (!Menu)
+	{
+		UE_LOG(LogNeonStack, Error, TEXT("NSMenuGameMode: falhou ao criar o menu."));
+		return;
+	}
 	Menu->AddToViewport();
 	Menu->FocusDefault();
+	UE_LOG(LogNeonStack, Log, TEXT("NSMenuGameMode: menu criado."));
 }

@@ -4,6 +4,8 @@
 #include "Data/NSGameConfig.h"
 #include "Game/NSBoardViewComponent.h"
 #include "Systems/NSSaveSubsystem.h"
+#include "Game/NSGameMode.h"
+#include "NSDebug.h"
 #include "NSDefaultAssets.h"
 
 ANSBoardActor::ANSBoardActor()
@@ -27,6 +29,15 @@ void ANSBoardActor::BeginPlay()
 		return;
 	}
 	View->InitializeView(Config);
+
+	// Diagnóstico: sem o NSGameMode ninguém inicia a partida nem liga input/UI
+	const AGameModeBase* GM = GetWorld()->GetAuthGameMode();
+	if (!Cast<ANSGameMode>(GM))
+	{
+		NSDebug::Screen(FString::Printf(
+			TEXT("Este mapa usa o GameMode '%s'. Abra World Settings > GameMode Override e escolha NSGameMode (ou rode de novo o script de setup)."),
+			*GetNameSafe(GM ? GM->GetClass() : nullptr)), true, 60.f);
+	}
 
 	if (UNSSaveSubsystem* Save = UNSSaveSubsystem::Get(this))
 	{

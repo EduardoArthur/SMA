@@ -97,6 +97,8 @@ private:
 	ENSFlowState FlowState = ENSFlowState::Countdown;
 	bool bStartPending = true; // a contagem atual é de início (true) ou de retomada (false)
 	FTimerHandle ResultsTimer;
+	FTimerHandle CountdownSafetyTimer;
+	float CountdownSafetyTime = 3.0f;
 
 	int64 LastScore = 0;
 	int32 LastLines = 0;

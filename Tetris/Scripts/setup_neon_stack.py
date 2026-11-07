@@ -458,6 +458,19 @@ def set_game_mode(cls):
     world = ues.get_editor_world()
     ws = world.get_world_settings()
     ws.set_editor_property("default_game_mode", cls.static_class())
+    current = ws.get_editor_property("default_game_mode")
+    log("GameMode Override de %s = %s" % (world.get_name(), current.get_name() if current else "None"))
+
+
+def ensure_game_mode(path, cls):
+    """Mapas já existentes: confere/corrige o GameMode Override (útil ao rodar o script de novo)."""
+    if not eal.does_asset_exist(path):
+        return
+    if not les.load_level(path):
+        warn("não abriu " + path)
+        return
+    set_game_mode(cls)
+    les.save_current_level()
 
 
 def make_level(path, build):
@@ -554,6 +567,8 @@ def main():
 
     step("Mapa L_MainMenu", make_level, MAPS + "/L_MainMenu", build_menu_level)
     step("Mapa L_Game", make_level, MAPS + "/L_Game", build_game_level)
+    step("GameMode do L_Game", ensure_game_mode, MAPS + "/L_Game", unreal.NSGameMode)
+    step("GameMode do L_MainMenu", ensure_game_mode, MAPS + "/L_MainMenu", unreal.NSMenuGameMode)
 
     log("=" * 60)
     log("Setup concluído: %d itens criados, %d avisos." % (created_count, len(warnings)))

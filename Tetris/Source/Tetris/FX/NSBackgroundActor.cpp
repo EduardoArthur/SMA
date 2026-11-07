@@ -5,6 +5,8 @@
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Materials/MaterialParameterCollection.h"
 #include "Game/NSBoardActor.h"
+#include "Game/NSMenuGameMode.h"
+#include "NSDebug.h"
 #include "Systems/NSSaveSubsystem.h"
 #include "NSDefaultAssets.h"
 
@@ -47,6 +49,18 @@ void ANSBackgroundActor::BeginPlay()
 		Board = *It;
 		break;
 	}
+	if (!Board.IsValid())
+	{
+		// Mapa sem board = menu. Sem o NSMenuGameMode o menu não aparece.
+		const AGameModeBase* GM = GetWorld()->GetAuthGameMode();
+		if (!Cast<ANSMenuGameMode>(GM))
+		{
+			NSDebug::Screen(FString::Printf(
+				TEXT("Mapa de menu com GameMode '%s'. Em World Settings > GameMode Override, escolha NSMenuGameMode."),
+				*GetNameSafe(GM ? GM->GetClass() : nullptr)), true, 60.f);
+		}
+	}
+
 	if (ANSBoardActor* B = Board.Get())
 	{
 		B->OnLevelUp.AddDynamic(this, &ANSBackgroundActor::HandleLevelUp);
