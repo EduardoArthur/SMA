@@ -1,0 +1,28 @@
+name: press-kit
+description: Create comprehensive press kit for media
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Press Kit"
+  icon: "📰"
+  time_estimate: "45-60 minutes"
+  output_path: "_gdks-output/02-design/marketing/press-kit/"
+agents:
+  primary: marketing-strategist
+outputs:
+  - press-kit/factsheet.md
+  - press-kit/press-release.md
+steps:
+  - id: factsheet
+    name: "Factsheet"
+    type: prompt
+  - id: release
+    name: "Press Release"
+    type: prompt
+  - id: assets
+    name: "Asset List"
+    type: prompt
+  - id: document
+    name: "Generate Press Kit"
+    type: template

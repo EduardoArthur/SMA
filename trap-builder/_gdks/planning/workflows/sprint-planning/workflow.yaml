@@ -1,0 +1,6 @@
+name: sprint-planning
+description: sprint-planning workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

@@ -1,0 +1,58 @@
+# Workflow: Project Initialization
+# Initialize GD-KS workflow tracking for a new project
+
+name: workflow-init
+title: Initialize GD-KS Project
+description: Set up workflow tracking and recommend development track
+
+# Input requirements
+inputs:
+  - name: project_name
+    type: string
+    required: true
+    description: Name of the game project
+  
+  - name: project_description
+    type: string
+    required: false
+    description: Brief description of the game
+
+# Output artifacts
+outputs:
+  - name: gdks-workflow-status.yaml
+    path: _gdks-output/gdks-workflow-status.yaml
+    description: Workflow status tracking file
+
+# Workflow steps
+steps:
+  - id: gather-info
+    name: Gather Project Information
+    type: prompt
+    
+  - id: recommend-track
+    name: Recommend Development Track
+    type: analysis
+    
+  - id: create-status
+    name: Create Workflow Status
+    type: generate
+    template: workflow-status.template.yaml
+
+# Variables available during workflow
+variables:
+  tracks:
+    quick:
+      name: Quick Track
+      description: Rapid prototyping, minimal documentation
+      phases: [ideation, engine]
+      estimated_time: "1-2 weeks"
+    standard:
+      name: Standard Track
+      description: Balanced approach for small-medium projects
+      phases: [ideation, design, engine]
+      estimated_time: "2-4 weeks"
+    full:
+      name: Full Track
+      description: Comprehensive documentation for large projects
+      phases: [ideation, design, planning, engine]
+      estimated_time: "4-8 weeks"

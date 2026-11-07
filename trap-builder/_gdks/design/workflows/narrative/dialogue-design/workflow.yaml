@@ -1,0 +1,27 @@
+name: dialogue-design
+description: Design dialogue systems, voice guidelines, and sample dialogues
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Dialogue Design"
+  icon: "💬"
+  time_estimate: "45-60 minutes"
+  output_path: "_gdks-output/02-design/narrative/dialogue-system.md"
+agents:
+  primary: narrative-designer
+outputs:
+  - dialogue-system.md
+steps:
+  - id: system
+    name: "Dialogue System Design"
+    type: prompt
+  - id: voices
+    name: "Character Voices"
+    type: prompt
+  - id: samples
+    name: "Sample Dialogues"
+    type: prompt
+  - id: document
+    name: "Generate Dialogue Doc"
+    type: template

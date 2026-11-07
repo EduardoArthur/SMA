@@ -1,0 +1,38 @@
+# GD-KS Core Module Configuration
+# This module is always installed and provides base functionality
+
+name: core
+version: 0.1.0
+description: GD-KS Core - Essential system components
+
+# Module metadata
+metadata:
+  display_name: "GD-KS Core"
+  icon: "🎮"
+  required: true
+  default_selected: true
+
+# Inherited configuration
+config:
+  output_folder: "_gdks-output"
+  communication_language: "en"
+
+# Core agents
+agents:
+  - gdks-master
+
+# Core workflows
+workflows:
+  - workflow-init
+  - workflow-status
+  - party-mode
+  - tutorial
+
+# Dependencies
+dependencies: []
+
+# Installation hooks
+hooks:
+  post_install:
+    - compile_agents
+    - create_output_dirs

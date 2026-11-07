@@ -1,0 +1,26 @@
+name: concept-validation
+title: "Concept Validation Check"
+description: "Validate concept completeness and readiness"
+agent: ideation-coordinator
+version: 1.0.0
+
+outputs:
+  - name: validation-report.md
+    path: "_gdks-output/01-ideation/validation-report.md"
+    description: "Validation status report"
+
+config:
+  estimated_time: "15-30 minutes"
+  next_workflows:
+    - "handoff-to-design"
+
+steps:
+  - id: checklist
+    name: "Run Checklist"
+    type: validation
+  - id: gaps
+    name: "Check for Gaps"
+    type: analysis
+  - id: report
+    name: "Generate Report"
+    type: generate

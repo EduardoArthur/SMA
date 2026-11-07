@@ -1,0 +1,6 @@
+name: level-documentation
+description: level-documentation workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

@@ -1,0 +1,45 @@
+name: concept-synthesis
+title: "Concept Synthesis"
+description: "Synthesize all ideation work into coherent whole"
+agent: ideation-coordinator
+version: 1.0.0
+
+inputs:
+  - name: concept_brief
+    type: file
+    required: true
+  - name: market_analysis
+    type: file
+    required: true
+  - name: mechanics_exploration
+    type: file
+    required: true
+
+outputs:
+  - name: synthesis-report.md
+    path: "_gdks-output/01-ideation/synthesis-report.md"
+    description: "Synthesis of all ideation documents"
+
+config:
+  estimated_time: "30 minutes"
+  prerequisites:
+    - "concept-brief.md"
+    - "market-analysis.md"
+    - "mechanics-exploration.md"
+  next_workflows:
+    - "concept-validation"
+    - "handoff-to-design"
+
+steps:
+  - id: collect
+    name: "Collect Documents"
+    type: read
+  - id: review
+    name: "Review Consistency"
+    type: analysis
+  - id: gaps
+    name: "Identify Gaps"
+    type: analysis
+  - id: synthesize
+    name: "Create Synthesis"
+    type: generate

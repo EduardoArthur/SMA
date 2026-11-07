@@ -1,0 +1,29 @@
+name: player-agency
+description: Audit and design meaningful player choices
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: 'Player Agency'
+  icon: '🎯'
+  time_estimate: '45-60 minutes'
+  output_path: '_gdks-output/02-design/core-design/agency/'
+agents:
+  primary: player-agency-advocate
+  support:
+    - game-design-director
+outputs:
+  - agency/agency-audit.md
+steps:
+  - id: choices
+    name: 'Map Choices'
+    type: prompt
+  - id: meaning
+    name: 'Evaluate Meaning'
+    type: prompt
+  - id: consequences
+    name: 'Design Consequences'
+    type: prompt
+  - id: document
+    name: 'Generate Agency Audit'
+    type: template
