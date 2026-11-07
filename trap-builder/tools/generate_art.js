@@ -158,7 +158,49 @@ function blueprint(svgText) {
     .replace(/fill-opacity="[^"]*"/g, '');
 }
 
+// ---------- ícone do jogo (res://icon.svg) ----------
+// O Lobo Mau armando a emboscada: puxa a corda que segura a bigorna sobre o alvo.
+function icon() {
+  const strip = s => s.replace(/^<svg[^>]*>\n?/, '').replace(/<\/svg>\s*$/, '');
+  const wolfInner = strip(wolf('lick'));
+  const anvilInner = strip(traps.anvil());
+  const grid = [];
+  for (let i = 1; i < 6; i++) grid.push(line(i * 21.3, 0, i * 21.3, 128, '#3a6fb0', 1.5), line(0, i * 21.3, 128, i * 21.3, '#3a6fb0', 1.5));
+  const pulley = [99, 17];
+  const paw = [80, 50];
+  return svg(128, 128, [
+    '<defs><clipPath id="frame"><rect x="3" y="3" width="122" height="122" rx="22"/></clipPath></defs>',
+    rect(3, 3, 122, 122, 22, st('#1f4e8c')),
+    '<g clip-path="url(#frame)">',
+    ...grid,
+    // alvo no chão, à direita (onde a bigorna vai cair)
+    ellipse(99, 113, 20, 5, `fill="#000000" fill-opacity="0.3"`),
+    line(90, 107, 108, 119, '#ff6b5a', 4), line(108, 107, 90, 119, '#ff6b5a', 4),
+    // viga + roldana
+    line(70, 10, 126, 10, INK, 6),
+    line(pulley[0], 10, pulley[0], pulley[1], INK, 3),
+    circle(pulley[0], pulley[1], 7, st('#9aa3ad', INK, 4)),
+    // corda: roldana -> bigorna (vertical) e roldana -> pata do lobo (diagonal)
+    line(pulley[0], pulley[1] + 6, pulley[0], 50, '#e8b33a', 3),
+    line(pulley[0] - 6, pulley[1] + 1, paw[0], paw[1], '#e8b33a', 3),
+    // bigorna suspensa
+    `<g transform="translate(72 31) scale(0.43)">${anvilInner}</g>`,
+    // lobo à esquerda, maior
+    `<g transform="translate(-10 36) scale(0.64)">${wolfInner}</g>`,
+    // braço erguido ao lado da cabeça, pata segurando a corda
+    pathEl(`M66 124 Q86 96 ${paw[0]} ${paw[1] + 6}`, st('none', INK, 11)),
+    pathEl(`M66 124 Q86 96 ${paw[0]} ${paw[1] + 6}`, st('none', '#7a7f8c', 6)),
+    circle(paw[0], paw[1], 7, st('#c9cdd6', INK, 3)),
+    // brilho de "plano em andamento"
+    pathEl('M20 14 L22 20 L28 22 L22 24 L20 30 L18 24 L12 22 L18 20 Z', `fill="#ffd84d"`),
+    '</g>',
+    rect(3, 3, 122, 122, 22, st('none')),
+  ].join('\n'));
+}
+
 console.log('Gerando arte em ' + OUT);
+fs.writeFileSync(path.resolve(__dirname, '..', 'icon.svg'), icon());
+console.log('  icon.svg (ícone do projeto)');
 write('pigs/pig.svg', pig(false));
 write('pigs/pig_walk.svg', pig(true));
 for (const e of ['watch', 'lick', 'cheer', 'angry', 'feast', 'sad']) write(`wolf/wolf_${e}.svg`, wolf(e));

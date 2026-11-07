@@ -101,7 +101,6 @@ func _connect_events() -> void:
 	GameEvents.invalid_action.connect(func() -> void: play(&"sfx_invalid", &"UI"))
 	GameEvents.trap_triggered.connect(_on_trap_triggered)
 	GameEvents.trap_resolved.connect(_on_trap_resolved)
-	GameEvents.pig_spawned.connect(func(_id: int) -> void: play(&"sfx_pig_oink"))
 	GameEvents.pig_pushed.connect(func(_id: int) -> void: play(&"sfx_push"))
 	GameEvents.pig_turned_back.connect(func(_id: int) -> void: play(&"sfx_pig_turn"))
 	GameEvents.pig_captured.connect(_on_pig_captured)

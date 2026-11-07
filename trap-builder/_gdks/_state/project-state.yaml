@@ -105,9 +105,15 @@ decisions:
     date: '2026-11-07'
     decision: 'Simulacao em RefCounted puro (sem Nodes), port 1:1 do sim.js; tilemaps gerados a partir do LevelData; levels.js como fonte unica exportada para .tres'
     source: 'godot-architecture.md'
+  - id: D021
+    date: '2026-11-07'
+    decision: 'Piche: velocidade dividida por 3 (playtest: piche fraco)'
+    source: 'playtest'
+  - id: D022
+    date: '2026-11-07'
+    decision: 'Fase 2 com 4 porcos (playtest: dificil demais)'
+    source: 'playtest'
 open_questions:
   - 'Titulo final (G1)'
   - 'Mostrar escolha dos porcos apos 1a tentativa?'
   - 'Porco de capacete entra no prototipo?'
-  - 'Piche fraco? (B7) avaliar no playtest'
-  - 'Fase 2 tem o 3 estrelas mais dificil: ajustar par ou ordem apos playtest'

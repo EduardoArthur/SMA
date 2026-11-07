@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=23 format=3]
+[gd_resource type="Resource" script_class="LevelData" load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://scripts/resources/level_data.gd" id="1_level"]
 [ext_resource type="Script" path="res://scripts/resources/route_node.gd" id="2_node"]
@@ -78,10 +78,6 @@ pig = ExtResource("pig_pig")
 script = ExtResource("4_spawn")
 pig = ExtResource("pig_pig")
 
-[sub_resource type="Resource" id="Spawn_4"]
-script = ExtResource("4_spawn")
-pig = ExtResource("pig_pig")
-
 [resource]
 script = ExtResource("1_level")
 level_id = 2
@@ -93,7 +89,7 @@ escape_limit = 1
 grid_size = Vector2i(18, 10)
 nodes = Array[ExtResource("2_node")]([SubResource("Node_0"), SubResource("Node_1"), SubResource("Node_2"), SubResource("Node_3")])
 edges = Array[ExtResource("3_edge")]([SubResource("Edge_0"), SubResource("Edge_1"), SubResource("Edge_2"), SubResource("Edge_3")])
-spawns = Array[ExtResource("4_spawn")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4")])
+spawns = Array[ExtResource("4_spawn")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])
 ravine = Array[Vector2i]([])
 marked = Array[Vector2i]([])
 available_traps = Array[ExtResource("5_trap")]([ExtResource("trap_anvil"), ExtResource("trap_tar"), ExtResource("trap_tnt")])

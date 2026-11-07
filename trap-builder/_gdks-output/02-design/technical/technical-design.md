@@ -218,12 +218,12 @@ class TrapState:   id, data, cell:Vector2i, dir:Vector2i, triggered:bool, timer:
 |-------|-------|
 | Custo | **50** |
 | Tiles | `ROUTE` |
-| `params.speed_num / speed_den` | **1 / 2** (velocidade × 0,5) |
+| `SimConst.TAR_DIV` | **3** (velocidade ÷ 3; D021, era ÷ 2) |
 | Persistência | A onda inteira |
 
-**Efeito:** enquanto P ocupa o tile, avança `speed × 1 / 2` unidades por tick (30 → 15; capacete 24 → 12). Use frações inteiras, nunca `0.5` em float.
+**Efeito:** enquanto P ocupa o tile, avança `speed / TAR_DIV` unidades por tick (30 → 10; capacete 24 → 8). Divisão inteira, nunca float.
 
-**Tempo no tile:** `TILE_UNITS / (speed/2)` = 1200 / 15 = **80 ticks** (1,33 s), mais que o intervalo de spawn de 60 ticks, então a fila cresce **20 ticks por porco** (B2).
+**Tempo no tile:** `TILE_UNITS / (speed/3)` = 1200 / 10 = **120 ticks** (2 s), contra o spawn de 60 ticks: a fila cresce **60 ticks por porco** (D021; antes 20).
 
 ---
 

@@ -146,6 +146,10 @@ activity_log:
     action: "implementation"
     agent: "godot-gdscript-lead"
     details: "S17–S22: WolfView, transição de 0,7 s, prévia tracejada da bigorna e caminho da fuga, tools/generate_audio.js (25 SFX + 4 músicas) + AudioDirector, tools/generate_art.js (22 SVGs), export_presets.cfg (Web), CREDITS.md"
+  - timestamp: "2026-11-07"
+    action: "balance"
+    agent: "technical-game-designer"
+    details: "Playtest: piche ÷3 (D021), Fase 2 com 4 porcos (D022), som do spawn removido, ícone do jogo (icon.svg)"
 
 # Notes
 notes:

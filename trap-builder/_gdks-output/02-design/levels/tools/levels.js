@@ -25,7 +25,7 @@ const L1 = {
 const L2 = {
   id: 2, name: 'Fila Indiana', w: 18, h: 10, seed: 2,
   budget: 550, par: 400, escapeLimit: 1,
-  traps: ['anvil', 'tar', 'tnt'], pigs: Array(5).fill('pig'),
+  traps: ['anvil', 'tar', 'tnt'], pigs: Array(4).fill('pig'),  // era 5 (playtest: difícil demais)
   nodes: [
     { id: 0, kind: 'S', cell: [0, 5] }, { id: 1, kind: 'F', cell: [3, 5] },
     { id: 2, kind: 'J', cell: [9, 5] }, { id: 3, kind: 'X', cell: [15, 5] },
@@ -36,7 +36,9 @@ const L2 = {
     { id: 2, from: 1, to: 2, via: [[3, 1], [5, 1], [5, 3], [7, 3], [7, 1], [9, 1]] }, // zigue-zague longo
     { id: 3, from: 2, to: 3, via: [[10, 5], [10, 8], [12, 8], [12, 5]] },            // U final (todos passam)
   ],
-  refs: { '★★★ 400': [{ type: 'tnt', cell: [9, 4] }, { type: 'tar', cell: [10, 5] }, { type: 'anvil', cell: [10, 8] }] },
+  refs: { '★★★ 400': [{ type: 'tnt', cell: [9, 4] }, { type: 'tar', cell: [10, 5] }, { type: 'anvil', cell: [10, 8] }],
+          '★★★ 350 (mínimo)': [{ type: 'tnt', cell: [9, 4] }, { type: 'anvil', cell: [11, 8] }],
+          '★ 250 (piche + TNT)': [{ type: 'tar', cell: [10, 5] }, { type: 'tnt', cell: [10, 6] }] },
 };
 
 const L3 = {

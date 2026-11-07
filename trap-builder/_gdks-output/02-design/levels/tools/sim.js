@@ -4,6 +4,7 @@
 
 const TICK_RATE = 60, TU = 1200, SPAWN_INT = 60;
 const RAVINE_CAP_DEFAULT = 2; // porcos por tile de barranco antes de lotar (0 = sem limite)
+const TAR_DIV = 3; // piche: velocidade / 3 (era / 2; playtest 2026-11-07: piche fraco)
 const SHADOW = 24, CLIMB = 120, STUN = 30, FUSE = 18, EAT = 180, PUSH = 15, FAN_RANGE = 3;
 const PIGS = { pig: { speed: 30, immune: false }, helmet: { speed: 24, immune: true } };
 const TRAPS = {
@@ -180,7 +181,7 @@ function simulate(L, plan, opts = {}) {
     for (const p of pigs) {
       if (!active(p) || (p.st !== 'walk' && p.st !== 'back')) continue;
       const here = key(...cellOf(p)); const t = trapAt.get(here);
-      let sp = p.speed; if (t && t.type === 'tar') sp = Math.floor(sp / 2);
+      let sp = p.speed; if (t && t.type === 'tar') sp = Math.floor(sp / TAR_DIV);
       p.sub += sp; if (p.sub < TU) continue;
       if (p.st === 'back') {
         p.sub -= TU; const e = L.edges[p.loc.edge];

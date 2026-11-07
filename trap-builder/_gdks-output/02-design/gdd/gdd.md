@@ -176,7 +176,7 @@ Todas as armadilhas têm: `custo`, `tiles_validos`, `gatilho`, `efeito`, `persis
 - **Aceite:** o ventilador nunca captura sozinho fora de `BARRANCO` e nunca trava porcos em loop.
 
 ### 7.5 Piche (contínuo / atraso) · 50*
-- **Tile:** `ROTA` · **Efeito:** velocidade × 0,5* enquanto o porco está no tile.
+- **Tile:** `ROTA` · **Efeito:** velocidade × 1/3 enquanto o porco está no tile (D021; era × 0,5).
 - **Persistência:** a onda inteira. Não acumula com outro piche (1 por tile).
 - **Aceite:** porcos atrás de um porco lento **não** o ultrapassam (fila por tile), o que gera **acúmulo** para o TNT.
 
@@ -256,7 +256,7 @@ Todas as armadilhas têm: `custo`, `tiles_validos`, `gatilho`, `efeito`, `persis
 | # | Nome | Ensina | Armadilhas | Porcos | Bifurc. | Orç. / Par* | Fugas |
 |---|------|--------|-----------|--------|---------|-------------|-------|
 | 1 | O Atalho | Bigorna bloqueia e desvia | Bigorna | 2 | 1 | 450 / 300 | 1 |
-| 2 | Fila Indiana | Piche acumula, TNT limpa | TNT, Piche, Bigorna | 5 | 1 | 550 / 400 | 1 |
+| 2 | Fila Indiana | Piche acumula, TNT limpa | TNT, Piche, Bigorna | 4 | 1 | 550 / 400 | 1 |
 | 3 | Cheiro de Lavagem | Isca controla a bifurcação | Isca, TNT, Piche | 6 | 2 | 600 / 475 | 1 |
 | 4 | Ventania | Ventilador + barrancos | Ventilador, Isca, Piche | 4 | 1 | 450 / 300 | 1 |
 | 5 | O Banquete | Combo-assinatura | Todas | 10 | 2 | 900 / 750 | 2 |
@@ -344,6 +344,8 @@ F12 Lobo (eventos de captura/fuga)   F13 Transição (F04)
 | **D017** | **Marca fictícia: Catapimba S.A.** | Aurora |
 | **D018** | **Arte vetorial própria** (Inkscape/Figma), top-down com personagens em 3/4, contorno `#2B1B17` | Aurora |
 | **D019** | **Áudio: SFX gratuitos + música CC0/CC-BY**, com CREDITS.md | Anton |
+| **D021** | **Piche: velocidade ÷ 3** (era ÷ 2; playtest: piche fraco) | Playtest |
+| **D022** | **Fase 2 com 4 porcos** (era 5; playtest: difícil demais) | Playtest |
 
 ---
 

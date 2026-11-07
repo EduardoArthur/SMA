@@ -665,7 +665,7 @@
           "plan": [],
           "expect": {
             "captured": 0,
-            "escaped": 5,
+            "escaped": 4,
             "ticks": 1319,
             "stars": 0,
             "cost": 0,
@@ -710,11 +710,81 @@
             }
           ],
           "expect": {
-            "captured": 5,
+            "captured": 4,
             "escaped": 0,
             "ticks": 817,
             "stars": 3,
             "cost": 400,
+            "deadlock": false
+          }
+        },
+        {
+          "name": "★★★ 350 (mínimo)",
+          "plan": [
+            {
+              "type": "tnt",
+              "cell": [
+                9,
+                4
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "anvil",
+              "cell": [
+                11,
+                8
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            }
+          ],
+          "expect": {
+            "captured": 4,
+            "escaped": 0,
+            "ticks": 817,
+            "stars": 3,
+            "cost": 350,
+            "deadlock": false
+          }
+        },
+        {
+          "name": "★ 250 (piche + TNT)",
+          "plan": [
+            {
+              "type": "tar",
+              "cell": [
+                10,
+                5
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "tnt",
+              "cell": [
+                10,
+                6
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            }
+          ],
+          "expect": {
+            "captured": 3,
+            "escaped": 1,
+            "ticks": 1399,
+            "stars": 1,
+            "cost": 250,
             "deadlock": false
           }
         }

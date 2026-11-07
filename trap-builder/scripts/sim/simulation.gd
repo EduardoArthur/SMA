@@ -203,7 +203,7 @@ func _move_pigs(entered: Array[PigState]) -> void:
 		var speed: int = p.data.speed
 		if here_trap != null and here_trap.kind == &"tar":
 			@warning_ignore("integer_division")
-			speed = speed / 2
+			speed = speed / SimConst.TAR_DIV
 		p.sub += speed
 		if p.sub < SimConst.TILE_UNITS:
 			continue

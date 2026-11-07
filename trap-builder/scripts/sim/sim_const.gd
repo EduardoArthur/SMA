@@ -16,6 +16,8 @@ const TNT_RADIUS: int = 1
 const BAIT_EAT: int = 180
 const FAN_PUSH: int = 15
 const FAN_RANGE: int = 3
+## Piche: velocidade dividida por este valor (inteiro). Era 2; playtest pediu mais forte.
+const TAR_DIV: int = 3
 ## Porcos por tile de barranco antes de lotar (D014). 0 = sem limite.
 const RAVINE_CAP: int = 2
 

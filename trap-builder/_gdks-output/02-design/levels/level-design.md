@@ -34,7 +34,7 @@ node validate.js --search   # lento (minutos): roda o solver em todas as fases
 |---|--------|---------------------|---------|
 | **B6** | **Isca + Ventilador + Barranco é degenerado** | Na Fase 5, a primeira versão capturava **os 10 porcos por 250** (isca + 1 ventilador). O resto do kit perdia o sentido | **D014: cada tile de BARRANCO lota com 2 porcos.** Lotado, ele funciona como BLOQUEADO (o empurrão não acontece). Espelha a regra do "Buraco" do GDD original |
 | B4' | Com o limite do barranco, o custo de 175 para o ventilador deixou a Fase 4 cara demais | Fase 4 ficou sem solução dentro do orçamento | **D015: o ventilador volta a custar 125.** O limite do barranco resolve o B4 melhor do que o preço |
-| B7 | **O piche quase nunca aparece em soluções ótimas** | Só entra na solução mínima da Fase 2 | 📝 **Observar no playtest.** Candidatos: custo 25 ou velocidade ×1/3. Não mudar antes de jogar |
+| B7 | **O piche quase nunca aparece em soluções ótimas** | Só entra na solução mínima da Fase 2 | ✅ **Playtest confirmou: D021, piche agora ÷ 3** (fila cresce 1 s por porco). Referências revalidadas |
 | B8 | A seed pode tornar uma fase "fácil por sorte" | Fase 4: o mínimo (250) usa só 2 ventiladores, porque a seed 4 manda os 4 porcos pelo galho de cima | Aceito: **aprender a seed faz parte do puzzle** (pilar P2). O par 300 abre 33 soluções, inclusive com isca |
 
 ---
@@ -72,7 +72,7 @@ S..+....o...X
 ### Fase 2: Fila Indiana
 | Orçamento | Par | Fugas | Porcos | Seed | Armadilhas |
 |-----------|-----|-------|--------|------|------------|
-| 550 | **400** | 1 | 5 | 2 | Bigorna, Piche, TNT |
+| 550 | **400** | 1 | **4** | 2 | Bigorna, Piche, TNT |
 
 ```
    ... ...
@@ -85,7 +85,8 @@ S..+.....o. ...X
           ...
 ```
 - **Ensina:** a **junção** e as **curvas** concentram porcos; o piche segura a fila; o TNT pega o grupo.
-- **Solver:** mínimo = **400**, com **apenas 3 soluções** (fase de "eureka"). Com 450 há mais 4. A passagem mais barata custa 350, com 1 fuga.
+- **Solver (v0.2, após o playtest):** mínimo = **350** (3 soluções); com par 400 são **195 soluções ★★★**. A passagem mais barata custa **250** (piche + TNT logo depois), justamente a lição da fase.
+- **Histórico:** na v0.1 (5 porcos, piche ÷2) só 3,3% dos planos passavam e o ★★★ tinha 3 soluções. O playtest confirmou que estava difícil demais (D022).
 - **Referência ★★★ (400):** TNT no último tile do zigue-zague antes da junção `[9,4]` + piche logo depois da junção `[10,5]` + bigorna no fundo do U `[10,8]`.
 - **Dica de design:** o TNT na **junção** cobre os dois galhos ao mesmo tempo (regra B3: o TNT brilha onde rotas se encontram).
 
@@ -158,12 +159,12 @@ S..+      o.+..o.X
 | Fase | Porcos | Bifurc. | Armadilhas novas | Folga do orçamento sobre o par | Dificuldade do ★★★ |
 |------|--------|---------|------------------|--------------------------------|--------------------|
 | 1 | 2 | 1 | Bigorna | +150 | Fácil (100 soluções) |
-| 2 | 5 | 1 | Piche, TNT | +150 | **Difícil (3 soluções)** |
+| 2 | 4 | 1 | Piche, TNT | +150 | Média (195 soluções) |
 | 3 | 6 | 2 | Isca | +125 | Média (90) |
 | 4 | 4 | 1 | Ventilador | +150 | Média (33) |
 | 5 | 10 | 2 | — (todas) | +150 | Difícil |
 
-> ⚠️ **A Fase 2 tem o ★★★ mais difícil** do protótipo, antes de fases mais complexas. Se o playtest mostrar frustração, suba o par para 450 (7 soluções) ou troque a ordem das fases 2 e 3.
+> ✅ **Resolvido no playtest (2026-11-07):** a Fase 2 estava difícil demais. Agora tem 4 porcos (D022) e o piche desacelera mais (D021).
 
 ---
 
