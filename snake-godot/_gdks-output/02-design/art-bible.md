@@ -116,17 +116,17 @@ The head is a circle of radius `r`. The face is built from simple shapes and **r
 ### 5.1 Base layout (local coordinates, forward = +x)
 | Part | Position | Size |
 |------|----------|------|
-| Eyes (×2) | `(+0.20r, ±0.38r)` | White circle `0.30r`, outlined |
-| Pupils | Eye center + `0.10r` toward forward | Circle `0.15r` |
-| Cheeks (×2) | `(-0.05r, ±0.62r)` | `SNAKE_CHEEK` circle `0.16r`, 60% alpha |
-| Mouth | `(+0.70r, 0)` | Depends on expression |
+| Eyes (×2) | `(+0.15r, ±0.44r)` | White circle `0.36r`, outlined *(v1.1: bigger, to match the app icon)* |
+| Pupils | Eye center + `0.12r` toward forward | Circle `0.19r` + white sparkle `0.06r` at its top-front |
+| Cheeks (×2) | `(-0.40r, ±0.58r)` | `SNAKE_CHEEK` circle `0.15r`, 65% alpha |
+| Mouth / tongue | Front of the head | Depends on expression. Neutral has **no mouth**, only the forked tongue flick. |
 
 > When the head faces **left**, flip the face vertically (not just a rotation), so the snake isn't upside-down. This is a simple scale `(1, -1)` in the local transform when `direction == LEFT`.
 
 ### 5.2 Expression sheet (GDD §6.3)
 | Expression | Eyes | Mouth | Extra |
 |------------|------|-------|-------|
-| 😐 **Neutral** | Round, pupils forward | Small smile arc | **Blink** every 2-4 s (random): eyes squash to 10% height for 0.1 s. Optional tongue flick every 5-8 s. |
+| 😐 **Neutral** *(matches the app icon)* | Big round eyes, pupils forward with a white sparkle | None | **Forked `TONGUE` flick**: out and back in over 0.4 s, every 1.5-3 s (not always out, for readability). **Blink** every 2-4 s for 0.1 s. |
 | 😋 **Happy chomp** | Happy `^` arcs (closed) | Open "D" half-circle, `PUPIL` color, with a `TONGUE` blob | Head squash (from Technical Design §7.4) |
 | 😱 **Gasp** | **1.3× bigger**, tiny pupils (`0.08r`) | Small "O" circle | `SWEAT` teardrop at the back of the head; pupils look **toward the danger cell** |
 | 🤩 **Proud** | Eyes become 4-point `GOLD` stars | Big smile arc | 3 small sparkles pop around the head |

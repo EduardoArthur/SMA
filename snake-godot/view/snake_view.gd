@@ -19,6 +19,10 @@ var _bump_t := -1.0 ## Time since death: head bump, then the body bounce (-1 = a
 var _squash_t := -1.0 ## Time since eating, for the head squash (-1 = none).
 var _rainbow_t := -1.0 ## Time since a milestone, for the rainbow wave (-1 = none).
 var _time := 0.0
+var _tongue_in := 1.0 ## Seconds until the next tongue flick (neutral face).
+var _tongue_t := -1.0 ## Time into the current flick (-1 = tongue in).
+
+const TONGUE_TIME := 0.4 ## How long one flick (out and back in) takes.
 
 
 func _ready() -> void:
@@ -42,6 +46,13 @@ func _process(delta: float) -> void:
 			_blink_left = 0.1
 			_blink_in = randf_range(2.0, 4.0)
 	_blink_left = maxf(_blink_left - delta, 0.0)
+	if expression == &"neutral":
+		_tongue_in -= delta
+		if _tongue_in <= 0.0:
+			_tongue_t = 0.0
+			_tongue_in = randf_range(1.5, 3.0)
+	if _tongue_t >= 0.0:
+		_tongue_t = -1.0 if _tongue_t > TONGUE_TIME else _tongue_t + delta
 	if _bump_t >= 0.0:
 		_bump_t += delta
 	if _squash_t >= 0.0:
@@ -187,16 +198,26 @@ func _draw_face(head: Vector2, dir: Vector2i, r: float, o: float) -> void:
 		squash = exp(-_squash_t * 14.0) * cos(_squash_t * 28.0)
 	draw_set_transform(head, angle, flip * Vector2(1.0 - 0.25 * squash, 1.0 + 0.25 * squash))
 
+	# Forked tongue (neutral only), drawn before the head so it comes out from under it.
+	if expression == &"neutral" and _tongue_t >= 0.0:
+		var reach := sin(PI * _tongue_t / TONGUE_TIME) # 0 -> out -> back in
+		var tip := Vector2(r * (0.9 + 0.6 * reach), 0.0)
+		var fork := r * 0.2 * reach
+		var width := maxf(1.5, r * 0.1)
+		draw_line(Vector2(r * 0.5, 0.0), tip, Palette.TONGUE, width, true)
+		draw_line(tip, tip + Vector2(fork, -fork * 0.7), Palette.TONGUE, width, true)
+		draw_line(tip, tip + Vector2(fork, fork * 0.7), Palette.TONGUE, width, true)
+
 	draw_circle(Vector2.ZERO, r + o, Palette.OUTLINE, true, -1.0, true)
 	draw_circle(Vector2.ZERO, r, Palette.SNAKE_BODY, true, -1.0, true)
 
 	var line := r * 0.09
-	var eyes: Array[Vector2] = [Vector2(0.2, -0.38) * r, Vector2(0.2, 0.38) * r]
+	var eyes: Array[Vector2] = [Vector2(0.15, -0.44) * r, Vector2(0.15, 0.44) * r]
 
 	# Cheeks (all expressions except cool).
 	if expression != &"cool":
 		for e in eyes:
-			draw_circle(Vector2(-0.05 * r, signf(e.y) * 0.62 * r), 0.16 * r, Color(Palette.SNAKE_CHEEK, 0.6), true, -1.0, true)
+			draw_circle(Vector2(-0.4 * r, signf(e.y) * 0.58 * r), 0.15 * r, Color(Palette.SNAKE_CHEEK, 0.65), true, -1.0, true)
 
 	match expression:
 		&"happy":
@@ -236,14 +257,15 @@ func _draw_face(head: Vector2, dir: Vector2i, r: float, o: float) -> void:
 			for e in eyes:
 				draw_line(e + Vector2(0.0, -0.2) * r, e + Vector2(0.0, 0.2) * r, Palette.PUPIL, line, true)
 			draw_arc(Vector2(0.66 * r, 0.0), 0.07 * r, 0.0, TAU, 12, Palette.PUPIL, line * 0.7, true)
-		_: # neutral (with blinking)
+		_: # neutral (matches the app icon): big sparkly eyes, no mouth, tongue flicks
 			for e in eyes:
 				if _blink_left > 0.0:
-					draw_line(e + Vector2(0.0, -0.22) * r, e + Vector2(0.0, 0.22) * r, Palette.PUPIL, line, true)
+					draw_line(e + Vector2(0.0, -0.28) * r, e + Vector2(0.0, 0.28) * r, Palette.PUPIL, line, true)
 				else:
-					_circle_outlined(e, 0.3 * r, Palette.EYE_WHITE, o * 0.6)
-					draw_circle(e + Vector2(0.1 * r, 0.0), 0.15 * r, Palette.PUPIL, true, -1.0, true)
-			draw_arc(Vector2(0.45 * r, 0.0), 0.25 * r, -PI / 3.0, PI / 3.0, 10, Palette.PUPIL, line, true)
+					_circle_outlined(e, 0.36 * r, Palette.EYE_WHITE, o * 0.6)
+					var pupil := e + Vector2(0.12 * r, 0.0)
+					draw_circle(pupil, 0.19 * r, Palette.PUPIL, true, -1.0, true)
+					draw_circle(pupil + Vector2(0.06, -0.06) * r, 0.06 * r, Palette.EYE_WHITE, true, -1.0, true)
 
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
