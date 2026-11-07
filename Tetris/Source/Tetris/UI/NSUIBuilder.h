@@ -88,10 +88,10 @@ namespace NSUI
 
 	inline UVerticalBoxSlot* AddV(UVerticalBox* Box, UWidget* Child, float Bottom = 8.f, EHorizontalAlignment HAlign = HAlign_Fill)
 	{
-		UVerticalBoxSlot* Slot = Box->AddChildToVerticalBox(Child);
-		Slot->SetPadding(FMargin(0.f, 0.f, 0.f, Bottom));
-		Slot->SetHorizontalAlignment(HAlign);
-		return Slot;
+		UVerticalBoxSlot* PanelSlot = Box->AddChildToVerticalBox(Child);
+		PanelSlot->SetPadding(FMargin(0.f, 0.f, 0.f, Bottom));
+		PanelSlot->SetHorizontalAlignment(HAlign);
+		return PanelSlot;
 	}
 
 	inline UHorizontalBox* Row(UWidgetTree* Tree, UWidget* Label, UWidget* Control, UWidget* Value = nullptr, float LabelWidth = 240.f)
@@ -121,20 +121,20 @@ namespace NSUI
 	/** Filho ancorado num ponto da tela (0..1), com alinhamento e deslocamento em pixels. */
 	inline UCanvasPanelSlot* Place(UCanvasPanel* Canvas, UWidget* Child, FVector2D Anchor, FVector2D Alignment, FVector2D Offset = FVector2D::ZeroVector)
 	{
-		UCanvasPanelSlot* Slot = Canvas->AddChildToCanvas(Child);
-		Slot->SetAnchors(FAnchors(Anchor.X, Anchor.Y));
-		Slot->SetAlignment(Alignment);
-		Slot->SetPosition(Offset);
-		Slot->SetAutoSize(true);
-		return Slot;
+		UCanvasPanelSlot* PanelSlot = Canvas->AddChildToCanvas(Child);
+		PanelSlot->SetAnchors(FAnchors(Anchor.X, Anchor.Y));
+		PanelSlot->SetAlignment(Alignment);
+		PanelSlot->SetPosition(Offset);
+		PanelSlot->SetAutoSize(true);
+		return PanelSlot;
 	}
 
 	/** Filho cobrindo a tela inteira. */
 	inline UCanvasPanelSlot* Fill(UCanvasPanel* Canvas, UWidget* Child)
 	{
-		UCanvasPanelSlot* Slot = Canvas->AddChildToCanvas(Child);
-		Slot->SetAnchors(FAnchors(0.f, 0.f, 1.f, 1.f));
-		Slot->SetOffsets(FMargin(0.f));
-		return Slot;
+		UCanvasPanelSlot* PanelSlot = Canvas->AddChildToCanvas(Child);
+		PanelSlot->SetAnchors(FAnchors(0.f, 0.f, 1.f, 1.f));
+		PanelSlot->SetOffsets(FMargin(0.f));
+		return PanelSlot;
 	}
 }

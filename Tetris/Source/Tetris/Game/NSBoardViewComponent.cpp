@@ -140,15 +140,15 @@ void UNSBoardViewComponent::RebuildFixed(const FNSGameSimulation& Sim)
 	FixedISM->MarkRenderStateDirty();
 }
 
-void UNSBoardViewComponent::UpdatePieceISM(UInstancedStaticMeshComponent* ISM, const FIntPoint Cells[4], bool bVisible, ENSPieceType Type, float Brightness, float Alpha)
+void UNSBoardViewComponent::UpdatePieceISM(UInstancedStaticMeshComponent* ISM, const FIntPoint Cells[4], bool bShow, ENSPieceType Type, float Brightness, float Alpha)
 {
-	const FLinearColor Color = bVisible ? GetPieceColor(Type) : FLinearColor::Black;
-	const float Pattern = bVisible ? static_cast<float>(static_cast<int32>(Type) - 1) : 0.f;
+	const FLinearColor Color = bShow ? GetPieceColor(Type) : FLinearColor::Black;
+	const float Pattern = bShow ? static_cast<float>(static_cast<int32>(Type) - 1) : 0.f;
 
 	for (int32 i = 0; i < 4; ++i)
 	{
-		const FIntPoint Cell = bVisible ? Cells[i] : FIntPoint(0, 0);
-		const bool bCellVisible = bVisible && Cell.Y < VisibleHeight;
+		const FIntPoint Cell = bShow ? Cells[i] : FIntPoint(0, 0);
+		const bool bCellVisible = bShow && Cell.Y < VisibleHeight;
 		ISM->UpdateInstanceTransform(i, CellTransform(Cell, bCellVisible), /*bWorldSpace*/ false, /*bMarkRenderStateDirty*/ false, /*bTeleport*/ true);
 		SetInstanceData(ISM, i, Color, Pattern, Brightness, 0.f, Alpha);
 	}
@@ -161,9 +161,9 @@ void UNSBoardViewComponent::SetInstanceData(UInstancedStaticMeshComponent* ISM, 
 	ISM->SetCustomData(Index, TArrayView<const float>(Data, NumCustomFloats), /*bMarkRenderStateDirty*/ false);
 }
 
-FTransform UNSBoardViewComponent::CellTransform(FIntPoint Cell, bool bVisible) const
+FTransform UNSBoardViewComponent::CellTransform(FIntPoint Cell, bool bShow) const
 {
-	const float Scale = bVisible ? (CellSize / 100.f) * BlockScale : 0.f;
+	const float Scale = bShow ? (CellSize / 100.f) * BlockScale : 0.f;
 	return FTransform(FQuat::Identity, CellToLocal(Cell), FVector(Scale));
 }
 

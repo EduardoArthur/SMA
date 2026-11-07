@@ -86,9 +86,9 @@ public:
 private:
 	UInstancedStaticMeshComponent* CreateISM(FName Name, UMaterialInterface* Material);
 	void RebuildFixed(const FNSGameSimulation& Sim);
-	void UpdatePieceISM(UInstancedStaticMeshComponent* ISM, const FIntPoint Cells[4], bool bVisible, ENSPieceType Type, float Brightness, float Alpha);
+	void UpdatePieceISM(UInstancedStaticMeshComponent* ISM, const FIntPoint Cells[4], bool bShow, ENSPieceType Type, float Brightness, float Alpha);
 	void SetInstanceData(UInstancedStaticMeshComponent* ISM, int32 Index, const FLinearColor& Color, float Pattern, float Brightness, float Pulse, float Alpha);
-	FTransform CellTransform(FIntPoint Cell, bool bVisible) const;
+	FTransform CellTransform(FIntPoint Cell, bool bShow) const;
 
 	UPROPERTY(Transient)
 	TObjectPtr<UInstancedStaticMeshComponent> FixedISM;
