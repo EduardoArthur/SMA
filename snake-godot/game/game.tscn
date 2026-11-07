@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://game/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://view/board_view.gd" id="2_board"]
+[ext_resource type="Script" path="res://view/fruit_view.gd" id="3_fruit"]
+[ext_resource type="Script" path="res://view/snake_view.gd" id="4_snake"]
+[ext_resource type="Script" path="res://game/input_handler.gd" id="5_input"]
+[ext_resource type="Script" path="res://ui/screens.gd" id="6_ui"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="BoardView" type="Node2D" parent="."]
+script = ExtResource("2_board")
+
+[node name="FruitView" type="Node2D" parent="BoardView"]
+script = ExtResource("3_fruit")
+
+[node name="SnakeView" type="Node2D" parent="BoardView"]
+script = ExtResource("4_snake")
+
+[node name="InputHandler" type="Node" parent="."]
+script = ExtResource("5_input")
+
+[node name="Screens" type="CanvasLayer" parent="."]
+script = ExtResource("6_ui")
