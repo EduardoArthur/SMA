@@ -15,14 +15,16 @@ var _expr_left := 0.0 ## Seconds left for a temporary expression (0 = stays).
 var _locked := false ## Faint / cool / sleepy stay until the game state changes.
 var _blink_in := 3.0
 var _blink_left := 0.0
-var _bump_t := -1.0 ## Time since death, for the head bump (-1 = not dying).
+var _bump_t := -1.0 ## Time since death: head bump, then the body bounce (-1 = alive).
+var _squash_t := -1.0 ## Time since eating, for the head squash (-1 = none).
+var _rainbow_t := -1.0 ## Time since a milestone, for the rainbow wave (-1 = none).
 var _time := 0.0
 
 
 func _ready() -> void:
-	Events.fruit_eaten.connect(func(_cell: Vector2i, _type: int) -> void: _try_expression(&"happy"))
+	Events.fruit_eaten.connect(_on_fruit_eaten)
 	Events.near_miss.connect(func(_cell: Vector2i) -> void: _try_expression(&"gasp"))
-	Events.milestone_reached.connect(func(_length: int) -> void: _try_expression(&"proud"))
+	Events.milestone_reached.connect(_on_milestone)
 	Events.died.connect(_on_died)
 	Events.board_cleared.connect(func() -> void: _force(&"cool", true))
 	Events.state_changed.connect(_on_state_changed)
@@ -42,6 +44,10 @@ func _process(delta: float) -> void:
 	_blink_left = maxf(_blink_left - delta, 0.0)
 	if _bump_t >= 0.0:
 		_bump_t += delta
+	if _squash_t >= 0.0:
+		_squash_t = -1.0 if _squash_t > 0.4 else _squash_t + delta
+	if _rainbow_t >= 0.0:
+		_rainbow_t = -1.0 if _rainbow_t > 0.8 else _rainbow_t + delta
 	queue_redraw()
 
 
@@ -63,6 +69,16 @@ func _force(expr: StringName, locked: bool) -> void:
 	_locked = locked
 
 
+func _on_fruit_eaten(_cell: Vector2i, _type: int) -> void:
+	_try_expression(&"happy")
+	_squash_t = 0.0
+
+
+func _on_milestone(_length: int) -> void:
+	_try_expression(&"proud")
+	_rainbow_t = 0.0
+
+
 func _on_died(_cause: String) -> void:
 	_force(&"faint", true)
 	_bump_t = 0.0
@@ -75,6 +91,8 @@ func _on_state_changed(_state: int) -> void:
 		Game.State.READY:
 			_force(&"neutral", false)
 			_bump_t = -1.0
+			_squash_t = -1.0
+			_rainbow_t = -1.0
 		Game.State.PLAYING:
 			if expression == &"sleepy":
 				_force(&"neutral", false) # Waking up after a pause.
@@ -93,8 +111,15 @@ func _draw() -> void:
 	var o := maxf(2.0, c * 0.08)
 	var pts := _path_points(model, game.tick_alpha)
 	var fwd := Vector2(model.direction)
-	if _bump_t >= 0.0: # Death bump: the head pushes into the obstacle and back.
+	if _bump_t >= 0.0:
+		# Death bump: the head pushes into the obstacle and back (0-0.2 s)...
 		pts.set(0, pts[0] + fwd * c * 0.2 * sin(PI * clampf(_bump_t / 0.2, 0.0, 1.0)))
+		# ...then, after the 0.3 s freeze, segments hop one after another, head to tail.
+		var gap := minf(0.03, 0.6 / pts.size())
+		for i in pts.size():
+			var t := (_bump_t - 0.3 - i * gap) / 0.2
+			if t > 0.0 and t < 1.0:
+				pts.set(i, pts[i] + Vector2(0.0, -c * 0.15 * sin(PI * t)))
 	var head := pts[0]
 
 	# Body: outline pass, fill pass, then the belly highlight (Art Bible §4).
@@ -112,11 +137,16 @@ func _draw() -> void:
 			belly.append(p + Vector2(-0.06, -0.06) * c) # Light comes from the top-left.
 		draw_polyline(belly, Palette.SNAKE_BELLY, c * 0.25, true)
 
-	# Head on top.
-	var r := c * 0.5
-	draw_circle(head, r + o, Palette.OUTLINE, true, -1.0, true)
-	draw_circle(head, r, Palette.SNAKE_BODY, true, -1.0, true)
-	_draw_face(head, model.direction, r, o)
+	# Milestone rainbow: a band of color runs from head to tail (Art Bible §5.3).
+	if _rainbow_t >= 0.0:
+		var wave := _rainbow_t / 0.6 * (pts.size() + 6) - 3.0
+		for i in pts.size():
+			var k := clampf(1.0 - absf(i - wave) / 3.0, 0.0, 1.0)
+			if k > 0.0:
+				draw_circle(pts[i], c * 0.4, Color.from_hsv(fmod(i * 0.09 + _time, 1.0), 0.65, 1.0, k), true, -1.0, true)
+
+	# Head on top (drawn inside the face transform so it can squash).
+	_draw_face(head, model.direction, c * 0.5, o)
 
 
 ## Points along the snake from head to tail, following the grid path exactly.
@@ -151,7 +181,14 @@ func _draw_face(head: Vector2, dir: Vector2i, r: float, o: float) -> void:
 		angle = -PI / 2.0
 	elif dir == Vector2i.DOWN:
 		angle = PI / 2.0
-	draw_set_transform(head, angle, flip)
+	# Eating squash: flattens along the heading, then wobbles back (about 0.3 s).
+	var s := 0.0
+	if _squash_t >= 0.0:
+		s = exp(-_squash_t * 14.0) * cos(_squash_t * 28.0)
+	draw_set_transform(head, angle, flip * Vector2(1.0 - 0.25 * s, 1.0 + 0.25 * s))
+
+	draw_circle(Vector2.ZERO, r + o, Palette.OUTLINE, true, -1.0, true)
+	draw_circle(Vector2.ZERO, r, Palette.SNAKE_BODY, true, -1.0, true)
 
 	var line := r * 0.09
 	var eyes: Array[Vector2] = [Vector2(0.2, -0.38) * r, Vector2(0.2, 0.38) * r]
@@ -213,6 +250,12 @@ func _draw_face(head: Vector2, dir: Vector2i, r: float, o: float) -> void:
 	# Screen-space extras that should not rotate with the head.
 	if expression == &"cool":
 		_draw_crown(head + Vector2(0.0, -0.95 * r), r, o)
+	elif expression == &"faint": # Three stars circling above the fainted head.
+		for k in 3:
+			var a := _time * 4.0 + k * TAU / 3.0
+			var p := head + Vector2(cos(a) * 0.6 * r, -1.15 * r + sin(a) * 0.18 * r)
+			draw_colored_polygon(_star_points(p, 0.2 * r + o * 0.6, 0.09 * r + o * 0.6), Palette.OUTLINE)
+			draw_colored_polygon(_star_points(p, 0.2 * r, 0.09 * r), Palette.GOLD)
 	elif expression == &"sleepy":
 		var t := fmod(_time, 1.5) / 1.5
 		var z := head + Vector2(0.5 * r, -1.1 * r - t * 0.5 * r)

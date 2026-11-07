@@ -26,7 +26,7 @@ team:
 status:
   current_phase: "engine"
   current_agent: "gabi"
-  current_workflow: "M4-snake-comes-alive"
+  current_workflow: "M5-juice-and-sound"
   started_at: "2026-11-06"
   last_activity: "2026-11-06"
 
@@ -80,6 +80,14 @@ phases:
 
 # Activity Log
 activity_log:
+  - timestamp: "2026-11-06"
+    action: "milestone_code_written"
+    agent: "gina"
+    details: "M5 code written: camera shake, Juice layer (chomp bursts, +10 popups, confetti, speed lines), snake squash/rainbow/death bounce/stars, AudioManager autoload (buses, low-pass, pitch ramp, event map, silent placeholders), Settings overlay (O key). Not yet run in Godot."
+  - timestamp: "2026-11-06"
+    action: "milestone_completed"
+    agent: "gina"
+    details: "M4 verified by user in the Godot editor (looks good). Next: M5 juice & sound."
   - timestamp: "2026-11-06"
     action: "milestone_code_written"
     agent: "gina"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_game"]
 [ext_resource type="Script" path="res://view/board_view.gd" id="2_board"]
@@ -6,12 +6,21 @@
 [ext_resource type="Script" path="res://view/snake_view.gd" id="4_snake"]
 [ext_resource type="Script" path="res://game/input_handler.gd" id="5_input"]
 [ext_resource type="Script" path="res://ui/screens.gd" id="6_ui"]
+[ext_resource type="Script" path="res://view/juice/juice.gd" id="7_juice"]
+[ext_resource type="Script" path="res://view/juice/camera_shake.gd" id="8_camera"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_game")
 
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("8_camera")
+
 [node name="BoardView" type="Node2D" parent="."]
 script = ExtResource("2_board")
+
+[node name="Juice" type="Node2D" parent="BoardView"]
+script = ExtResource("7_juice")
 
 [node name="FruitView" type="Node2D" parent="BoardView"]
 script = ExtResource("3_fruit")

@@ -7,6 +7,8 @@ extends Node
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if game.input_blocked or event.is_action_pressed("settings"):
+		return # Settings is open, or is about to be opened by Screens.
 	if event.is_action_pressed("move_up"):
 		game.request_turn(Vector2i.UP)
 	elif event.is_action_pressed("move_down"):

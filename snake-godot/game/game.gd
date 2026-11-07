@@ -16,6 +16,8 @@ var tick_alpha := 0.0
 ## Results of the last finished run, read by the Game Over screen.
 var last_run_new_best := false
 var last_run_perfect := false
+## True while an overlay (Settings) is open: InputHandler ignores all input.
+var input_blocked := false
 
 var _acc := 0.0
 var _interval := 1.0
