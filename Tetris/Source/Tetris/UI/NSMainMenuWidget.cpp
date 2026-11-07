@@ -7,6 +7,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Systems/NSSaveSubsystem.h"
 #include "UI/NSOptionsWidget.h"
+#include "NSDefaultAssets.h"
 
 void UNSMainMenuWidget::NativeOnInitialized()
 {
@@ -36,20 +37,17 @@ UWidget* UNSMainMenuWidget::GetDefaultFocusWidget() const
 
 void UNSMainMenuWidget::HandlePlay()
 {
-	if (GameLevel.IsNull())
-	{
-		UE_LOG(LogNeonStack, Warning, TEXT("NSMainMenuWidget: GameLevel não configurado no WBP_MainMenu."));
-		return;
-	}
-	UGameplayStatics::OpenLevelBySoftObjectPtr(this, GameLevel);
+	const TSoftObjectPtr<UWorld> Level = GameLevel.IsNull()
+		? TSoftObjectPtr<UWorld>(FSoftObjectPath(NSAssets::GameMap))
+		: GameLevel;
+	UGameplayStatics::OpenLevelBySoftObjectPtr(this, Level);
 }
 
 void UNSMainMenuWidget::HandleOptions()
 {
 	if (!OptionsClass)
 	{
-		UE_LOG(LogNeonStack, Warning, TEXT("NSMainMenuWidget: OptionsClass não configurado."));
-		return;
+		OptionsClass = UNSOptionsWidget::StaticClass(); // layout padrão em C++
 	}
 	if (!Options)
 	{

@@ -4,6 +4,7 @@
 #include "Data/NSGameConfig.h"
 #include "Game/NSBoardViewComponent.h"
 #include "Systems/NSSaveSubsystem.h"
+#include "NSDefaultAssets.h"
 
 ANSBoardActor::ANSBoardActor()
 {
@@ -19,6 +20,7 @@ void ANSBoardActor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	NSAssets::FillIfEmpty<UNSGameConfig>(Config, NSAssets::GameConfig);
 	if (!Config)
 	{
 		UE_LOG(LogNeonStack, Error, TEXT("%s: Config vazio. Atribua DA_GameConfig no BP_Board."), *GetName());
@@ -39,6 +41,7 @@ void ANSBoardActor::HandleSettingsChanged(const FNSSettings& Settings)
 
 void ANSBoardActor::StartGame()
 {
+	NSAssets::FillIfEmpty<UNSGameConfig>(Config, NSAssets::GameConfig);
 	if (!Config)
 	{
 		UE_LOG(LogNeonStack, Error, TEXT("%s: StartGame sem Config."), *GetName());

@@ -9,6 +9,7 @@ ANSMenuGameMode::ANSMenuGameMode()
 {
 	PlayerControllerClass = APlayerController::StaticClass();
 	DefaultPawnClass = nullptr;
+	MainMenuClass = UNSMainMenuWidget::StaticClass();
 }
 
 void ANSMenuGameMode::BeginPlay()

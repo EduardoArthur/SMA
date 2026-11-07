@@ -10,7 +10,7 @@ public class Tetris : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "Slate", "SlateCore" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "Slate", "SlateCore", "Niagara" });
 
 		// Neon Stack: permite #include "Simulation/NSTypes.h", "Game/NSBoardActor.h" etc.
 		PublicIncludePaths.Add(ModuleDirectory);

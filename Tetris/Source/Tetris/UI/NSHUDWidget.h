@@ -14,10 +14,18 @@ class UTextBlock;
 class UNSPieceIconWidget;
 class ANSBoardActor;
 
-UCLASS(Abstract)
+UCLASS()
 class TETRIS_API UNSHUDWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+	/** Sem WBP: monta um layout padrão em C++ antes da inicialização. */
+	virtual bool Initialize() override;
+
+private:
+	void BuildDefaultLayout();
+
 
 public:
 	/** Liga o HUD aos eventos do board. Chamado pelo PlayerController. */

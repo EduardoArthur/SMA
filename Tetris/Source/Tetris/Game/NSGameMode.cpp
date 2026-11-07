@@ -6,11 +6,13 @@
 #include "Kismet/GameplayStatics.h"
 #include "Game/NSBoardActor.h"
 #include "Game/NSPlayerController.h"
+#include "NSDefaultAssets.h"
 
 ANSGameMode::ANSGameMode()
 {
 	PlayerControllerClass = ANSPlayerController::StaticClass();
 	DefaultPawnClass = nullptr; // a câmera vem de um CameraActor no mapa (Auto Activate for Player 0)
+	MainMenuLevel = TSoftObjectPtr<UWorld>(FSoftObjectPath(NSAssets::MenuMap));
 }
 
 void ANSGameMode::BeginPlay()

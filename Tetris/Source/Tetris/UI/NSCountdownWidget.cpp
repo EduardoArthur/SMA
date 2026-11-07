@@ -3,6 +3,7 @@
 #include "Components/TextBlock.h"
 #include "Engine/World.h"
 #include "Game/NSGameMode.h"
+#include "Audio/NSAudioDirector.h"
 
 void UNSCountdownWidget::StartCountdown()
 {
@@ -21,6 +22,10 @@ void UNSCountdownWidget::ShowNumber(int32 Number)
 	}
 	CurrentNumber = Number;
 	CountText->SetText(FText::AsNumber(Number));
+	if (ANSAudioDirector* Audio = ANSAudioDirector::Get(this))
+	{
+		Audio->PlayCountdown(Number);
+	}
 	OnNumberShown(Number);
 }
 

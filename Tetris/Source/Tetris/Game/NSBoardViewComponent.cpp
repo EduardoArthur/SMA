@@ -6,6 +6,7 @@
 #include "Materials/MaterialInterface.h"
 #include "Simulation/NSGameSimulation.h"
 #include "UObject/ConstructorHelpers.h"
+#include "NSDefaultAssets.h"
 
 UNSBoardViewComponent::UNSBoardViewComponent()
 {
@@ -36,6 +37,8 @@ void UNSBoardViewComponent::InitializeView(const UNSGameConfig* Config)
 		Width = Config->BoardWidth;
 		VisibleHeight = Config->VisibleHeight;
 	}
+	NSAssets::FillIfEmpty<UMaterialInterface>(BlockMaterial, NSAssets::BlockMat);
+	NSAssets::FillIfEmpty<UMaterialInterface>(GhostMaterial, NSAssets::GhostMat);
 	CellToInstance.Init(INDEX_NONE, Width * VisibleHeight);
 	LastBoardRevision = MAX_uint32;
 

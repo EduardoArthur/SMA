@@ -12,10 +12,18 @@
 class UButton;
 class UTextBlock;
 
-UCLASS(Abstract)
+UCLASS()
 class TETRIS_API UNSResultsWidget : public UNSMenuWidgetBase
 {
 	GENERATED_BODY()
+
+public:
+	/** Sem WBP: monta um layout padrão em C++ antes da inicialização. */
+	virtual bool Initialize() override;
+
+private:
+	void BuildDefaultLayout();
+
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "NeonStack|UI")

@@ -9,6 +9,7 @@
 #include "EngineUtils.h"
 #include "Game/NSBoardActor.h"
 #include "Game/NSGameMode.h"
+#include "NSDefaultAssets.h"
 #include "UI/NSCountdownWidget.h"
 #include "UI/NSHUDWidget.h"
 #include "UI/NSOptionsWidget.h"
@@ -38,12 +39,45 @@ void ANSPlayerController::SetBoard(ANSBoardActor* InBoard)
 	Board = InBoard;
 }
 
+void ANSPlayerController::EnsureDefaults()
+{
+	if (bDefaultsEnsured)
+	{
+		return;
+	}
+	bDefaultsEnsured = true;
+
+	auto FillIA = [](TObjectPtr<UInputAction>& Ptr, const TCHAR* Name)
+	{
+		if (!Ptr) { Ptr = NSAssets::LoadInput<UInputAction>(Name); }
+	};
+	FillIA(IA_MoveLeft, TEXT("IA_MoveLeft"));
+	FillIA(IA_MoveRight, TEXT("IA_MoveRight"));
+	FillIA(IA_SoftDrop, TEXT("IA_SoftDrop"));
+	FillIA(IA_HardDrop, TEXT("IA_HardDrop"));
+	FillIA(IA_RotateCW, TEXT("IA_RotateCW"));
+	FillIA(IA_RotateCCW, TEXT("IA_RotateCCW"));
+	FillIA(IA_Hold, TEXT("IA_Hold"));
+	FillIA(IA_Pause, TEXT("IA_Pause"));
+
+	if (!GameplayContext) { GameplayContext = NSAssets::LoadInput<UInputMappingContext>(TEXT("IMC_Gameplay")); }
+	if (!UIContext) { UIContext = NSAssets::LoadInput<UInputMappingContext>(TEXT("IMC_UI")); }
+
+	// Sem WBP: usa as próprias classes C++, que montam um layout padrão
+	if (!HUDClass) { HUDClass = UNSHUDWidget::StaticClass(); }
+	if (!CountdownClass) { CountdownClass = UNSCountdownWidget::StaticClass(); }
+	if (!PauseClass) { PauseClass = UNSPauseWidget::StaticClass(); }
+	if (!ResultsClass) { ResultsClass = UNSResultsWidget::StaticClass(); }
+	if (!OptionsClass) { OptionsClass = UNSOptionsWidget::StaticClass(); }
+}
+
 // ---------------------------------------------------------------------------
 // UI
 // ---------------------------------------------------------------------------
 
 void ANSPlayerController::InitUI(ANSGameMode* InGameMode, ANSBoardActor* InBoard)
 {
+	EnsureDefaults();
 	GameMode = InGameMode;
 	if (InGameMode)
 	{
@@ -164,6 +198,7 @@ void ANSPlayerController::HandleOptionsClosed()
 
 void ANSPlayerController::SetGameplayInputEnabled(bool bEnabled)
 {
+	EnsureDefaults();
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
 		Subsystem->ClearAllMappings();
@@ -192,6 +227,7 @@ void ANSPlayerController::SetGameplayInputEnabled(bool bEnabled)
 void ANSPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
+	EnsureDefaults();
 
 	UEnhancedInputComponent* EIC = Cast<UEnhancedInputComponent>(InputComponent);
 	if (!EIC)

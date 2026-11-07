@@ -4,6 +4,7 @@
 #include "Components/TextBlock.h"
 #include "Engine/World.h"
 #include "Game/NSGameMode.h"
+#include "Audio/NSAudioDirector.h"
 
 void UNSResultsWidget::NativeOnInitialized()
 {
@@ -28,6 +29,10 @@ void UNSResultsWidget::SetResult(int64 Score, int32 Lines, int32 Level, bool bNe
 	}
 	if (bNewHighScore)
 	{
+		if (ANSAudioDirector* Audio = ANSAudioDirector::Get(this))
+		{
+			Audio->PlayNewRecord();
+		}
 		OnNewHighScoreShown();
 	}
 }

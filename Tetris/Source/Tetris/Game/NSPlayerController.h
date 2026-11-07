@@ -71,6 +71,10 @@ private:
 	void HandleReleased(ENSInputAction Action);
 	void HandlePause();
 
+	/** Preenche campos vazios com os assets padrão (NSDefaultAssets.h) e as classes de widget C++. */
+	void EnsureDefaults();
+	bool bDefaultsEnsured = false;
+
 	UFUNCTION()
 	void HandleFlowStateChanged(ENSFlowState NewState);
 

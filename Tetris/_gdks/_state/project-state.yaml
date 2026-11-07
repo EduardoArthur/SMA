@@ -3,7 +3,7 @@ project:
   id: tetris
   name: Tetris
   created_at: '2026-11-07T19:57:07.441Z'
-  updated_at: '2026-11-08T02:00:00Z'
+  updated_at: '2026-11-08T05:00:00Z'
 preset: solo-indie
 target_engine: unreal-5
 language: pt-BR
@@ -44,6 +44,10 @@ phase_progress:
       - m1-setup-guide
       - m3-code
       - m3-setup-guide
+      - m4-m5-code
+      - m4-m5-setup-guide
+      - editor-setup-script
+      - quickstart
 active_agents: []
 decisions:
   - id: skip-planning

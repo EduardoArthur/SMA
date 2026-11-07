@@ -9,10 +9,18 @@
 
 class UTextBlock;
 
-UCLASS(Abstract)
+UCLASS()
 class TETRIS_API UNSCountdownWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+	/** Sem WBP: monta um layout padrão em C++ antes da inicialização. */
+	virtual bool Initialize() override;
+
+private:
+	void BuildDefaultLayout();
+
 
 public:
 	/** Mostra o widget e começa a contar. Ao terminar, chama ANSGameMode::FinishCountdown. */

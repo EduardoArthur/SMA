@@ -18,10 +18,18 @@ class UTextBlock;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FNSOnOptionsClosed);
 
-UCLASS(Abstract)
+UCLASS()
 class TETRIS_API UNSOptionsWidget : public UNSMenuWidgetBase
 {
 	GENERATED_BODY()
+
+public:
+	/** Sem WBP: monta um layout padrão em C++ antes da inicialização. */
+	virtual bool Initialize() override;
+
+private:
+	void BuildDefaultLayout();
+
 
 public:
 	/** Carrega as opções salvas nos controles, mostra e foca. */

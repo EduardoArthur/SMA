@@ -24,9 +24,9 @@ team:
 status:
   current_phase: "engine"
   current_agent: "ue5-programmer-lead"
-  current_workflow: "implementation-m3"
+  current_workflow: "editor-automation"
   started_at: "2026-11-07T20:01:41Z"
-  last_activity: "2026-11-08T02:00:00Z"
+  last_activity: "2026-11-08T05:00:00Z"
 
 # Phase Progress
 phases:
@@ -73,7 +73,7 @@ phases:
       cpp_specifications: true
       blueprint_specifications: false
       implementation_guides: true
-      llm_prompts: false
+      llm_prompts: false  # n/a: codigo escrito diretamente
 
 # Activity Log
 activity_log:
@@ -144,6 +144,16 @@ activity_log:
     action: "m3_code_written"
     agent: "ue5-programmer-lead"
     details: "M1 compilado pelo usuario. M3: SaveSubsystem, fluxo completo no GameMode, MenuGameMode, widgets C++ (HUD, contagem, pausa, resultados, opcoes, menu, piece icon) + m3-setup-guide.md. Nao compilado"
+
+  - timestamp: "2026-11-08T03:30:00Z"
+    action: "m4_m5_code_written"
+    agent: "ue5-programmer-lead"
+    details: "M3 compilado pelo usuario. M4/M5: NSPaletteData, NSBackgroundActor (MPC), NSFXDirector (Niagara/shake/flash/PP), NSAudioDirector (SFX afinados + musica reativa) + m4-m5-setup-guide.md. Nao compilado"
+
+  - timestamp: "2026-11-08T05:00:00Z"
+    action: "editor_automation"
+    agent: "ue5-programmer-lead"
+    details: "Fallbacks de assets por caminho (NSDefaultAssets.h), UI padrao em C++ (sem WBP), shake procedural, Scripts/setup_neon_stack.py (cria DA/IA/IMC/MPC/materiais/mapas), plugins Python + Editor Scripting, mapas padrao no DefaultEngine.ini, quickstart.md. Nao compilado"
 
 # Notes
 notes:
