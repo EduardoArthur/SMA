@@ -25,8 +25,8 @@ team:
 # Current Status
 status:
   current_phase: "engine"
-  current_agent: "erico"
-  current_workflow: "readiness-review"
+  current_agent: "gabi"
+  current_workflow: "M1-rules"
   started_at: "2026-11-06"
   last_activity: "2026-11-06"
 
@@ -80,6 +80,10 @@ phases:
 
 # Activity Log
 activity_log:
+  - timestamp: "2026-11-06"
+    action: "milestone_code_written"
+    agent: "gabi"
+    details: "M1 code written: config/game_config.gd+.tres, game/step_result.gd, game/snake_model.gd, tests/test_snake_model.gd. Tests NOT yet run (Godot CLI path unknown)."
   - timestamp: "2026-11-06"
     action: "review_completed"
     agent: "erico"
