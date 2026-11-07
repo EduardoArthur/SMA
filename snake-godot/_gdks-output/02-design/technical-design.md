@@ -153,7 +153,7 @@ var speed_changed := false
 ```gdscript
 func step(turn: Vector2i) -> StepResult:
     var r := StepResult.new()
-    prev_body = body.duplicate()
+    # prev_body is only updated in step 4 (a real move), so on death the view freezes in place.
 
     # 1. Apply turn (never a reversal, never "same direction")
     var prev_dir := direction
@@ -181,6 +181,7 @@ func step(turn: Vector2i) -> StepResult:
             r.near_miss_cell = would_have
 
     # 4. Move
+    prev_body = body.duplicate()
     body.push_front(new_head)
     if growing:
         r.ate = true

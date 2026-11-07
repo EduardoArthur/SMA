@@ -26,7 +26,7 @@ team:
 status:
   current_phase: "engine"
   current_agent: "gabi"
-  current_workflow: "M2-playable-squares"
+  current_workflow: "M4-snake-comes-alive"
   started_at: "2026-11-06"
   last_activity: "2026-11-06"
 
@@ -80,6 +80,14 @@ phases:
 
 # Activity Log
 activity_log:
+  - timestamp: "2026-11-06"
+    action: "milestone_code_written"
+    agent: "gina"
+    details: "M4 code written: smooth slide along the grid path, code-drawn snake with 7 expressions + blink + death bump, apple/cherry/grapes with faces, bounce and pop-in, hedge bumps, MSAA 2D. M3 web check skipped for now by user choice. Not yet run in Godot."
+  - timestamp: "2026-11-06"
+    action: "milestone_completed"
+    agent: "gabi"
+    details: "M2 playable squares verified by user in the Godot editor. Next: M3 (Events bus done early; web export check)."
   - timestamp: "2026-11-06"
     action: "milestone_code_written"
     agent: "gabi"

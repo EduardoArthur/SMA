@@ -12,7 +12,7 @@ var rng := RandomNumberGenerator.new()
 
 var grid_size := Vector2i.ZERO
 var body: Array[Vector2i] = [] ## body[0] is the head, the last item is the tail.
-var prev_body: Array[Vector2i] = [] ## body before the last step, for interpolation.
+var prev_body: Array[Vector2i] = [] ## body before the last move, for interpolation.
 var direction := Vector2i.RIGHT
 var fruit := NO_FRUIT
 var fruit_type := 0
@@ -46,7 +46,6 @@ func reset(size: Vector2i) -> void:
 ## Advances the snake by one cell. `turn` is Vector2i.ZERO when there is no input.
 func step(turn: Vector2i) -> StepResult:
 	var r := StepResult.new()
-	prev_body = body.duplicate()
 
 	# 1. Apply the turn: never a reversal, never the same direction.
 	var prev_dir := direction
@@ -76,7 +75,9 @@ func step(turn: Vector2i) -> StepResult:
 			r.near_miss = true
 			r.near_miss_cell = would_have
 
-	# 4. Move (and grow).
+	# 4. Move (and grow). prev_body is only updated on a real move, so after a
+	#    death the view keeps sliding from the same cells and freezes in place.
+	prev_body = body.duplicate()
 	body.push_front(new_head)
 	if growing:
 		r.ate = true

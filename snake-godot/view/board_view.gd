@@ -32,9 +32,17 @@ func _draw() -> void:
 	var hedge := cell * 0.5
 	var outline := maxf(2.0, cell * 0.08)
 
-	# Hedge (the deadly wall): an outlined band around the grid.
+	# Hedge (the deadly wall): an outlined band around the grid with a bushy edge
+	# of dark half-circles (Art Bible §7). Bumps are drawn first so the band
+	# covers their inner halves.
 	var outer := Rect2(Vector2(-hedge, -hedge), board_px + Vector2(hedge, hedge) * 2.0)
+	var bumps := _bump_centers(outer, cell * 0.5)
+	var bump_r := cell * 0.25
+	for p in bumps:
+		draw_circle(p, bump_r + outline, Palette.OUTLINE, true, -1.0, true)
 	draw_rect(outer.grow(outline), Palette.OUTLINE)
+	for p in bumps:
+		draw_circle(p, bump_r, Palette.HEDGE_DARK, true, -1.0, true)
 	draw_rect(outer, Palette.HEDGE)
 
 	# Lawn checkerboard.
@@ -42,3 +50,16 @@ func _draw() -> void:
 		for x in grid_size.x:
 			var color := Palette.LAWN_LIGHT if (x + y) % 2 == 0 else Palette.LAWN_DARK
 			draw_rect(Rect2(Vector2(x, y) * cell, Vector2(cell, cell)), color)
+
+
+## Evenly spaced points along the edge of `rect`, about `step` apart.
+func _bump_centers(rect: Rect2, step: float) -> PackedVector2Array:
+	var pts := PackedVector2Array()
+	var corners := [rect.position, Vector2(rect.end.x, rect.position.y), rect.end, Vector2(rect.position.x, rect.end.y)]
+	for i in 4:
+		var a: Vector2 = corners[i]
+		var b: Vector2 = corners[(i + 1) % 4]
+		var count := maxi(1, roundi(a.distance_to(b) / step))
+		for j in count:
+			pts.append(a.lerp(b, j / float(count)))
+	return pts
