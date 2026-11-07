@@ -1,0 +1,127 @@
+# GD-KS Workflow Status
+
+# Project Information
+project:
+  name: "Snake"
+  codename: "snake-godot"
+  description: "A classic Snake arcade game built in Godot (to be refined during Ideation)."
+  game_type: "Arcade"
+  engine: "Godot"
+  created_at: "2026-11-06"
+  updated_at: "2026-11-06"
+
+# Selected Track
+track:
+  selected: "standard"  # quick, standard, or full
+  phases: [ideation, design, engine]
+
+# Team Configuration
+team:
+  size: "solo"
+  experience_level: "beginner"  # Godot
+  timeline: "prototype (1-4 weeks)"
+  documentation: "standard"
+
+# Current Status
+status:
+  current_phase: "engine"
+  current_agent: "erico"
+  current_workflow: "readiness-review"
+  started_at: "2026-11-06"
+  last_activity: "2026-11-06"
+
+# Phase Progress
+phases:
+  ideation:
+    status: "completed"  # not_started, in_progress, completed
+    started_at: "2026-11-06"
+    completed_at: "2026-11-06"
+    deliverables:
+      concept_brief: true
+      market_analysis: "skipped"
+      mechanics_exploration: true
+      ideation_handoff: true
+
+  design:
+    status: "completed"
+    started_at: "2026-11-06"
+    completed_at: "2026-11-06"
+    deliverables:
+      gdd: true
+      level_design: "in_gdd"
+      narrative_design: "skipped"
+      technical_design: true
+      art_bible: true
+      audio_bible: true
+      design_handoff: true
+
+  planning:
+    status: "skipped"  # not part of the standard track
+    started_at: null
+    completed_at: null
+    deliverables:
+      roadmap: false
+      epics: false
+      stories: false
+      sprint_plan: false
+      planning_handoff: false
+
+  engine:
+    status: "in_progress"
+    started_at: "2026-11-06"
+    completed_at: null
+    # Adapted from the UE5 template for Godot
+    deliverables:
+      godot_architecture: false
+      gdscript_specifications: false
+      scene_specifications: false
+      implementation_guides: false
+      llm_prompts: false
+
+# Activity Log
+activity_log:
+  - timestamp: "2026-11-06"
+    action: "review_completed"
+    agent: "erico"
+    details: "Engine readiness review: ready for M1; project setup items scheduled in M2-M6; Godot CLI path unknown"
+  - timestamp: "2026-11-06"
+    action: "phase_completed"
+    agent: "dylan"
+    details: "Design handoff created; 5 cross-doc issues fixed. Next: Engine Team (Érico) -> M1"
+  - timestamp: "2026-11-06"
+    action: "deliverable_completed"
+    agent: "anton"
+    details: "Audio bible v1.0 (SFX in jsfxr, music + jingles in BeepBox, dynamic low-pass + speed pitch)"
+  - timestamp: "2026-11-06"
+    action: "deliverable_completed"
+    agent: "aurora"
+    details: "Art bible v1.0 (all art drawn in code, sunny garden palette; banana replaced by grapes)"
+  - timestamp: "2026-11-06"
+    action: "deliverable_completed"
+    agent: "theo"
+    details: "Technical design v1.0 (SnakeModel + Game + Events bus, accumulator tick, smooth slide, headless tests, web export checklist)"
+  - timestamp: "2026-11-06"
+    action: "deliverable_completed"
+    agent: "diana"
+    details: "GDD v1.0 (two grids 20x15/15x20, smooth slide, near-miss = last-second turn, same speed cap for touch)"
+  - timestamp: "2026-11-06"
+    action: "phase_completed"
+    agent: "ivy"
+    details: "Ideation handoff created; market analysis skipped on purpose. Next: Design Team (Diana)"
+  - timestamp: "2026-11-06"
+    action: "deliverable_completed"
+    agent: "mira"
+    details: "Mechanics exploration done (walls kill, cosmetic fruit panic, speed ramp, PC + web + touch)"
+  - timestamp: "2026-11-06"
+    action: "deliverable_completed"
+    agent: "sparky"
+    details: "Concept brief drafted (classic rules + cute cartoon style + chaotic juice)"
+  - timestamp: "2026-11-06"
+    action: "workflow_initialized"
+    agent: "gdks-master"
+    details: "Project initialized with standard track"
+
+# Notes
+notes:
+  - "Engine module is Godot 4 (agents: Érico, Guilherme, Gabi, Gina). Planning phase replaced by the milestone build plan in 02-design/design-handoff.md."
+  - "Narrative design and audio bible can stay lightweight for a Snake game."
