@@ -8,7 +8,7 @@ project:
   game_type: "Arcade"
   engine: "Godot"
   created_at: "2026-11-06"
-  updated_at: "2026-11-06"
+  updated_at: "2026-11-07"
 
 # Selected Track
 track:
@@ -26,9 +26,9 @@ team:
 status:
   current_phase: "engine"
   current_agent: "gabi"
-  current_workflow: "M5-juice-and-sound"
+  current_workflow: "M6-touch-and-layouts"
   started_at: "2026-11-06"
-  last_activity: "2026-11-06"
+  last_activity: "2026-11-07"
 
 # Phase Progress
 phases:
@@ -80,6 +80,14 @@ phases:
 
 # Activity Log
 activity_log:
+  - timestamp: "2026-11-07"
+    action: "milestone_code_written"
+    agent: "gabi"
+    details: "M6 code written: swipe input (re-anchored, first finger), taps via emulated mouse, emulate touch from mouse, HUD pause button, touch-friendly texts, grid re-picked on rotation during READY, fruit panic face + shake. PERFECT already done in M4/M5. Not yet run in Godot; phone test needs the M3 web export."
+  - timestamp: "2026-11-07"
+    action: "milestone_completed"
+    agent: "gina"
+    details: "M5 verified by user in the Godot editor after fixing a duplicate variable in snake_view.gd. Audio files still to be produced. Next: M6 (touch, two grids, fruit panic, PERFECT) or M3 web check."
   - timestamp: "2026-11-06"
     action: "milestone_code_written"
     agent: "gina"

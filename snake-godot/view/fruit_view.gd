@@ -10,6 +10,8 @@ extends Node2D
 var _time := 0.0
 var _spawn_t := 1.0 ## Time since the fruit appeared (for the pop-in).
 var _last_fruit := Vector2i(-2, -2)
+var _panic := false ## Set each frame in _draw; read by _face().
+var _look := Vector2.ZERO ## Direction from the fruit to the snake's head.
 
 
 func _process(delta: float) -> void:
@@ -33,7 +35,17 @@ func _draw() -> void:
 	var squash := Vector2(1.0 - 0.03 * wave, 1.0 + 0.06 * wave)
 	var k := clampf(_spawn_t / 0.2, 0.0, 1.0)
 	var pop := lerpf(0.0, 1.15, k / 0.7) if k < 0.7 else lerpf(1.15, 1.0, (k - 0.7) / 0.3)
-	draw_set_transform(board.cell_to_pos(Vector2(model.fruit)), 0.0, squash * pop)
+
+	# Panic (GDD §6.4): scared face and a fast shake when the head is close.
+	# Purely visual: the fruit never changes cell.
+	var center := board.cell_to_pos(Vector2(model.fruit))
+	var head := board.cell_to_pos(Vector2(model.body[0]))
+	var gap := (model.body[0] - model.fruit).abs()
+	_panic = gap.x + gap.y <= game.config.fruit_panic_range
+	_look = (head - center).normalized() if _panic else Vector2.ZERO
+	if _panic:
+		center.x += sin(_time * TAU * 18.0) * c * 0.05
+	draw_set_transform(center, 0.0, squash * pop)
 
 	var color: Color = Palette.FRUIT[model.fruit_type]
 	match model.fruit_type:
@@ -88,8 +100,23 @@ func _leaf(at: Vector2, c: float, o: float) -> void:
 	draw_polyline(pts, Palette.OUTLINE, o * 0.7, true)
 
 
-## Tiny happy face: two dot eyes and a small smile (Art Bible §6).
+## Tiny face (Art Bible §6): happy dots and a smile, or, in panic, wide eyes
+## looking at the snake, a wobbly mouth and a sweat drop.
 func _face(center: Vector2, radius: float) -> void:
+	if _panic:
+		for side: float in [-1.0, 1.0]:
+			var e := center + Vector2(0.3 * side, -0.08) * radius
+			draw_circle(e, radius * 0.24, Palette.OUTLINE, true, -1.0, true)
+			draw_circle(e, radius * 0.19, Palette.EYE_WHITE, true, -1.0, true)
+			draw_circle(e + _look * radius * 0.09, radius * 0.07, Palette.PUPIL, true, -1.0, true)
+		var mouth := PackedVector2Array()
+		for i in 5:
+			mouth.append(center + Vector2(-0.2 + i * 0.1, 0.32 + (0.05 if i % 2 == 0 else -0.05)) * radius)
+		draw_polyline(mouth, Palette.PUPIL, maxf(1.5, radius * 0.07), true)
+		var drop := center + Vector2(0.75, -0.6) * radius
+		draw_colored_polygon(PackedVector2Array([drop + Vector2(0.0, -0.3) * radius, drop + Vector2(-0.11, 0.0) * radius, drop + Vector2(0.11, 0.0) * radius]), Palette.SWEAT)
+		draw_circle(drop, radius * 0.11, Palette.SWEAT, true, -1.0, true)
+		return
 	var eye := radius * 0.12
 	draw_circle(center + Vector2(-0.3, -0.05) * radius, eye, Palette.PUPIL, true, -1.0, true)
 	draw_circle(center + Vector2(0.3, -0.05) * radius, eye, Palette.PUPIL, true, -1.0, true)

@@ -12,6 +12,7 @@ var _message: VBoxContainer
 var _headline: Label
 var _details: Label
 var _settings_button: Button
+var _pause_button: Button
 var _settings: Control
 
 
@@ -32,6 +33,17 @@ func _ready() -> void:
 		label.offset_bottom = 70
 		add_child(label)
 	_best.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+
+	# Pause button at the top center while playing (needed on touch screens).
+	_pause_button = _make_button("II")
+	_pause_button.custom_minimum_size = Vector2(64, 52)
+	_pause_button.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
+	_pause_button.offset_left = -32
+	_pause_button.offset_right = 32
+	_pause_button.offset_top = 12
+	_pause_button.offset_bottom = 64
+	_pause_button.pressed.connect(game.toggle_pause)
+	add_child(_pause_button)
 
 	_message = VBoxContainer.new()
 	_message.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -78,16 +90,16 @@ func _on_state_changed(_state: int) -> void:
 	_best.text = "Best: %d" % SaveData.best
 	match game.state:
 		Game.State.TITLE:
-			_show("SNAKE", "Press any key or click to play\nArrows / WASD to move  ·  Esc / P to pause")
+			_show("SNAKE", "Press any key or tap to play\nArrows / WASD or swipe to move  ·  Esc / P to pause")
 		Game.State.READY:
-			_show("Ready?", "Press a direction to go!", false)
+			_show("Ready?", "Press a direction or swipe to go!", false)
 		Game.State.PAUSED:
-			_show("Paused", "Press Esc / P or click to resume")
+			_show("Paused", "Press Esc / P or tap to resume")
 		Game.State.GAME_OVER:
 			var details := "Score: %d" % game.model.score
 			if game.last_run_new_best:
 				details += "\nNEW BEST!"
-			details += "\n\nPress any key or click to retry"
+			details += "\n\nPress any key or tap to retry"
 			_show("PERFECT!" if game.last_run_perfect else "Game Over", details)
 		_:
 			_show("", "", false) # PLAYING and DYING: keep the board clear.
@@ -100,6 +112,7 @@ func _show(headline: String, details: String, dim := true) -> void:
 	_details.visible = details != ""
 	_dim.visible = dim
 	_settings_button.visible = _settings_allowed()
+	_pause_button.visible = game.state == Game.State.PLAYING
 
 
 func _settings_allowed() -> bool:

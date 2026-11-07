@@ -183,12 +183,12 @@ func _emit_events(r: StepResult) -> void:
 # --- Layout -------------------------------------------------------------------
 
 func _on_viewport_resized() -> void:
-	if state == State.TITLE:
-		_new_run() # Nothing is in progress: pick the grid for the new shape.
-		return
-	board.layout(model.grid_size)
 	var vp := get_viewport_rect().size
 	var wants_landscape := vp.x >= vp.y
 	var is_landscape := model.grid_size.x >= model.grid_size.y
+	if state == State.TITLE or (state == State.READY and wants_landscape != is_landscape):
+		_new_run() # No run in progress yet: pick the grid for the new shape.
+		return
+	board.layout(model.grid_size)
 	if state == State.PLAYING and wants_landscape != is_landscape:
 		toggle_pause() # The grid stays fixed until the next run (GDD §3.1).
