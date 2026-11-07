@@ -182,10 +182,10 @@ func _draw_face(head: Vector2, dir: Vector2i, r: float, o: float) -> void:
 	elif dir == Vector2i.DOWN:
 		angle = PI / 2.0
 	# Eating squash: flattens along the heading, then wobbles back (about 0.3 s).
-	var s := 0.0
+	var squash := 0.0
 	if _squash_t >= 0.0:
-		s = exp(-_squash_t * 14.0) * cos(_squash_t * 28.0)
-	draw_set_transform(head, angle, flip * Vector2(1.0 - 0.25 * s, 1.0 + 0.25 * s))
+		squash = exp(-_squash_t * 14.0) * cos(_squash_t * 28.0)
+	draw_set_transform(head, angle, flip * Vector2(1.0 - 0.25 * squash, 1.0 + 0.25 * squash))
 
 	draw_circle(Vector2.ZERO, r + o, Palette.OUTLINE, true, -1.0, true)
 	draw_circle(Vector2.ZERO, r, Palette.SNAKE_BODY, true, -1.0, true)
