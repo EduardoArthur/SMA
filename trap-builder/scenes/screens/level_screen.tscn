@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/game/level_controller.gd" id="1_ctrl"]
+[ext_resource type="PackedScene" path="res://scenes/board/board.tscn" id="2_board"]
+[ext_resource type="Script" path="res://scripts/ui/hud_panel.gd" id="3_hud"]
+[ext_resource type="Script" path="res://scripts/ui/catalog_panel.gd" id="4_catalog"]
+[ext_resource type="Script" path="res://scripts/ui/action_bar.gd" id="5_action"]
+[ext_resource type="Script" path="res://scripts/ui/result_panel.gd" id="6_result"]
+
+[node name="LevelScreen" type="Node2D"]
+script = ExtResource("1_ctrl")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.949, 0.89, 0.761, 1)
+
+[node name="Board" parent="." instance=ExtResource("2_board")]
+position = Vector2(16, 66)
+scale = Vector2(0.86, 0.86)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Hud" type="PanelContainer" parent="UI"]
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 1264.0
+offset_bottom = 56.0
+script = ExtResource("3_hud")
+
+[node name="Catalog" type="PanelContainer" parent="UI"]
+offset_left = 1020.0
+offset_top = 66.0
+offset_right = 1264.0
+offset_bottom = 616.0
+script = ExtResource("4_catalog")
+
+[node name="ActionBar" type="PanelContainer" parent="UI"]
+visible = false
+offset_left = 1020.0
+offset_top = 66.0
+offset_right = 1264.0
+offset_bottom = 330.0
+script = ExtResource("5_action")
+
+[node name="ResultPanel" type="PanelContainer" parent="UI"]
+visible = false
+offset_left = 280.0
+offset_top = 200.0
+offset_right = 740.0
+offset_bottom = 480.0
+script = ExtResource("6_result")
+
+[node name="Help" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 632.0
+offset_right = 1264.0
+offset_bottom = 712.0
+theme_override_colors/font_color = Color(0.169, 0.106, 0.09, 1)
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 3
+text = "Ajuda"

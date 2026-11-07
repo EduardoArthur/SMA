@@ -1,0 +1,96 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/level_data.gd" id="1_level"]
+[ext_resource type="Script" path="res://scripts/resources/route_node.gd" id="2_node"]
+[ext_resource type="Script" path="res://scripts/resources/route_edge.gd" id="3_edge"]
+[ext_resource type="Script" path="res://scripts/resources/spawn_entry.gd" id="4_spawn"]
+[ext_resource type="Script" path="res://scripts/resources/trap_data.gd" id="5_trap"]
+[ext_resource type="Resource" path="res://data/pigs/pig.tres" id="pig_pig"]
+[ext_resource type="Resource" path="res://data/traps/fan.tres" id="trap_fan"]
+[ext_resource type="Resource" path="res://data/traps/bait.tres" id="trap_bait"]
+[ext_resource type="Resource" path="res://data/traps/tar.tres" id="trap_tar"]
+
+[sub_resource type="Resource" id="Node_0"]
+script = ExtResource("2_node")
+id = 0
+cell = Vector2i(0, 5)
+kind = 0
+
+[sub_resource type="Resource" id="Node_1"]
+script = ExtResource("2_node")
+id = 1
+cell = Vector2i(3, 5)
+kind = 1
+
+[sub_resource type="Resource" id="Node_2"]
+script = ExtResource("2_node")
+id = 2
+cell = Vector2i(12, 5)
+kind = 2
+
+[sub_resource type="Resource" id="Node_3"]
+script = ExtResource("2_node")
+id = 3
+cell = Vector2i(15, 5)
+kind = 3
+
+[sub_resource type="Resource" id="Edge_0"]
+script = ExtResource("3_edge")
+id = 0
+from_id = 0
+to_id = 1
+via = Array[Vector2i]([])
+
+[sub_resource type="Resource" id="Edge_1"]
+script = ExtResource("3_edge")
+id = 1
+from_id = 1
+to_id = 2
+via = Array[Vector2i]([Vector2i(3, 2), Vector2i(12, 2)])
+
+[sub_resource type="Resource" id="Edge_2"]
+script = ExtResource("3_edge")
+id = 2
+from_id = 1
+to_id = 2
+via = Array[Vector2i]([Vector2i(3, 8), Vector2i(12, 8)])
+
+[sub_resource type="Resource" id="Edge_3"]
+script = ExtResource("3_edge")
+id = 3
+from_id = 2
+to_id = 3
+via = Array[Vector2i]([])
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[resource]
+script = ExtResource("1_level")
+level_id = 4
+title = "Ventania"
+route_seed = 4
+budget = 450
+par = 300
+escape_limit = 1
+grid_size = Vector2i(18, 10)
+nodes = Array[ExtResource("2_node")]([SubResource("Node_0"), SubResource("Node_1"), SubResource("Node_2"), SubResource("Node_3")])
+edges = Array[ExtResource("3_edge")]([SubResource("Edge_0"), SubResource("Edge_1"), SubResource("Edge_2"), SubResource("Edge_3")])
+spawns = Array[ExtResource("4_spawn")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])
+ravine = Array[Vector2i]([Vector2i(6, 1), Vector2i(9, 1), Vector2i(7, 9)])
+marked = Array[Vector2i]([Vector2i(6, 3), Vector2i(9, 3), Vector2i(7, 7)])
+available_traps = Array[ExtResource("5_trap")]([ExtResource("trap_fan"), ExtResource("trap_bait"), ExtResource("trap_tar")])
+decor_seed = 404

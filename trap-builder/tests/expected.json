@@ -1,0 +1,995 @@
+{
+  "generated_by": "export_levels.js",
+  "fork_hash": [
+    {
+      "seed": 1,
+      "pig": 0,
+      "node": 0,
+      "value": 1639959187
+    },
+    {
+      "seed": 1,
+      "pig": 0,
+      "node": 1,
+      "value": 1994298645
+    },
+    {
+      "seed": 1,
+      "pig": 0,
+      "node": 3,
+      "value": 356805209
+    },
+    {
+      "seed": 1,
+      "pig": 0,
+      "node": 7,
+      "value": 3410365735
+    },
+    {
+      "seed": 1,
+      "pig": 3,
+      "node": 0,
+      "value": 841516743
+    },
+    {
+      "seed": 1,
+      "pig": 3,
+      "node": 1,
+      "value": 3731470023
+    },
+    {
+      "seed": 1,
+      "pig": 3,
+      "node": 3,
+      "value": 4025524454
+    },
+    {
+      "seed": 1,
+      "pig": 3,
+      "node": 7,
+      "value": 2734791108
+    },
+    {
+      "seed": 1,
+      "pig": 6,
+      "node": 0,
+      "value": 2959597285
+    },
+    {
+      "seed": 1,
+      "pig": 6,
+      "node": 1,
+      "value": 3072697554
+    },
+    {
+      "seed": 1,
+      "pig": 6,
+      "node": 3,
+      "value": 672069595
+    },
+    {
+      "seed": 1,
+      "pig": 6,
+      "node": 7,
+      "value": 3440489257
+    },
+    {
+      "seed": 1,
+      "pig": 9,
+      "node": 0,
+      "value": 3985091560
+    },
+    {
+      "seed": 1,
+      "pig": 9,
+      "node": 1,
+      "value": 717375543
+    },
+    {
+      "seed": 1,
+      "pig": 9,
+      "node": 3,
+      "value": 371951984
+    },
+    {
+      "seed": 1,
+      "pig": 9,
+      "node": 7,
+      "value": 1378929375
+    },
+    {
+      "seed": 2,
+      "pig": 0,
+      "node": 0,
+      "value": 1473757897
+    },
+    {
+      "seed": 2,
+      "pig": 0,
+      "node": 1,
+      "value": 3804336277
+    },
+    {
+      "seed": 2,
+      "pig": 0,
+      "node": 3,
+      "value": 2758313787
+    },
+    {
+      "seed": 2,
+      "pig": 0,
+      "node": 7,
+      "value": 2292305052
+    },
+    {
+      "seed": 2,
+      "pig": 3,
+      "node": 0,
+      "value": 4060387086
+    },
+    {
+      "seed": 2,
+      "pig": 3,
+      "node": 1,
+      "value": 110951340
+    },
+    {
+      "seed": 2,
+      "pig": 3,
+      "node": 3,
+      "value": 4052153174
+    },
+    {
+      "seed": 2,
+      "pig": 3,
+      "node": 7,
+      "value": 3458583197
+    },
+    {
+      "seed": 2,
+      "pig": 6,
+      "node": 0,
+      "value": 1756324278
+    },
+    {
+      "seed": 2,
+      "pig": 6,
+      "node": 1,
+      "value": 2340246521
+    },
+    {
+      "seed": 2,
+      "pig": 6,
+      "node": 3,
+      "value": 2917935477
+    },
+    {
+      "seed": 2,
+      "pig": 6,
+      "node": 7,
+      "value": 2775295228
+    },
+    {
+      "seed": 2,
+      "pig": 9,
+      "node": 0,
+      "value": 895286455
+    },
+    {
+      "seed": 2,
+      "pig": 9,
+      "node": 1,
+      "value": 1977636453
+    },
+    {
+      "seed": 2,
+      "pig": 9,
+      "node": 3,
+      "value": 2548749656
+    },
+    {
+      "seed": 2,
+      "pig": 9,
+      "node": 7,
+      "value": 1231744551
+    },
+    {
+      "seed": 3,
+      "pig": 0,
+      "node": 0,
+      "value": 3909425446
+    },
+    {
+      "seed": 3,
+      "pig": 0,
+      "node": 1,
+      "value": 3358582088
+    },
+    {
+      "seed": 3,
+      "pig": 0,
+      "node": 3,
+      "value": 3606654936
+    },
+    {
+      "seed": 3,
+      "pig": 0,
+      "node": 7,
+      "value": 1496107877
+    },
+    {
+      "seed": 3,
+      "pig": 3,
+      "node": 0,
+      "value": 4057367903
+    },
+    {
+      "seed": 3,
+      "pig": 3,
+      "node": 1,
+      "value": 553561443
+    },
+    {
+      "seed": 3,
+      "pig": 3,
+      "node": 3,
+      "value": 599409910
+    },
+    {
+      "seed": 3,
+      "pig": 3,
+      "node": 7,
+      "value": 4077218287
+    },
+    {
+      "seed": 3,
+      "pig": 6,
+      "node": 0,
+      "value": 218586369
+    },
+    {
+      "seed": 3,
+      "pig": 6,
+      "node": 1,
+      "value": 4015308663
+    },
+    {
+      "seed": 3,
+      "pig": 6,
+      "node": 3,
+      "value": 570801188
+    },
+    {
+      "seed": 3,
+      "pig": 6,
+      "node": 7,
+      "value": 3179735519
+    },
+    {
+      "seed": 3,
+      "pig": 9,
+      "node": 0,
+      "value": 995385507
+    },
+    {
+      "seed": 3,
+      "pig": 9,
+      "node": 1,
+      "value": 4124510546
+    },
+    {
+      "seed": 3,
+      "pig": 9,
+      "node": 3,
+      "value": 46627004
+    },
+    {
+      "seed": 3,
+      "pig": 9,
+      "node": 7,
+      "value": 1973079889
+    },
+    {
+      "seed": 4,
+      "pig": 0,
+      "node": 0,
+      "value": 1100815838
+    },
+    {
+      "seed": 4,
+      "pig": 0,
+      "node": 1,
+      "value": 3776859032
+    },
+    {
+      "seed": 4,
+      "pig": 0,
+      "node": 3,
+      "value": 3726232895
+    },
+    {
+      "seed": 4,
+      "pig": 0,
+      "node": 7,
+      "value": 1900162329
+    },
+    {
+      "seed": 4,
+      "pig": 3,
+      "node": 0,
+      "value": 4097831385
+    },
+    {
+      "seed": 4,
+      "pig": 3,
+      "node": 1,
+      "value": 2811001728
+    },
+    {
+      "seed": 4,
+      "pig": 3,
+      "node": 3,
+      "value": 19121151
+    },
+    {
+      "seed": 4,
+      "pig": 3,
+      "node": 7,
+      "value": 765573578
+    },
+    {
+      "seed": 4,
+      "pig": 6,
+      "node": 0,
+      "value": 3899031849
+    },
+    {
+      "seed": 4,
+      "pig": 6,
+      "node": 1,
+      "value": 507012970
+    },
+    {
+      "seed": 4,
+      "pig": 6,
+      "node": 3,
+      "value": 890116077
+    },
+    {
+      "seed": 4,
+      "pig": 6,
+      "node": 7,
+      "value": 260234811
+    },
+    {
+      "seed": 4,
+      "pig": 9,
+      "node": 0,
+      "value": 3444087077
+    },
+    {
+      "seed": 4,
+      "pig": 9,
+      "node": 1,
+      "value": 3821568463
+    },
+    {
+      "seed": 4,
+      "pig": 9,
+      "node": 3,
+      "value": 2064692992
+    },
+    {
+      "seed": 4,
+      "pig": 9,
+      "node": 7,
+      "value": 3380899938
+    },
+    {
+      "seed": 5,
+      "pig": 0,
+      "node": 0,
+      "value": 3972707166
+    },
+    {
+      "seed": 5,
+      "pig": 0,
+      "node": 1,
+      "value": 1083644702
+    },
+    {
+      "seed": 5,
+      "pig": 0,
+      "node": 3,
+      "value": 1874865873
+    },
+    {
+      "seed": 5,
+      "pig": 0,
+      "node": 7,
+      "value": 667087965
+    },
+    {
+      "seed": 5,
+      "pig": 3,
+      "node": 0,
+      "value": 3259097623
+    },
+    {
+      "seed": 5,
+      "pig": 3,
+      "node": 1,
+      "value": 3204431567
+    },
+    {
+      "seed": 5,
+      "pig": 3,
+      "node": 3,
+      "value": 3718539206
+    },
+    {
+      "seed": 5,
+      "pig": 3,
+      "node": 7,
+      "value": 645488902
+    },
+    {
+      "seed": 5,
+      "pig": 6,
+      "node": 0,
+      "value": 2429370994
+    },
+    {
+      "seed": 5,
+      "pig": 6,
+      "node": 1,
+      "value": 1931757055
+    },
+    {
+      "seed": 5,
+      "pig": 6,
+      "node": 3,
+      "value": 2821966884
+    },
+    {
+      "seed": 5,
+      "pig": 6,
+      "node": 7,
+      "value": 2708972994
+    },
+    {
+      "seed": 5,
+      "pig": 9,
+      "node": 0,
+      "value": 1577645877
+    },
+    {
+      "seed": 5,
+      "pig": 9,
+      "node": 1,
+      "value": 1047399853
+    },
+    {
+      "seed": 5,
+      "pig": 9,
+      "node": 3,
+      "value": 85465031
+    },
+    {
+      "seed": 5,
+      "pig": 9,
+      "node": 7,
+      "value": 1161390529
+    },
+    {
+      "seed": 123456,
+      "pig": 0,
+      "node": 0,
+      "value": 1391566157
+    },
+    {
+      "seed": 123456,
+      "pig": 0,
+      "node": 1,
+      "value": 1689614786
+    },
+    {
+      "seed": 123456,
+      "pig": 0,
+      "node": 3,
+      "value": 1266065476
+    },
+    {
+      "seed": 123456,
+      "pig": 0,
+      "node": 7,
+      "value": 2360509325
+    },
+    {
+      "seed": 123456,
+      "pig": 3,
+      "node": 0,
+      "value": 2701364073
+    },
+    {
+      "seed": 123456,
+      "pig": 3,
+      "node": 1,
+      "value": 1854758696
+    },
+    {
+      "seed": 123456,
+      "pig": 3,
+      "node": 3,
+      "value": 4146829283
+    },
+    {
+      "seed": 123456,
+      "pig": 3,
+      "node": 7,
+      "value": 312971660
+    },
+    {
+      "seed": 123456,
+      "pig": 6,
+      "node": 0,
+      "value": 2395827641
+    },
+    {
+      "seed": 123456,
+      "pig": 6,
+      "node": 1,
+      "value": 843054491
+    },
+    {
+      "seed": 123456,
+      "pig": 6,
+      "node": 3,
+      "value": 2841476876
+    },
+    {
+      "seed": 123456,
+      "pig": 6,
+      "node": 7,
+      "value": 3464901450
+    },
+    {
+      "seed": 123456,
+      "pig": 9,
+      "node": 0,
+      "value": 1905213756
+    },
+    {
+      "seed": 123456,
+      "pig": 9,
+      "node": 1,
+      "value": 540087091
+    },
+    {
+      "seed": 123456,
+      "pig": 9,
+      "node": 3,
+      "value": 3709497614
+    },
+    {
+      "seed": 123456,
+      "pig": 9,
+      "node": 7,
+      "value": 2486515898
+    }
+  ],
+  "levels": [
+    {
+      "level_id": 1,
+      "path": "res://data/levels/level_01.tres",
+      "refs": [
+        {
+          "name": "vazio",
+          "plan": [],
+          "expect": {
+            "captured": 0,
+            "escaped": 2,
+            "ticks": 779,
+            "stars": 0,
+            "cost": 0,
+            "deadlock": false
+          }
+        },
+        {
+          "name": "★★★ 300",
+          "plan": [
+            {
+              "type": "anvil",
+              "cell": [
+                5,
+                4
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "anvil",
+              "cell": [
+                3,
+                2
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            }
+          ],
+          "expect": {
+            "captured": 2,
+            "escaped": 0,
+            "ticks": 366,
+            "stars": 3,
+            "cost": 300,
+            "deadlock": false
+          }
+        },
+        {
+          "name": "★ 150",
+          "plan": [
+            {
+              "type": "anvil",
+              "cell": [
+                2,
+                4
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            }
+          ],
+          "expect": {
+            "captured": 1,
+            "escaped": 1,
+            "ticks": 981,
+            "stars": 1,
+            "cost": 150,
+            "deadlock": false
+          }
+        }
+      ]
+    },
+    {
+      "level_id": 2,
+      "path": "res://data/levels/level_02.tres",
+      "refs": [
+        {
+          "name": "vazio",
+          "plan": [],
+          "expect": {
+            "captured": 0,
+            "escaped": 5,
+            "ticks": 1319,
+            "stars": 0,
+            "cost": 0,
+            "deadlock": false
+          }
+        },
+        {
+          "name": "★★★ 400",
+          "plan": [
+            {
+              "type": "tnt",
+              "cell": [
+                9,
+                4
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "tar",
+              "cell": [
+                10,
+                5
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "anvil",
+              "cell": [
+                10,
+                8
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            }
+          ],
+          "expect": {
+            "captured": 5,
+            "escaped": 0,
+            "ticks": 817,
+            "stars": 3,
+            "cost": 400,
+            "deadlock": false
+          }
+        }
+      ]
+    },
+    {
+      "level_id": 3,
+      "path": "res://data/levels/level_03.tres",
+      "refs": [
+        {
+          "name": "vazio",
+          "plan": [],
+          "expect": {
+            "captured": 0,
+            "escaped": 6,
+            "ticks": 1340,
+            "stars": 0,
+            "cost": 0,
+            "deadlock": false
+          }
+        },
+        {
+          "name": "★★★ 475",
+          "plan": [
+            {
+              "type": "bait",
+              "cell": [
+                2,
+                1
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "tnt",
+              "cell": [
+                2,
+                5
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "tnt",
+              "cell": [
+                3,
+                1
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            }
+          ],
+          "expect": {
+            "captured": 6,
+            "escaped": 0,
+            "ticks": 436,
+            "stars": 3,
+            "cost": 475,
+            "deadlock": false
+          }
+        }
+      ]
+    },
+    {
+      "level_id": 4,
+      "path": "res://data/levels/level_04.tres",
+      "refs": [
+        {
+          "name": "vazio",
+          "plan": [],
+          "expect": {
+            "captured": 0,
+            "escaped": 4,
+            "ticks": 1019,
+            "stars": 0,
+            "cost": 0,
+            "deadlock": false
+          }
+        },
+        {
+          "name": "★★★ 250 (mínimo)",
+          "plan": [
+            {
+              "type": "fan",
+              "cell": [
+                6,
+                3
+              ],
+              "dir": [
+                0,
+                -1
+              ]
+            },
+            {
+              "type": "fan",
+              "cell": [
+                9,
+                3
+              ],
+              "dir": [
+                0,
+                -1
+              ]
+            }
+          ],
+          "expect": {
+            "captured": 4,
+            "escaped": 0,
+            "ticks": 659,
+            "stars": 3,
+            "cost": 250,
+            "deadlock": false
+          }
+        }
+      ]
+    },
+    {
+      "level_id": 5,
+      "path": "res://data/levels/level_05.tres",
+      "refs": [
+        {
+          "name": "vazio",
+          "plan": [],
+          "expect": {
+            "captured": 0,
+            "escaped": 10,
+            "ticks": 1859,
+            "stars": 0,
+            "cost": 0,
+            "deadlock": false
+          }
+        },
+        {
+          "name": "★★★ 725 (melhor encontrado)",
+          "plan": [
+            {
+              "type": "fan",
+              "cell": [
+                6,
+                3
+              ],
+              "dir": [
+                0,
+                -1
+              ]
+            },
+            {
+              "type": "bait",
+              "cell": [
+                10,
+                3
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "tnt",
+              "cell": [
+                12,
+                4
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "fan",
+              "cell": [
+                13,
+                4
+              ],
+              "dir": [
+                0,
+                1
+              ]
+            },
+            {
+              "type": "tnt",
+              "cell": [
+                11,
+                5
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            }
+          ],
+          "expect": {
+            "captured": 10,
+            "escaped": 0,
+            "ticks": 1276,
+            "stars": 3,
+            "cost": 725,
+            "deadlock": false
+          }
+        },
+        {
+          "name": "★★★ 750 (com bigorna)",
+          "plan": [
+            {
+              "type": "bait",
+              "cell": [
+                12,
+                2
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "tnt",
+              "cell": [
+                15,
+                4
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "tnt",
+              "cell": [
+                16,
+                5
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            },
+            {
+              "type": "fan",
+              "cell": [
+                6,
+                3
+              ],
+              "dir": [
+                0,
+                -1
+              ]
+            },
+            {
+              "type": "anvil",
+              "cell": [
+                7,
+                6
+              ],
+              "dir": [
+                1,
+                0
+              ]
+            }
+          ],
+          "expect": {
+            "captured": 10,
+            "escaped": 0,
+            "ticks": 1817,
+            "stars": 3,
+            "cost": 750,
+            "deadlock": false
+          }
+        }
+      ]
+    }
+  ]
+}

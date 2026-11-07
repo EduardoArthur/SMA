@@ -1,0 +1,146 @@
+# GD-KS Workflow Status
+
+# Project Information
+project:
+  name: "Trap Builder"
+  codename: "toon-defense"
+  description: "Tower Defense sem torres, apenas armadilhas cartoon (estilo Acme) de uso único. Ciclo Blueprint (planejamento em grid) → Ação (execução sem interação), com rotas bifurcadas e orçamento fixo por fase."
+  game_type: "Tower Defense / Puzzle de Estratégia"
+  platforms: ["PC", "Mobile"]
+  engine: "godot-4"
+  source_document: "_gdks-output/00-input/GDD-Toon-Defense.pdf"
+  created_at: "2026-11-07"
+  updated_at: "2026-11-07"
+
+# Selected Track
+track:
+  selected: "standard"
+  phases: [ideation, design, engine]
+  scope: "prototype"  # prazo de 1–4 semanas: validar o loop Blueprint → Ação
+
+# Team Configuration
+team:
+  size: "solo"
+  experience_level: "beginner"  # Godot 4
+  timeline: "1-4 weeks"
+  documentation: "standard"
+
+# Current Status
+status:
+  current_phase: "engine"
+  current_agent: "godot-architect"
+  current_workflow: "godot-architecture"
+  started_at: "2026-11-07"
+  last_activity: "2026-11-07"
+
+# Phase Progress
+phases:
+  ideation:
+    status: "completed"
+    started_at: "2026-11-07"
+    completed_at: "2026-11-07"
+    deliverables:
+      concept_brief: true         # 01-ideation/concept-brief.md (rascunho v1.0)
+      market_analysis: skipped    # aceito na síntese (escopo de protótipo)
+      synthesis_report: true      # 01-ideation/synthesis-report.md
+      mechanics_exploration: true # 01-ideation/mechanics-exploration.md
+      ideation_handoff: true      # 01-ideation/ideation-handoff.md
+
+  design:
+    status: "completed"
+    started_at: "2026-11-07"
+    completed_at: "2026-11-07"
+    deliverables:
+      gdd: true                   # 02-design/gdd/gdd.md v0.1
+      level_design: true          # 02-design/levels/level-design.md + tools/ (simulador e solver)
+      narrative_design: skipped   # dispensado: premissa + marca já definidas
+      technical_design: true      # 02-design/technical/technical-design.md v0.1
+      art_bible: true             # 02-design/art/art-bible.md (mínima)
+      audio_bible: true           # 02-design/audio/audio-bible.md (mínima)
+      design_handoff: true        # 02-design/design-handoff.md (inclui backlog enxuto S01–S22)
+
+  planning:
+    status: "skipped"  # não faz parte da trilha Standard
+
+  engine:
+    status: "in_progress"
+    started_at: "2026-11-07"
+    completed_at: null
+    deliverables:
+      godot_architecture: true        # 04-engine/godot-architecture.md + scene-tree-overview.md
+      gdscript_specifications: false
+      scene_specifications: false
+      implementation_guides: false
+    implementation:
+      S01_S05: "código escrito; testes Godot não executados (sem Godot nesta máquina)"
+      S06_S08: "código escrito (Input Map em código, posicionar/girar/remover, tiles válidos, fantasma, visual da bigorna)"
+      S09: "pendente: paridade da Fase 1 via tests/run_tests.gd (testes adiados pelo usuário)"
+      S10_S16: "código escrito (catálogo, HUD, barra de ação, visuais e FX de TNT/isca/ventilador/piche, barranco lotado, resultado com estrelas, menu de fases); paridade das fases 2–5 pendente (testes)"
+      llm_prompts: false
+
+# Activity Log
+activity_log:
+  - timestamp: "2026-11-07"
+    action: "workflow_initialized"
+    agent: "gdks-master"
+    details: "Projeto inicializado com a trilha standard (escopo de protótipo) a partir do GDD Toon Defense"
+  - timestamp: "2026-11-07"
+    action: "deliverable_created"
+    agent: "concept-brainstormer"
+    details: "concept-brief.md v1.0 (Lobo Mau, gancho: planeje como engenheiro, assista como plateia)"
+  - timestamp: "2026-11-07"
+    action: "deliverable_created"
+    agent: "mechanics-explorer"
+    details: "mechanics-exploration.md (seed fixa, limite de fugas, rota + tiles marcados, 5 armadilhas)"
+  - timestamp: "2026-11-07"
+    action: "deliverable_created"
+    agent: "ideation-coordinator"
+    details: "synthesis-report.md (4 contradições tratadas, 8 lacunas, critérios de sucesso)"
+  - timestamp: "2026-11-07"
+    action: "phase_completed"
+    agent: "ideation-coordinator"
+    details: "ideation-handoff.md criado; fase de Ideação concluída, handoff para Diana (Design)"
+  - timestamp: "2026-11-07"
+    action: "deliverable_created"
+    agent: "game-design-director"
+    details: "gdd.md v0.1 (protótipo): 15 features com critérios de aceite, decisões D007 a D013"
+  - timestamp: "2026-11-07"
+    action: "deliverable_created"
+    agent: "technical-game-designer"
+    details: "technical-design.md v0.1: sim em ticks inteiros, hash de bifurcação, Resources, fichas, 5 correções de balanceamento (B1 a B5)"
+  - timestamp: "2026-11-07"
+    action: "deliverable_created"
+    agent: "game-design-director"
+    details: "level-design.md: 5 fases validadas por simulador JS + solver; D014 (barranco lota), D015 (ventilador 125), D016 (par por solver)"
+  - timestamp: "2026-11-07"
+    action: "deliverable_created"
+    agent: "art-director, audio-director"
+    details: "art-bible.md e audio-bible.md mínimas; marca Catapimba S.A. (D017 a D019)"
+  - timestamp: "2026-11-07"
+    action: "phase_completed"
+    agent: "design-coordinator"
+    details: "design-handoff.md: fase de Design concluída; backlog enxuto S01–S22 substitui a fase de Planning; próximo: Guilherme (godot-architecture)"
+  - timestamp: "2026-11-07"
+    action: "deliverable_created"
+    agent: "godot-architect"
+    details: "godot-architecture.md + scene-tree-overview.md (D020: simulação RefCounted pura, tilemap gerado, pipeline levels.js → .tres)"
+  - timestamp: "2026-11-07"
+    action: "implementation"
+    agent: "godot-gdscript-lead"
+    details: "S01–S05: projeto base, autoloads, Resources + export_levels.js, RouteGraph/ForkHash/Simulation (port do sim.js), BoardView/PigView placeholder, LevelController, tests/run_tests.gd"
+  - timestamp: "2026-11-07"
+    action: "implementation"
+    agent: "godot-gdscript-lead"
+    details: "S06–S08: Blueprint interativo (teclas 1–5 selecionam, clique posiciona/remove, botão direito/R gira), destaque de tiles válidos, prévia da corrente do ventilador, bigorna caindo/caída; S09 adiada (testes)"
+  - timestamp: "2026-11-07"
+    action: "implementation"
+    agent: "godot-gdscript-lead"
+    details: "S10–S16: layout com tabuleiro a 86% + coluna lateral; catálogo Catapimba, HUD, ActionBar, ResultPanel, MenuScreen; visuais/FX das 5 armadilhas; aviso de isca sem bifurcação; contador de barranco; fases 2–5 jogáveis"
+
+# Notes
+notes:
+  - "GDD inicial já define loop, inimigos (porcos, patos, armaduras, veículos), 13 armadilhas e economia por estrelas."
+  - "Prazo curto + iniciante em Godot: o protótipo deve ter um subconjunto de armadilhas (ex.: bigorna, TNT, banana, isca) e poucas fases."
+  - "Questões em aberto do GDD: regra de RNG nas bifurcações, comportamento dos patos (voadores) com armadilhas de chão, diferenças de UX entre PC e Mobile."
+  - "Fantasia central definida: o jogador é o Lobo Mau (porcos e patos dos contos como inimigos)."
+  - "Premissa definida: Lobo Emboscador. Os porcos atravessam a floresta e o lobo os embosca; os inimigos vencem ao chegar à saída do mapa."

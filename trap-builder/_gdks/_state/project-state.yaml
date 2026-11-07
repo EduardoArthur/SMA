@@ -3,26 +3,111 @@ project:
   id: trap-builder
   name: trap builder
   created_at: '2026-11-07T03:51:58.939Z'
-  updated_at: '2026-11-07T03:51:58.939Z'
+  updated_at: '2026-11-07T12:00:00.000Z'
 preset: solo-indie
 target_engine: godot-4
 language: pt-BR
-current_phase: 1
-phases_completed: []
-phases_in_progress: []
+current_phase: 4
+phases_completed: [1, 2]
+phases_in_progress: [4]
 phase_progress:
   '1':
-    status: not_started
-    deliverables: []
+    status: completed
+    deliverables: [concept-brief.md, mechanics-exploration.md, synthesis-report.md, ideation-handoff.md]
   '2':
-    status: not_started
-    deliverables: []
+    status: completed
+    deliverables: [gdd/gdd.md, technical/technical-design.md, levels/level-design.md, levels/tools/, art/art-bible.md, audio/audio-bible.md, design-handoff.md]
   '3':
-    status: not_started
+    status: skipped
     deliverables: []
   '4':
-    status: not_started
-    deliverables: []
-active_agents: []
-decisions: []
-open_questions: []
+    status: in_progress
+    deliverables: [godot-architecture.md, scene-tree-overview.md, 'codigo S01-S05']
+active_agents: [godot-gdscript-lead]
+decisions:
+  - id: D001
+    date: '2026-11-07'
+    decision: 'Trilha standard (ideation, design, engine) com escopo de protótipo de 1 a 4 semanas'
+    source: '_gdks-output/00-input/GDD-Toon-Defense.pdf'
+  - id: D002
+    date: '2026-11-07'
+    decision: 'Premissa Lobo Emboscador: porcos e patos atravessam a floresta; o lobo arma emboscadas. Inimigos vencem ao chegar na saida do mapa'
+    source: 'concept-brief.md'
+  - id: D003
+    date: '2026-11-07'
+    decision: 'Bifurcacoes por RNG com seed fixa por fase: hash(seed, porco, bifurcacao)'
+    source: 'mechanics-exploration.md'
+  - id: D004
+    date: '2026-11-07'
+    decision: 'Derrota por limite de fugas por fase'
+    source: 'mechanics-exploration.md'
+  - id: D005
+    date: '2026-11-07'
+    decision: 'Posicionamento em tiles de rota + tiles marcados'
+    source: 'mechanics-exploration.md'
+  - id: D006
+    date: '2026-11-07'
+    decision: 'Armadilhas do prototipo: bigorna, TNT, isca falsa, ventilador, piche'
+    source: 'mechanics-exploration.md'
+  - id: D007
+    date: '2026-11-07'
+    decision: 'Lobo assiste e reage num canto fixo do mapa'
+    source: 'gdd.md'
+  - id: D008
+    date: '2026-11-07'
+    decision: 'Ventilador depende do tile: BARRANCO captura, ROTA desloca, resto bloqueia'
+    source: 'gdd.md'
+  - id: D009
+    date: '2026-11-07'
+    decision: 'Bigorna sem alternativa: porcos escalam (2s)'
+    source: 'gdd.md'
+  - id: D010
+    date: '2026-11-07'
+    decision: 'Onda unica por fase'
+    source: 'gdd.md'
+  - id: D011
+    date: '2026-11-07'
+    decision: 'Estrelas: passou / zero fugas / zero fugas + gasto <= orcamento par'
+    source: 'gdd.md'
+  - id: D012
+    date: '2026-11-07'
+    decision: 'Fila de 1 porco por tile, sem ultrapassagem'
+    source: 'gdd.md'
+  - id: D013
+    date: '2026-11-07'
+    decision: 'Remover armadilha no Blueprint devolve 100% do custo'
+    source: 'gdd.md'
+  - id: D014
+    date: '2026-11-07'
+    decision: 'Barranco lota com 2 porcos por tile'
+    source: 'level-design.md'
+  - id: D015
+    date: '2026-11-07'
+    decision: 'Ventilador custa 125'
+    source: 'level-design.md'
+  - id: D016
+    date: '2026-11-07'
+    decision: 'Par = minimo do solver; orcamento = par + 125-150'
+    source: 'level-design.md'
+  - id: D017
+    date: '2026-11-07'
+    decision: 'Marca ficticia: Catapimba S.A.'
+    source: 'art-bible.md'
+  - id: D018
+    date: '2026-11-07'
+    decision: 'Arte vetorial propria, top-down com personagens 3/4'
+    source: 'art-bible.md'
+  - id: D019
+    date: '2026-11-07'
+    decision: 'Audio: SFX gratuitos + musica CC0/CC-BY com CREDITS.md'
+    source: 'audio-bible.md'
+  - id: D020
+    date: '2026-11-07'
+    decision: 'Simulacao em RefCounted puro (sem Nodes), port 1:1 do sim.js; tilemaps gerados a partir do LevelData; levels.js como fonte unica exportada para .tres'
+    source: 'godot-architecture.md'
+open_questions:
+  - 'Titulo final (G1)'
+  - 'Mostrar escolha dos porcos apos 1a tentativa?'
+  - 'Porco de capacete entra no prototipo?'
+  - 'Piche fraco? (B7) avaliar no playtest'
+  - 'Fase 2 tem o 3 estrelas mais dificil: ajustar par ou ordem apos playtest'

@@ -1,0 +1,155 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=35 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/level_data.gd" id="1_level"]
+[ext_resource type="Script" path="res://scripts/resources/route_node.gd" id="2_node"]
+[ext_resource type="Script" path="res://scripts/resources/route_edge.gd" id="3_edge"]
+[ext_resource type="Script" path="res://scripts/resources/spawn_entry.gd" id="4_spawn"]
+[ext_resource type="Script" path="res://scripts/resources/trap_data.gd" id="5_trap"]
+[ext_resource type="Resource" path="res://data/pigs/pig.tres" id="pig_pig"]
+[ext_resource type="Resource" path="res://data/traps/anvil.tres" id="trap_anvil"]
+[ext_resource type="Resource" path="res://data/traps/tnt.tres" id="trap_tnt"]
+[ext_resource type="Resource" path="res://data/traps/bait.tres" id="trap_bait"]
+[ext_resource type="Resource" path="res://data/traps/fan.tres" id="trap_fan"]
+[ext_resource type="Resource" path="res://data/traps/tar.tres" id="trap_tar"]
+
+[sub_resource type="Resource" id="Node_0"]
+script = ExtResource("2_node")
+id = 0
+cell = Vector2i(0, 5)
+kind = 0
+
+[sub_resource type="Resource" id="Node_1"]
+script = ExtResource("2_node")
+id = 1
+cell = Vector2i(3, 5)
+kind = 1
+
+[sub_resource type="Resource" id="Node_2"]
+script = ExtResource("2_node")
+id = 2
+cell = Vector2i(10, 5)
+kind = 2
+
+[sub_resource type="Resource" id="Node_3"]
+script = ExtResource("2_node")
+id = 3
+cell = Vector2i(12, 5)
+kind = 1
+
+[sub_resource type="Resource" id="Node_4"]
+script = ExtResource("2_node")
+id = 4
+cell = Vector2i(15, 5)
+kind = 2
+
+[sub_resource type="Resource" id="Node_5"]
+script = ExtResource("2_node")
+id = 5
+cell = Vector2i(17, 5)
+kind = 3
+
+[sub_resource type="Resource" id="Edge_0"]
+script = ExtResource("3_edge")
+id = 0
+from_id = 0
+to_id = 1
+via = Array[Vector2i]([])
+
+[sub_resource type="Resource" id="Edge_1"]
+script = ExtResource("3_edge")
+id = 1
+from_id = 1
+to_id = 2
+via = Array[Vector2i]([Vector2i(3, 2), Vector2i(10, 2)])
+
+[sub_resource type="Resource" id="Edge_2"]
+script = ExtResource("3_edge")
+id = 2
+from_id = 1
+to_id = 2
+via = Array[Vector2i]([Vector2i(3, 8), Vector2i(6, 8), Vector2i(6, 6), Vector2i(8, 6), Vector2i(8, 8), Vector2i(10, 8)])
+
+[sub_resource type="Resource" id="Edge_3"]
+script = ExtResource("3_edge")
+id = 3
+from_id = 2
+to_id = 3
+via = Array[Vector2i]([])
+
+[sub_resource type="Resource" id="Edge_4"]
+script = ExtResource("3_edge")
+id = 4
+from_id = 3
+to_id = 4
+via = Array[Vector2i]([])
+
+[sub_resource type="Resource" id="Edge_5"]
+script = ExtResource("3_edge")
+id = 5
+from_id = 3
+to_id = 4
+via = Array[Vector2i]([Vector2i(12, 2), Vector2i(15, 2)])
+
+[sub_resource type="Resource" id="Edge_6"]
+script = ExtResource("3_edge")
+id = 6
+from_id = 4
+to_id = 5
+via = Array[Vector2i]([])
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_4"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_5"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_6"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_7"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_8"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[sub_resource type="Resource" id="Spawn_9"]
+script = ExtResource("4_spawn")
+pig = ExtResource("pig_pig")
+
+[resource]
+script = ExtResource("1_level")
+level_id = 5
+title = "O Banquete"
+route_seed = 5
+budget = 900
+par = 750
+escape_limit = 2
+grid_size = Vector2i(18, 10)
+nodes = Array[ExtResource("2_node")]([SubResource("Node_0"), SubResource("Node_1"), SubResource("Node_2"), SubResource("Node_3"), SubResource("Node_4"), SubResource("Node_5")])
+edges = Array[ExtResource("3_edge")]([SubResource("Edge_0"), SubResource("Edge_1"), SubResource("Edge_2"), SubResource("Edge_3"), SubResource("Edge_4"), SubResource("Edge_5"), SubResource("Edge_6")])
+spawns = Array[ExtResource("4_spawn")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9")])
+ravine = Array[Vector2i]([Vector2i(5, 1), Vector2i(6, 1), Vector2i(7, 1), Vector2i(13, 6), Vector2i(14, 6)])
+marked = Array[Vector2i]([Vector2i(6, 3), Vector2i(13, 4)])
+available_traps = Array[ExtResource("5_trap")]([ExtResource("trap_anvil"), ExtResource("trap_tnt"), ExtResource("trap_bait"), ExtResource("trap_fan"), ExtResource("trap_tar")])
+decor_seed = 505
