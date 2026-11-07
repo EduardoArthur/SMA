@@ -499,31 +499,68 @@ def build_menu_level():
 # ---------------------------------------------------------------------------
 # Execução
 # ---------------------------------------------------------------------------
+import traceback
+
+log_lines = []
+_orig_log, _orig_warn = log, warn
+
+
+def log(msg):  # noqa: F811 - também guarda para o arquivo de log
+    log_lines.append(msg)
+    _orig_log(msg)
+
+
+def warn(msg):  # noqa: F811
+    log_lines.append("AVISO: " + msg)
+    _orig_warn(msg)
+
+
+def step(name, func, *args):
+    """Roda uma etapa sem deixar um erro derrubar o script inteiro."""
+    try:
+        log("--- " + name)
+        return func(*args)
+    except Exception:
+        warn("ERRO em '%s':\n%s" % (name, traceback.format_exc()))
+        return None
+
+
+def write_log_file():
+    try:
+        path = unreal.Paths.project_saved_dir() + "NeonStackSetup.log"
+        with open(path, "w", encoding="utf-8") as f:
+            f.write("\n".join(log_lines))
+        _orig_log("[NeonStack] log salvo em " + unreal.Paths.convert_relative_path_to_full(path))
+    except Exception:
+        pass
+
+
 def main():
     for folder in (DATA, INPUT, MATS, MAPS):
         eal.make_directory(folder)
 
-    make_data_assets()
-    make_input()
-    mpc = make_mpc()
+    step("Data Assets", make_data_assets)
+    step("Input", make_input)
+    mpc = step("Material Parameter Collection", make_mpc)
     if mpc is not None:
-        make_block_material(mpc)
-        make_ghost_material()
-        make_sky_material(mpc)
-        make_sun_material(mpc)
-        make_floor_material(mpc)
-        make_well_material(mpc)
+        step("M_Block", make_block_material, mpc)
+        step("M_Ghost", make_ghost_material)
+        step("M_SynthSky", make_sky_material, mpc)
+        step("M_SynthSun", make_sun_material, mpc)
+        step("M_SynthFloor", make_floor_material, mpc)
+        step("M_Well", make_well_material, mpc)
     else:
         warn("sem MPC: materiais não criados")
 
-    make_level(MAPS + "/L_MainMenu", build_menu_level)
-    make_level(MAPS + "/L_Game", build_game_level)
+    step("Mapa L_MainMenu", make_level, MAPS + "/L_MainMenu", build_menu_level)
+    step("Mapa L_Game", make_level, MAPS + "/L_Game", build_game_level)
 
     log("=" * 60)
     log("Setup concluído: %d itens criados, %d avisos." % (created_count, len(warnings)))
     for w in warnings:
-        log("  aviso: " + w)
+        log("  aviso: " + w.splitlines()[0])
     log("Abra Maps/L_MainMenu e aperte Play.")
+    write_log_file()
 
 
 main()

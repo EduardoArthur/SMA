@@ -7,12 +7,20 @@
 #include "Game/NSBoardActor.h"
 #include "Game/NSPlayerController.h"
 #include "NSDefaultAssets.h"
+#include "Game/NSSceneBootstrap.h"
+#include "Misc/PackageName.h"
 
 ANSGameMode::ANSGameMode()
 {
 	PlayerControllerClass = ANSPlayerController::StaticClass();
 	DefaultPawnClass = nullptr; // a câmera vem de um CameraActor no mapa (Auto Activate for Player 0)
 	MainMenuLevel = TSoftObjectPtr<UWorld>(FSoftObjectPath(NSAssets::MenuMap));
+}
+
+void ANSGameMode::StartPlay()
+{
+	NSBootstrap::EnsureScene(GetWorld(), /*bGameplay*/ true); // antes do BeginPlay dos atores
+	Super::StartPlay();
 }
 
 void ANSGameMode::BeginPlay()
@@ -107,9 +115,10 @@ void ANSGameMode::RestartGame()
 
 void ANSGameMode::ReturnToMenu()
 {
-	if (MainMenuLevel.IsNull())
+	if (MainMenuLevel.IsNull() || !FPackageName::DoesPackageExist(MainMenuLevel.ToSoftObjectPath().GetLongPackageName()))
 	{
-		UE_LOG(LogNeonStack, Warning, TEXT("NSGameMode: MainMenuLevel não configurado no BP_NeonStackGameMode."));
+		UE_LOG(LogNeonStack, Warning, TEXT("NSGameMode: mapa do menu não existe; reiniciando a partida."));
+		RestartGame();
 		return;
 	}
 	UGameplayStatics::OpenLevelBySoftObjectPtr(this, MainMenuLevel);

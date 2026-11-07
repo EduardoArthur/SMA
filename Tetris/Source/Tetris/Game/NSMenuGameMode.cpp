@@ -4,12 +4,19 @@
 #include "Blueprint/UserWidget.h"
 #include "GameFramework/PlayerController.h"
 #include "UI/NSMainMenuWidget.h"
+#include "Game/NSSceneBootstrap.h"
 
 ANSMenuGameMode::ANSMenuGameMode()
 {
 	PlayerControllerClass = APlayerController::StaticClass();
 	DefaultPawnClass = nullptr;
 	MainMenuClass = UNSMainMenuWidget::StaticClass();
+}
+
+void ANSMenuGameMode::StartPlay()
+{
+	NSBootstrap::EnsureScene(GetWorld(), /*bGameplay*/ false);
+	Super::StartPlay();
 }
 
 void ANSMenuGameMode::BeginPlay()

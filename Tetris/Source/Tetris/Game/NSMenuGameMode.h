@@ -20,6 +20,8 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "NeonStack")
 	TSubclassOf<UNSMainMenuWidget> MainMenuClass;
 
+	virtual void StartPlay() override;
+
 protected:
 	virtual void BeginPlay() override;
 };

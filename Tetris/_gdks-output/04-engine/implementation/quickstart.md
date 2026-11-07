@@ -12,13 +12,22 @@
 | `BP_Board`, `BP_NSPlayerController`, `BP_*GameMode` obrigatórios | As **classes C++ vão direto no mapa**; campos vazios carregam assets padrão por caminho (`Source/Tetris/NSDefaultAssets.h`) |
 | Camera Shake Blueprints | **Tremor procedural** no `NSFXDirector` (os shakes BP continuam opcionais) |
 
+## Rede de segurança (bootstrap)
+
+Mesmo **sem rodar o script**, dar Play em **qualquer mapa** (inclusive Untitled/vazio) funciona:
+- `DefaultEngine.ini` define `GlobalDefaultGameMode = NSGameMode`.
+- No `StartPlay`, o GameMode cria o que faltar: board, câmera ortográfica ativa, uma luz (se não houver nenhuma), Background, FX e Audio (`Source/Tetris/Game/NSSceneBootstrap.cpp`).
+- Sem os materiais do script, os blocos aparecem com o material padrão (brancos/cinza, iluminados). Com o script, ficam neon.
+- Sem o mapa de menu, "MENU" reinicia a partida.
+
 ## Passo a passo
 
 1. **Feche o editor** e compile (*Development Editor / Win64*). O `.uproject` agora habilita Niagara, Python e Editor Scripting Utilities.
 2. Abra o projeto. (O mapa inicial ainda não existe; ignore o aviso.)
 3. **Tools → Execute Python Script…** → `Scripts/setup_neon_stack.py`.
    - No **Output Log** aparece `[NeonStack] Setup concluído: N itens criados, M avisos.`
-   - Se houver avisos, copie as linhas `[NeonStack]` e me mande.
+   - Cada etapa roda isolada: um erro numa etapa não impede as outras.
+   - Tudo fica salvo em **`Saved/NeonStackSetup.log`** (o caminho completo aparece no Output Log). Se houver avisos/erros, mande esse arquivo.
 4. Abra `Content/NeonStack/Maps/L_MainMenu` e aperte **Play**.
    - Enter em JOGAR → contagem → jogo. Esc/P pausa. Game over → resultados.
 5. Rode os testes: **Tools → Session Frontend → Automation**, filtro `NeonStack` (12 testes).

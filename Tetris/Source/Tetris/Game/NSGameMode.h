@@ -80,6 +80,9 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "NeonStack")
 	FNSOnFlowStateChanged OnFlowStateChanged;
 
+	/** Cria board/câmera/luz se o mapa não tiver (NSSceneBootstrap). */
+	virtual void StartPlay() override;
+
 protected:
 	virtual void BeginPlay() override;
 

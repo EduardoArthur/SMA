@@ -26,7 +26,7 @@ status:
   current_agent: "ue5-programmer-lead"
   current_workflow: "editor-automation"
   started_at: "2026-11-07T20:01:41Z"
-  last_activity: "2026-11-08T05:00:00Z"
+  last_activity: "2026-11-08T06:00:00Z"
 
 # Phase Progress
 phases:
@@ -154,6 +154,11 @@ activity_log:
     action: "editor_automation"
     agent: "ue5-programmer-lead"
     details: "Fallbacks de assets por caminho (NSDefaultAssets.h), UI padrao em C++ (sem WBP), shake procedural, Scripts/setup_neon_stack.py (cria DA/IA/IMC/MPC/materiais/mapas), plugins Python + Editor Scripting, mapas padrao no DefaultEngine.ini, quickstart.md. Nao compilado"
+
+  - timestamp: "2026-11-08T06:00:00Z"
+    action: "black_screen_fix"
+    agent: "ue5-programmer-lead"
+    details: "Compilou, mas tela preta: mapas nao foram criados pelo script. Bootstrap C++ (NSSceneBootstrap) no StartPlay + GlobalDefaultGameMode; script com etapas isoladas e log em Saved/NeonStackSetup.log; GetLevel->GetGameLevel e bVisible->bShow (conflitos de nome UE 5.8)"
 
 # Notes
 notes:
