@@ -49,8 +49,9 @@ func _ready() -> void:
 				variants.append(stream)
 		_sounds[sfx_name] = variants
 	for jingle_name in JINGLE_NAMES:
-		_jingles[jingle_name] = _load_if_exists(MUSIC_DIR + jingle_name + ".ogg")
-	_music_stream = _load_if_exists(MUSIC_DIR + "music_garden_loop.ogg")
+		_jingles[jingle_name] = _load_music_file(jingle_name)
+	_music_stream = _load_music_file("music_garden_loop")
+	_make_looping(_music_stream)
 
 	for i in POOL_SIZE:
 		var player := AudioStreamPlayer.new()
@@ -209,6 +210,27 @@ func _ensure_bus(bus_name: StringName) -> int:
 		AudioServer.set_bus_send(idx, &"Master")
 		AudioServer.set_bus_volume_db(idx, 0.0)
 	return idx
+
+
+## Music and jingles may be OGG (BeepBox export) or WAV (tools/generate_audio.ps1).
+func _load_music_file(base_name: String) -> AudioStream:
+	for ext in [".ogg", ".wav"]:
+		var stream := _load_if_exists(MUSIC_DIR + base_name + ext)
+		if stream != null:
+			return stream
+	return null
+
+
+## Loops the music in code, so it works without changing the import settings.
+func _make_looping(stream: AudioStream) -> void:
+	var wav := stream as AudioStreamWAV
+	if wav != null:
+		wav.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		wav.loop_begin = 0
+		wav.loop_end = int(wav.get_length() * wav.mix_rate)
+	var ogg := stream as AudioStreamOggVorbis
+	if ogg != null:
+		ogg.loop = true
 
 
 func _load_if_exists(path: String) -> AudioStream:

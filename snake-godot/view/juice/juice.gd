@@ -114,6 +114,7 @@ func _popup(pos: Vector2, text: String) -> void:
 	label.size = Vector2(c * 3.0, c)
 	label.position = pos - label.size * 0.5
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	Fonts.make_bold(label)
 	add_child(label)
 	var tw := label.create_tween().set_parallel()
 	tw.tween_property(label, "position:y", label.position.y - c, 0.6).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
