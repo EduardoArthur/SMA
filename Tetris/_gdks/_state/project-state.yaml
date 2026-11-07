@@ -3,20 +3,34 @@ project:
   id: tetris
   name: Tetris
   created_at: '2026-11-07T19:57:07.441Z'
-  updated_at: '2026-11-07T19:57:07.441Z'
+  updated_at: '2026-11-07T22:40:00Z'
 preset: solo-indie
 target_engine: unreal-5
 language: pt-BR
-current_phase: 1
-phases_completed: []
+current_phase: 2
+phases_completed:
+  - 1
+  - 2
 phases_in_progress: []
 phase_progress:
   '1':
-    status: not_started
-    deliverables: []
+    status: completed
+    deliverables:
+      - concept-brief
+      - mechanics-exploration
+      - ideation-handoff
   '2':
-    status: not_started
-    deliverables: []
+    status: completed
+    deliverables:
+      - gdd-main
+      - core-mechanics-spec
+      - progression-system
+      - art-bible
+      - audio-bible
+      - design-pillars
+      - gameplay-loops
+      - level-documentation
+      - design-handoff
   '3':
     status: not_started
     deliverables: []

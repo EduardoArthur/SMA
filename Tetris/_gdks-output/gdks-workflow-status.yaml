@@ -1,0 +1,127 @@
+# GD-KS Workflow Status Template
+# This template is used to generate the initial workflow status file
+
+# Project Information
+project:
+  name: "Tetris"
+  codename: "tetris"
+  description: "Puzzle de blocos caindo classico: pecas caem num poco, linhas completas sao limpas; foco em pontuacao e velocidade crescente."
+  game_type: "puzzle (blocos caindo)"
+  created_at: "2026-11-07T20:01:41Z"
+  updated_at: "2026-11-07T20:01:41Z"
+
+# Selected Track
+track:
+  selected: "standard"  # quick, standard, or full
+  phases: [ideation, design, engine]
+
+# Team Configuration
+team:
+  size: "solo"
+  experience_level: "beginner"
+
+# Current Status
+status:
+  current_phase: "engine"
+  current_agent: "design-coordinator"
+  current_workflow: null
+  started_at: "2026-11-07T20:01:41Z"
+  last_activity: "2026-11-07T22:40:00Z"
+
+# Phase Progress
+phases:
+  ideation:
+    status: "completed"  # not_started, in_progress, completed
+    started_at: "2026-11-07T20:10:00Z"
+    completed_at: "2026-11-07T20:45:00Z"
+    deliverables:
+      concept_brief: true
+      market_analysis: false
+      mechanics_exploration: true
+      ideation_handoff: true
+  
+  design:
+    status: "completed"
+    started_at: "2026-11-07T21:05:00Z"
+    completed_at: "2026-11-07T22:40:00Z"
+    deliverables:
+      gdd: true
+      level_design: true
+      narrative_design: false
+      technical_design: true
+      art_bible: true
+      audio_bible: true
+      design_handoff: true
+  
+  planning:
+    status: "not_started"
+    started_at: null
+    completed_at: null
+    deliverables:
+      roadmap: false
+      epics: false
+      stories: false
+      sprint_plan: false
+      planning_handoff: false
+  
+  engine:
+    status: "not_started"
+    started_at: null
+    completed_at: null
+    deliverables:
+      ue5_architecture: false
+      cpp_specifications: false
+      blueprint_specifications: false
+      implementation_guides: false
+      llm_prompts: false
+
+# Activity Log
+activity_log:
+  - timestamp: "2026-11-07T20:01:41Z"
+    action: "workflow_initialized"
+    agent: "gdks-master"
+    details: "Project initialized with standard track"
+  - timestamp: "2026-11-07T20:10:00Z"
+    action: "concept_brief_created"
+    agent: "concept-brainstormer"
+    details: "Brainstorm concluido: Neon Stack (titulo provisorio), gancho de juice, visual neon/synthwave, emocao flow, PC teclado"
+
+  - timestamp: "2026-11-07T20:30:00Z"
+    action: "mechanics_exploration_created"
+    agent: "mechanics-explorer"
+    details: "Rotacao simples+kick basico, saco de 7, ghost/preview/hold/lock delay no MVP, C++ logica + BP visual"
+
+  - timestamp: "2026-11-07T20:45:00Z"
+    action: "ideation_handoff_created"
+    agent: "ideation-coordinator"
+    details: "Ideacao concluida (market analysis pulada - opcional). Proximo: Diana *create-gdd"
+
+  - timestamp: "2026-11-07T21:05:00Z"
+    action: "gdd_created"
+    agent: "game-design-director"
+    details: "GDD main.md v1.0: pilares, regras, pontuacao, telas (poco central, pausa cobre poco, inicio so Jogar+recorde), opcoes (volumes, FX, shake, DAS/ARR), features F1-F15"
+
+  - timestamp: "2026-11-07T21:30:00Z"
+    action: "core_mechanics_and_progression_created"
+    agent: "technical-game-designer"
+    details: "core-mechanics.md (formas, rotacao, kicks, DAS/ARR, lock delay, estados, eventos, DataAsset, testes) e progression-system.md (curva de gravidade, pacing, paletas, save)"
+
+  - timestamp: "2026-11-07T21:50:00Z"
+    action: "art_bible_created"
+    agent: "art-director"
+    details: "Cubo 3D com borda neon (ISM + custom data), fundo sol retro + grade rolando, cores fixas das pecas + padroes internos, 4 paletas de ambiente, VFX Niagara, pos-processamento, UI Orbitron/Audiowide"
+
+  - timestamp: "2026-11-07T22:10:00Z"
+    action: "audio_bible_created"
+    agent: "audio-director"
+    details: "SFX CC0 + musica royalty-free; faixa unica com filtro reativo (nivel/combo); SFX afinados em La menor pentatonica; 15 SFX + 4 opcionais; mixagem e MetaSounds"
+
+  - timestamp: "2026-11-07T22:40:00Z"
+    action: "design_completed"
+    agent: "design-coordinator"
+    details: "Pilares, loops e levels criados; revisao de consistencia e design-handoff.md. Narrativa n/a. Pendente decisao: Planning leve vs direto ao Engine (contrato 3-4)"
+
+# Notes
+notes:
+  - "Prazo: prototipo (1-4 semanas). Documentacao: padrao. Engine: Unreal Engine 5 (iniciante)."
+  - "Track standard: fase planning sera pulada."
