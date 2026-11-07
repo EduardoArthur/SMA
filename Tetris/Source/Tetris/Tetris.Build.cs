@@ -12,6 +12,9 @@ public class Tetris : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
+		// Neon Stack: permite #include "Simulation/NSTypes.h", "Game/NSBoardActor.h" etc.
+		PublicIncludePaths.Add(ModuleDirectory);
+
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		

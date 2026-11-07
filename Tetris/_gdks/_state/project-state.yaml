@@ -3,15 +3,16 @@ project:
   id: tetris
   name: Tetris
   created_at: '2026-11-07T19:57:07.441Z'
-  updated_at: '2026-11-07T22:40:00Z'
+  updated_at: '2026-11-08T00:30:00Z'
 preset: solo-indie
 target_engine: unreal-5
 language: pt-BR
-current_phase: 2
+current_phase: 4
 phases_completed:
   - 1
   - 2
-phases_in_progress: []
+phases_in_progress:
+  - 4
 phase_progress:
   '1':
     status: completed
@@ -32,11 +33,19 @@ phase_progress:
       - level-documentation
       - design-handoff
   '3':
-    status: not_started
+    status: skipped
     deliverables: []
   '4':
-    status: not_started
-    deliverables: []
+    status: in_progress
+    deliverables:
+      - ue5-architecture
+      - cpp-specifications
+      - m1-code
+      - m1-setup-guide
 active_agents: []
-decisions: []
+decisions:
+  - id: skip-planning
+    date: '2026-11-07'
+    decision: 'Trilha standard: pular fase 3 (Planning) e ir direto ao Engine; design-handoff.md secao 3 serve de roadmap'
+    note: 'Contrato phase-03-to-04 nao sera cumprido por decisao do usuario'
 open_questions: []

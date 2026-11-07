@@ -47,7 +47,7 @@
 | Pulso | Parâmetro `Pulse` (0-1) soma emissivo; usado no travar/limpar |
 
 - Renderizar com **Instanced Static Mesh** (um ISM para os blocos fixos e um para a peça ativa/ghost).
-- Dados por instância (`PerInstanceCustomData`): `R, G, B, PatternIndex, Pulse, Alpha` (6 floats).
+- Dados por instância (`PerInstanceCustomData`): `R, G, B, PatternIndex, Brightness, Pulse, Alpha` (7 floats; ver cpp-specs/02-gameplay §5).
 - 🔧 `EmissiveIntensity` base: **6** (borda); com bloom, resulta em glow moderado.
 
 ### 3.3 Estados

@@ -23,10 +23,10 @@ team:
 # Current Status
 status:
   current_phase: "engine"
-  current_agent: "design-coordinator"
-  current_workflow: null
+  current_agent: "ue5-programmer-lead"
+  current_workflow: "implementation-m1"
   started_at: "2026-11-07T20:01:41Z"
-  last_activity: "2026-11-07T22:40:00Z"
+  last_activity: "2026-11-08T00:30:00Z"
 
 # Phase Progress
 phases:
@@ -54,7 +54,7 @@ phases:
       design_handoff: true
   
   planning:
-    status: "not_started"
+    status: "skipped"  # trilha standard
     started_at: null
     completed_at: null
     deliverables:
@@ -65,14 +65,14 @@ phases:
       planning_handoff: false
   
   engine:
-    status: "not_started"
-    started_at: null
+    status: "in_progress"
+    started_at: "2026-11-07T22:50:00Z"
     completed_at: null
     deliverables:
-      ue5_architecture: false
-      cpp_specifications: false
+      ue5_architecture: true
+      cpp_specifications: true
       blueprint_specifications: false
-      implementation_guides: false
+      implementation_guides: true
       llm_prompts: false
 
 # Activity Log
@@ -120,6 +120,25 @@ activity_log:
     action: "design_completed"
     agent: "design-coordinator"
     details: "Pilares, loops e levels criados; revisao de consistencia e design-handoff.md. Narrativa n/a. Pendente decisao: Planning leve vs direto ao Engine (contrato 3-4)"
+
+  - timestamp: "2026-11-07T22:50:00Z"
+    action: "planning_skipped"
+    agent: "gdks-master"
+    details: "Usuario escolheu ir direto ao Engine (trilha standard); design-handoff secao 3 = roadmap"
+  - timestamp: "2026-11-07T23:10:00Z"
+    action: "ue5_architecture_created"
+    agent: "ue5-architect"
+    details: "Simulacao pura em C++ (FNS*) + actors finos + delegates; Enhanced Input; SaveSubsystem; DataAsset; Automation Tests; prefixo NS no modulo Tetris"
+
+  - timestamp: "2026-11-07T23:45:00Z"
+    action: "cpp_specifications_created"
+    agent: "ue5-programmer-lead"
+    details: "cpp-specs/01-simulation.md (NSTypes, tabelas, grade, randomizer, scoring, FNSGameSimulation, testes) e 02-gameplay.md (config, save, subsystem, board actor, view ISM, player controller, game mode)"
+
+  - timestamp: "2026-11-08T00:30:00Z"
+    action: "m1_code_written"
+    agent: "ue5-programmer-lead"
+    details: "Codigo C++ do M1 em Source/Tetris (Simulation, Data, Game, Tests T01-T12) + implementation/m1-setup-guide.md. Nao compilado (sem UE no ambiente)"
 
 # Notes
 notes:
