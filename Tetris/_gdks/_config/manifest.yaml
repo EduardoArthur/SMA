@@ -1,6 +1,6 @@
 gdks_version: 0.4.1-beta.2
-installed_at: '2026-11-07T19:34:00.834Z'
-updated_at: '2026-11-07T19:34:00.839Z'
+installed_at: '2026-11-07T19:57:07.430Z'
+updated_at: '2026-11-07T19:57:07.435Z'
 installation:
   method: npx
   node_version: v26.13.0
