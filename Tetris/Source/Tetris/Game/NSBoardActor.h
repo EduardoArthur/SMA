@@ -79,7 +79,7 @@ public:
 	int32 GetLines() const { return Sim.GetScoring().Lines; }
 
 	UFUNCTION(BlueprintPure, Category = "NeonStack")
-	int32 GetLevel() const { return Sim.GetScoring().Level; }
+	int32 GetGameLevel() const { return Sim.GetScoring().Level; }
 
 	/** (Level - 1) / PaletteEveryNLevels. */
 	UFUNCTION(BlueprintPure, Category = "NeonStack")

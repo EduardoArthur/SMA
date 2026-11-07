@@ -220,7 +220,7 @@ public:
 	UFUNCTION(BlueprintPure, Category="NeonStack") ENSSimState GetSimState() const { return Sim.GetState(); }
 	UFUNCTION(BlueprintPure, Category="NeonStack") int64 GetScore() const { return Sim.GetScoring().Score; }
 	UFUNCTION(BlueprintPure, Category="NeonStack") int32 GetLines() const { return Sim.GetScoring().Lines; }
-	UFUNCTION(BlueprintPure, Category="NeonStack") int32 GetLevel() const { return Sim.GetScoring().Level; }
+	UFUNCTION(BlueprintPure, Category="NeonStack") int32 GetGameLevel() const { return Sim.GetScoring().Level; }  // "GetLevel" colide com AActor::GetLevel
 	UFUNCTION(BlueprintPure, Category="NeonStack") int32 GetPaletteIndex() const;   // (Level-1)/PaletteEveryNLevels
 	UFUNCTION(BlueprintPure, Category="NeonStack") FVector CellToWorld(FIntPoint Cell) const;   // para FX
 	const FNSGameSimulation& GetSimulation() const { return Sim; }

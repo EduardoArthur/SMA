@@ -120,7 +120,7 @@ void ANSBoardActor::SetHandling(int32 DasMs, int32 ArrMs)
 int32 ANSBoardActor::GetPaletteIndex() const
 {
 	const int32 Every = Config ? FMath::Max(1, Config->PaletteEveryNLevels) : 5;
-	return FMath::Max(0, GetLevel() - 1) / Every;
+	return FMath::Max(0, GetGameLevel() - 1) / Every;
 }
 
 FVector ANSBoardActor::CellToWorld(FIntPoint Cell) const
