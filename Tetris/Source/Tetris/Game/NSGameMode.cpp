@@ -3,6 +3,7 @@
 #include "Tetris.h"
 #include "EngineUtils.h"
 #include "TimerManager.h"
+#include "Kismet/GameplayStatics.h"
 #include "Game/NSBoardActor.h"
 #include "Game/NSPlayerController.h"
 
@@ -26,60 +27,117 @@ void ANSGameMode::BeginPlay()
 		UE_LOG(LogNeonStack, Error, TEXT("NSGameMode: nenhum ANSBoardActor (BP_Board) no mapa."));
 		return;
 	}
-
 	Board->OnGameOver.AddDynamic(this, &ANSGameMode::HandleGameOver);
 
 	if (ANSPlayerController* PC = Cast<ANSPlayerController>(GetWorld()->GetFirstPlayerController()))
 	{
 		PC->SetBoard(Board.Get());
+		PC->InitUI(this, Board.Get());
 	}
 
-	RestartGame();
+	bStartPending = true;
+	SetFlowState(ENSFlowState::Countdown);
 }
 
-void ANSGameMode::RestartGame()
+void ANSGameMode::FinishCountdown()
 {
-	GetWorldTimerManager().ClearTimer(RestartTimer);
-	if (ANSBoardActor* B = Board.Get())
+	ANSBoardActor* B = Board.Get();
+	if (!B || FlowState != ENSFlowState::Countdown)
+	{
+		return;
+	}
+	if (bStartPending)
 	{
 		B->SetPaused(false);
 		B->StartGame();
-		SetFlowState(ENSFlowState::Playing);
 	}
+	else
+	{
+		B->SetPaused(false);
+	}
+	SetFlowState(ENSFlowState::Playing);
 }
 
 void ANSGameMode::TogglePause()
 {
-	ANSBoardActor* B = Board.Get();
-	if (!B)
-	{
-		return;
-	}
 	if (FlowState == ENSFlowState::Playing)
 	{
-		B->SetPaused(true);
-		SetFlowState(ENSFlowState::Paused);
+		PauseGame();
 	}
 	else if (FlowState == ENSFlowState::Paused)
 	{
-		B->SetPaused(false); // M3: passar pela contagem 3-2-1 antes de retomar
-		SetFlowState(ENSFlowState::Playing);
+		ResumeGame();
 	}
+}
+
+void ANSGameMode::PauseGame()
+{
+	ANSBoardActor* B = Board.Get();
+	if (!B || FlowState != ENSFlowState::Playing)
+	{
+		return;
+	}
+	B->SetPaused(true);
+	SetFlowState(ENSFlowState::Paused);
+}
+
+void ANSGameMode::ResumeGame()
+{
+	if (FlowState != ENSFlowState::Paused)
+	{
+		return;
+	}
+	bStartPending = false; // o board continua pausado até o FinishCountdown
+	SetFlowState(ENSFlowState::Countdown);
+}
+
+void ANSGameMode::RestartGame()
+{
+	GetWorldTimerManager().ClearTimer(ResultsTimer);
+	if (ANSBoardActor* B = Board.Get())
+	{
+		B->StopGame();
+		B->SetPaused(false);
+	}
+	bStartPending = true;
+	SetFlowState(ENSFlowState::Countdown);
+}
+
+void ANSGameMode::ReturnToMenu()
+{
+	if (MainMenuLevel.IsNull())
+	{
+		UE_LOG(LogNeonStack, Warning, TEXT("NSGameMode: MainMenuLevel não configurado no BP_NeonStackGameMode."));
+		return;
+	}
+	UGameplayStatics::OpenLevelBySoftObjectPtr(this, MainMenuLevel);
 }
 
 void ANSGameMode::HandleGameOver(int64 Score, int32 Lines, int32 Level, bool bNewHighScore)
 {
+	LastScore = Score;
+	LastLines = Lines;
+	LastLevel = Level;
+	bLastNewHighScore = bNewHighScore;
+
 	SetFlowState(ENSFlowState::GameOver);
-	// M1: reinicia sozinho. M3: tela de resultados.
-	GetWorldTimerManager().SetTimer(RestartTimer, this, &ANSGameMode::RestartGame, AutoRestartDelay, false);
+	if (GameOverToResultsDelay > 0.f)
+	{
+		GetWorldTimerManager().SetTimer(ResultsTimer, this, &ANSGameMode::ShowResults, GameOverToResultsDelay, false);
+	}
+	else
+	{
+		ShowResults();
+	}
+}
+
+void ANSGameMode::ShowResults()
+{
+	SetFlowState(ENSFlowState::Results);
 }
 
 void ANSGameMode::SetFlowState(ENSFlowState NewState)
 {
-	if (FlowState == NewState)
-	{
-		return;
-	}
 	FlowState = NewState;
-	OnFlowStateChanged.Broadcast(NewState);
+	OnFlowStateChanged.Broadcast(NewState); // sempre transmite (inclusive Countdown -> Countdown)
 }

@@ -6,6 +6,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Simulation/NSGameSimulation.h"
+#include "Data/NSSaveGame.h"
 #include "NSBoardActor.generated.h"
 
 class UNSGameConfig;
@@ -115,6 +116,9 @@ private:
 	void ProcessEvents();
 	void BroadcastEvent(const FNSGameEvent& E);
 	void SetHeld(ENSInputAction Action, bool bHeld);
+
+	UFUNCTION()
+	void HandleSettingsChanged(const FNSSettings& Settings);
 
 	FNSGameSimulation Sim;
 	FNSInputFrame PendingInput;

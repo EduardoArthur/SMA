@@ -3,6 +3,7 @@
 #include "Tetris.h"
 #include "Data/NSGameConfig.h"
 #include "Game/NSBoardViewComponent.h"
+#include "Systems/NSSaveSubsystem.h"
 
 ANSBoardActor::ANSBoardActor()
 {
@@ -24,6 +25,16 @@ void ANSBoardActor::BeginPlay()
 		return;
 	}
 	View->InitializeView(Config);
+
+	if (UNSSaveSubsystem* Save = UNSSaveSubsystem::Get(this))
+	{
+		Save->OnSettingsChanged.AddDynamic(this, &ANSBoardActor::HandleSettingsChanged);
+	}
+}
+
+void ANSBoardActor::HandleSettingsChanged(const FNSSettings& Settings)
+{
+	SetHandling(Settings.DasMs, Settings.ArrMs); // vale na hora, inclusive no meio da partida
 }
 
 void ANSBoardActor::StartGame()
@@ -38,7 +49,11 @@ void ANSBoardActor::StartGame()
 	View->InitializeView(Config);
 
 	Sim.Configure(Config->ToSimConfig());
-	// M3: aplicar DAS/ARR das opções salvas (UNSSaveSubsystem) aqui.
+	if (const UNSSaveSubsystem* Save = UNSSaveSubsystem::Get(this))
+	{
+		const FNSSettings Settings = Save->GetSettings();
+		SetHandling(Settings.DasMs, Settings.ArrMs);
+	}
 
 	PendingInput = FNSInputFrame();
 	bRunning = true;
@@ -164,7 +179,8 @@ void ANSBoardActor::BroadcastEvent(const FNSGameEvent& E)
 	case ENSGameEventType::GameOver:
 	{
 		bRunning = false;
-		const bool bNewHighScore = false; // M3: UNSSaveSubsystem::SubmitResult(...)
+		UNSSaveSubsystem* Save = UNSSaveSubsystem::Get(this);
+		const bool bNewHighScore = Save && Save->SubmitResult(E.Score, E.IntA, E.IntB);
 		UE_LOG(LogNeonStack, Log, TEXT("Game over: score %lld, linhas %d, nível %d"), E.Score, E.IntA, E.IntB);
 		OnGameOver.Broadcast(E.Score, E.IntA, E.IntB, bNewHighScore);
 		break;

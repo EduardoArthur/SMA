@@ -9,11 +9,19 @@
 #include "EngineUtils.h"
 #include "Game/NSBoardActor.h"
 #include "Game/NSGameMode.h"
+#include "UI/NSCountdownWidget.h"
+#include "UI/NSHUDWidget.h"
+#include "UI/NSOptionsWidget.h"
+#include "UI/NSPauseWidget.h"
+#include "UI/NSResultsWidget.h"
 
 void ANSPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	SetGameplayInputEnabled(true);
+	if (!GameMode.IsValid()) // se o GameMode já iniciou a UI, ele controla o input
+	{
+		SetGameplayInputEnabled(true);
+	}
 
 	if (!Board.IsValid())
 	{
@@ -28,6 +36,130 @@ void ANSPlayerController::BeginPlay()
 void ANSPlayerController::SetBoard(ANSBoardActor* InBoard)
 {
 	Board = InBoard;
+}
+
+// ---------------------------------------------------------------------------
+// UI
+// ---------------------------------------------------------------------------
+
+void ANSPlayerController::InitUI(ANSGameMode* InGameMode, ANSBoardActor* InBoard)
+{
+	GameMode = InGameMode;
+	if (InGameMode)
+	{
+		InGameMode->OnFlowStateChanged.AddUniqueDynamic(this, &ANSPlayerController::HandleFlowStateChanged);
+	}
+
+	if (HUDClass && !HUDWidget)
+	{
+		HUDWidget = CreateWidget<UNSHUDWidget>(this, HUDClass);
+		HUDWidget->AddToViewport(0);
+		HUDWidget->InitForBoard(InBoard);
+	}
+	if (CountdownClass && !CountdownWidget)
+	{
+		CountdownWidget = CreateWidget<UNSCountdownWidget>(this, CountdownClass);
+		CountdownWidget->AddToViewport(5);
+		CountdownWidget->SetVisibility(ESlateVisibility::Collapsed);
+	}
+	if (PauseClass && !PauseWidget)
+	{
+		PauseWidget = CreateWidget<UNSPauseWidget>(this, PauseClass);
+		PauseWidget->AddToViewport(10);
+		PauseWidget->SetVisibility(ESlateVisibility::Collapsed);
+	}
+	if (ResultsClass && !ResultsWidget)
+	{
+		ResultsWidget = CreateWidget<UNSResultsWidget>(this, ResultsClass);
+		ResultsWidget->AddToViewport(10);
+		ResultsWidget->SetVisibility(ESlateVisibility::Collapsed);
+	}
+
+	if (!HUDClass || !CountdownClass || !PauseClass || !ResultsClass)
+	{
+		UE_LOG(LogNeonStack, Warning, TEXT("NSPlayerController: alguma classe de widget (HUD/Countdown/Pause/Results) não foi atribuída no BP_NSPlayerController."));
+	}
+}
+
+void ANSPlayerController::HandleFlowStateChanged(ENSFlowState NewState)
+{
+	auto Hide = [](UUserWidget* W) { if (W) { W->SetVisibility(ESlateVisibility::Collapsed); } };
+
+	if (NewState != ENSFlowState::Paused && OptionsWidget)
+	{
+		Hide(OptionsWidget);
+	}
+
+	switch (NewState)
+	{
+	case ENSFlowState::Countdown:
+		Hide(PauseWidget);
+		Hide(ResultsWidget);
+		SetGameplayInputEnabled(false);
+		if (CountdownWidget)
+		{
+			CountdownWidget->StartCountdown();
+		}
+		else if (GameMode.IsValid())
+		{
+			GameMode->FinishCountdown(); // sem widget de contagem: começa direto
+		}
+		break;
+
+	case ENSFlowState::Playing:
+		Hide(CountdownWidget);
+		Hide(PauseWidget);
+		Hide(ResultsWidget);
+		SetGameplayInputEnabled(true);
+		break;
+
+	case ENSFlowState::Paused:
+		SetGameplayInputEnabled(false);
+		if (PauseWidget)
+		{
+			PauseWidget->SetVisibility(ESlateVisibility::Visible);
+			PauseWidget->FocusDefault();
+		}
+		break;
+
+	case ENSFlowState::GameOver:
+		SetGameplayInputEnabled(false);
+		break;
+
+	case ENSFlowState::Results:
+		SetGameplayInputEnabled(false);
+		if (ResultsWidget && GameMode.IsValid())
+		{
+			ResultsWidget->SetResult(GameMode->GetLastScore(), GameMode->GetLastLines(), GameMode->GetLastLevel(), GameMode->WasLastNewHighScore());
+			ResultsWidget->SetVisibility(ESlateVisibility::Visible);
+			ResultsWidget->FocusDefault();
+		}
+		break;
+	}
+}
+
+void ANSPlayerController::OpenOptions()
+{
+	if (!OptionsClass)
+	{
+		UE_LOG(LogNeonStack, Warning, TEXT("NSPlayerController: OptionsClass não atribuído."));
+		return;
+	}
+	if (!OptionsWidget)
+	{
+		OptionsWidget = CreateWidget<UNSOptionsWidget>(this, OptionsClass);
+		OptionsWidget->AddToViewport(20);
+		OptionsWidget->OnClosed.AddDynamic(this, &ANSPlayerController::HandleOptionsClosed);
+	}
+	OptionsWidget->Open();
+}
+
+void ANSPlayerController::HandleOptionsClosed()
+{
+	if (PauseWidget && GameMode.IsValid() && GameMode->GetFlowState() == ENSFlowState::Paused)
+	{
+		PauseWidget->FocusDefault();
+	}
 }
 
 void ANSPlayerController::SetGameplayInputEnabled(bool bEnabled)
