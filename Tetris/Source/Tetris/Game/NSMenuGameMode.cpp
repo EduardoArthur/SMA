@@ -22,6 +22,7 @@ void ANSMenuGameMode::StartPlay()
 void ANSMenuGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+	NSBootstrap::ActivateCamera(GetWorld());
 
 	APlayerController* PC = GetWorld()->GetFirstPlayerController();
 	if (!PC || !MainMenuClass)

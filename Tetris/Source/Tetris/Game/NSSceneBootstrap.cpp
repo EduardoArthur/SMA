@@ -7,6 +7,7 @@
 #include "Engine/DirectionalLight.h"
 #include "Engine/Light.h"
 #include "Engine/World.h"
+#include "GameFramework/PlayerController.h"
 #include "Audio/NSAudioDirector.h"
 #include "FX/NSBackgroundActor.h"
 #include "FX/NSFXDirector.h"
@@ -51,7 +52,7 @@ void NSBootstrap::EnsureScene(UWorld* World, bool bGameplay)
 		SpawnIfMissing<ANSBoardActor>(World);
 	}
 
-	// Câmera: usa a do mapa se houver; garante que alguma esteja ativa para o Player 0
+	// Câmera: usa a do mapa se houver (a ativação é feita em ActivateCamera, no BeginPlay do GameMode)
 	ACameraActor* Camera = FindFirst<ACameraActor>(World);
 	if (!Camera)
 	{
@@ -62,21 +63,11 @@ void NSBootstrap::EnsureScene(UWorld* World, bool bGameplay)
 		{
 			Comp->SetProjectionMode(ECameraProjectionMode::Orthographic);
 			Comp->SetOrthoWidth(4400.f);
-			Comp->SetAutoCalculateOrthoPlanes(false);
 			Comp->SetOrthoNearClipPlane(0.f);
 			Comp->SetOrthoFarClipPlane(20000.f);
 			Comp->SetConstraintAspectRatio(false);
 		}
 		UE_LOG(LogNeonStack, Log, TEXT("Bootstrap: criada câmera ortográfica"));
-	}
-	bool bAnyActive = false;
-	for (TActorIterator<ACameraActor> It(World); It; ++It)
-	{
-		bAnyActive |= It->GetAutoActivatePlayerIndex() == 0;
-	}
-	if (Camera && !bAnyActive)
-	{
-		Camera->SetAutoActivateForPlayer(EAutoReceiveInput::Player0);
 	}
 
 	// Luz: só se o mapa não tiver nenhuma (materiais Unlit do script não precisam)
@@ -96,5 +87,18 @@ void NSBootstrap::EnsureScene(UWorld* World, bool bGameplay)
 	if (bGameplay)
 	{
 		SpawnIfMissing<ANSFXDirector>(World);
+	}
+}
+
+void NSBootstrap::ActivateCamera(UWorld* World)
+{
+	APlayerController* PC = World ? World->GetFirstPlayerController() : nullptr;
+	if (!PC || Cast<ACameraActor>(PC->GetViewTarget()))
+	{
+		return; // já está olhando por uma câmera (ex.: "Auto Activate for Player 0" do mapa)
+	}
+	if (ACameraActor* Camera = FindFirst<ACameraActor>(World))
+	{
+		PC->SetViewTarget(Camera);
 	}
 }

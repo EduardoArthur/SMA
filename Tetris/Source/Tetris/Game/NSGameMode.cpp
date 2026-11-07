@@ -26,6 +26,7 @@ void ANSGameMode::StartPlay()
 void ANSGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+	NSBootstrap::ActivateCamera(GetWorld());
 
 	for (TActorIterator<ANSBoardActor> It(GetWorld()); It; ++It)
 	{

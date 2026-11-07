@@ -17,4 +17,7 @@ namespace NSBootstrap
 	 * - ANSBackgroundActor, ANSAudioDirector e (no jogo) ANSFXDirector
 	 */
 	void EnsureScene(UWorld* World, bool bGameplay);
+
+	/** Se o jogador não estiver vendo por nenhuma câmera, usa a primeira CameraActor do mapa. Chamar no BeginPlay. */
+	void ActivateCamera(UWorld* World);
 }
