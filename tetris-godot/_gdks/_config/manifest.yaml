@@ -1,0 +1,32 @@
+gdks_version: 0.4.1-beta.2
+installed_at: '2026-11-09T00:28:02.951Z'
+updated_at: '2026-11-09T00:28:02.951Z'
+installation:
+  method: npx
+  node_version: v26.13.0
+  platform: win32
+  arch: x64
+modules:
+  installed:
+    - core
+    - core
+    - ideation
+    - design
+    - planning
+    - engine
+  available:
+    - core
+    - ideation
+    - design
+    - planning
+    - engine
+project:
+  name: Tetris Godot
+  language: pt-BR
+  output_folder: _gdks-output
+agents:
+  compiled: true
+  format: markdown
+tracking:
+  workflow_status_file: _gdks-output/gdks-workflow-status.yaml
+  sprint_status_file: _gdks-output/03-planning/sprint-status.yaml

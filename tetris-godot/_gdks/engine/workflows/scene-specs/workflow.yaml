@@ -1,0 +1,53 @@
+name: scene-specs
+description: Produce scene (.tscn) specifications per story, with node composition and signal connections
+version: 1.0.0
+module: engine
+phase: 4
+
+metadata:
+  display_name: "Godot Scene Specifications"
+  icon: "🎬"
+  time_estimate: "30-60 minutes per story"
+  difficulty: "intermediate"
+  output_path: "_gdks-output/04-engine/scene-specs/"
+
+agents:
+  primary: godot-node-specialist
+
+inputs:
+  required:
+    - stories.md
+    - godot-architecture.md
+
+outputs:
+  - scene-specs/*.md
+
+steps:
+  - id: pick-story
+    name: "Pick a Story"
+    type: prompt
+    description: "Which story needs scene specs?"
+
+  - id: identify-nodes
+    name: "Identify Required Nodes"
+    type: prompt
+    description: "What built-in node types does this feature need?"
+
+  - id: compose
+    name: "Compose Scene Tree"
+    type: prompt
+    description: "Sketch the hierarchy with CollisionShape2D, Area2D, AnimationPlayer, etc."
+
+  - id: wire-signals
+    name: "Wire Signals"
+    type: prompt
+    description: "Document signal connections (editor or _ready)"
+
+  - id: exports
+    name: "Define Exports"
+    type: prompt
+    description: "What @export vars does this scene need for designer tuning?"
+
+  - id: document
+    name: "Generate scene spec"
+    type: template

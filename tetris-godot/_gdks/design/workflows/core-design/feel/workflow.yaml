@@ -1,0 +1,30 @@
+name: game-feel
+description: Design physics, responsiveness, and juice
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: 'Game Feel'
+  icon: '✨'
+  time_estimate: '60-90 minutes'
+  output_path: '_gdks-output/02-design/core-design/feel/'
+agents:
+  primary: game-feel-physicist
+  support:
+    - mechanics-designer
+outputs:
+  - feel/game-feel-spec.md
+  - feel/physics-tuning.md
+steps:
+  - id: physics
+    name: 'Physics Tuning'
+    type: prompt
+  - id: response
+    name: 'Responsiveness'
+    type: prompt
+  - id: juice
+    name: 'Juice Design'
+    type: prompt
+  - id: document
+    name: 'Generate Feel Spec'
+    type: template

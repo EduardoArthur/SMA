@@ -1,0 +1,28 @@
+# GD-KS Godot 4 Engine Module
+# Provides Godot-specific agents and workflows for Phase 4 (Engine)
+
+name: engine
+version: 0.1.0
+description: Godot 4 engine implementation guidance — agents for architecture, GDScript, nodes, and scene design.
+engine_id: godot-4
+
+metadata:
+  display_name: "Godot 4 Engine"
+  icon: "🟢"
+
+# Agents provided by this engine module
+agents:
+  - godot-architect
+  - godot-gdscript-lead
+  - godot-node-specialist
+  - engine-coordinator-godot
+
+# Workflows provided by this engine module
+workflows:
+  - godot-architecture
+  - scene-specs
+  - code-prompt-godot
+
+dependencies:
+  - core
+  - planning

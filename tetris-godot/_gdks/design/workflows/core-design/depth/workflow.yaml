@@ -1,0 +1,27 @@
+name: game-depth
+description: Design depth through meaningful interactions, not complexity
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: 'Game Depth'
+  icon: '🎲'
+  time_estimate: '45-60 minutes'
+  output_path: '_gdks-output/02-design/core-design/'
+agents:
+  primary: technical-game-designer
+outputs:
+  - depth-analysis.md
+steps:
+  - id: complexity
+    name: 'Complexity Audit'
+    type: prompt
+  - id: depth
+    name: 'Depth Design'
+    type: prompt
+  - id: mastery
+    name: 'Mastery Curve'
+    type: prompt
+  - id: document
+    name: 'Generate Depth Analysis'
+    type: template

@@ -1,0 +1,30 @@
+name: environment-art-specs
+description: Create visual specifications for environment and level art
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Environment Art Specs"
+  icon: "🏞️"
+  time_estimate: "30-45 minutes per environment"
+  output_path: "_gdks-output/02-design/art/environment-art/"
+agents:
+  primary: concept-artist
+  support:
+    - art-director
+    - level-designer
+outputs:
+  - environment-art/[environment-name].md
+steps:
+  - id: overview
+    name: "Environment Overview"
+    type: prompt
+  - id: mood
+    name: "Mood & Atmosphere"
+    type: prompt
+  - id: elements
+    name: "Key Elements"
+    type: prompt
+  - id: document
+    name: "Generate Spec"
+    type: template

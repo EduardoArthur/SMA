@@ -1,0 +1,24 @@
+name: ambient-design
+description: Design ambient soundscapes for environments
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Ambient Design"
+  icon: "🌲"
+  time_estimate: "45-60 minutes"
+  output_path: "_gdks-output/02-design/audio/ambient-design.md"
+agents:
+  primary: audio-director
+outputs:
+  - ambient-design.md
+steps:
+  - id: environments
+    name: "Environment Soundscapes"
+    type: prompt
+  - id: layers
+    name: "Audio Layers"
+    type: prompt
+  - id: document
+    name: "Generate Ambient Doc"
+    type: template

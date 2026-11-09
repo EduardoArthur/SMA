@@ -1,0 +1,34 @@
+name: gameplay-loops
+description: Design core, meta, and micro gameplay loops
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: 'Gameplay Loops'
+  icon: '🔄'
+  time_estimate: '45-60 minutes'
+  output_path: '_gdks-output/02-design/core-design/loops/'
+agents:
+  primary: core-loop-specialist
+  support:
+    - mechanics-designer
+    - progression-architect
+outputs:
+  - loops/core-loop.md
+  - loops/meta-loops.md
+steps:
+  - id: micro
+    name: 'Micro Loop'
+    type: prompt
+  - id: core
+    name: 'Core Loop'
+    type: prompt
+  - id: meta
+    name: 'Meta Loop'
+    type: prompt
+  - id: feedback
+    name: 'Feedback Cycles'
+    type: prompt
+  - id: document
+    name: 'Generate Loops Spec'
+    type: template

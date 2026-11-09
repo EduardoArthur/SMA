@@ -1,0 +1,49 @@
+schema_version: "1.0"
+from_phase: 3
+to_phase: 4
+name: "Planning → Engine Handoff"
+description: |
+  Requirements for advancing from Planning to Engine (UE5 implementation).
+  The Engine team needs a breakdown of stories, a sprint plan, and
+  a prioritized roadmap before it can generate implementation specs.
+
+required_deliverables:
+  - id: roadmap
+    path_glob: "_gdks-output/03-planning/roadmap.md"
+    min_word_count: 200
+    required_sections:
+      - "Timeline"
+      - "Milestones"
+
+  - id: epics
+    path_glob: "_gdks-output/03-planning/epics.md"
+    required_sections:
+      - "Epic"
+
+  - id: sprint-plan
+    path_glob: "_gdks-output/03-planning/sprint-plan.md"
+    min_word_count: 150
+
+  - id: stories
+    path_glob: "_gdks-output/03-planning/stories.md"
+    required_sections:
+      - "Story"
+
+optional_deliverables:
+  - id: risk-register
+    path_glob: "_gdks-output/03-planning/risks.md"
+
+  - id: estimates
+    path_glob: "_gdks-output/03-planning/estimates.md"
+
+quality_gates:
+  - type: no_open_blockers
+    description: "No unresolved blocker-level open questions"
+
+  - type: min_completion_pct
+    value: 80
+    description: "Phase 3 should be at least 80% complete"
+
+  - type: all_agents_signoff
+    agents: ["sam", "peter"]
+    description: "Sam (Scrum Master) and Peter (Planning Coordinator) must have been active"

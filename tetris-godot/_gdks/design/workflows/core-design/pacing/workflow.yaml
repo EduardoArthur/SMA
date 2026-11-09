@@ -1,0 +1,29 @@
+name: pacing-design
+description: Design game pacing and difficulty escalation
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: 'Pacing Design'
+  icon: '📊'
+  time_estimate: '45-60 minutes'
+  output_path: '_gdks-output/02-design/core-design/'
+agents:
+  primary: level-designer
+  support:
+    - technical-game-designer
+outputs:
+  - pacing-design.md
+steps:
+  - id: curve
+    name: 'Pacing Curve'
+    type: prompt
+  - id: peaks
+    name: 'Intensity Peaks'
+    type: prompt
+  - id: rest
+    name: 'Rest Points'
+    type: prompt
+  - id: document
+    name: 'Generate Pacing Design'
+    type: template

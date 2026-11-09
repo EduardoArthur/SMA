@@ -1,0 +1,27 @@
+name: vfx-design
+description: Design visual effects specifications
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "VFX Design"
+  icon: "✨"
+  time_estimate: "45-60 minutes"
+  output_path: "_gdks-output/02-design/art/vfx-design.md"
+agents:
+  primary: art-director
+outputs:
+  - vfx-design.md
+steps:
+  - id: categories
+    name: "VFX Categories"
+    type: prompt
+  - id: specs
+    name: "Effect Specifications"
+    type: prompt
+  - id: technical
+    name: "Technical Guidelines"
+    type: prompt
+  - id: document
+    name: "Generate VFX Doc"
+    type: template

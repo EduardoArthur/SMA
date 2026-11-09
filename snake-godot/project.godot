@@ -13,8 +13,8 @@ config_version=5
 config/name="Snake Godot"
 run/main_scene="res://game/game.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
 boot_splash/bg_color=Color(1, 0.956863, 0.839216, 1)
+config/icon="res://icon.svg"
 
 [autoload]
 
@@ -83,8 +83,8 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
-anti_aliasing/quality/msaa_2d=1
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_2d=1
 environment/defaults/default_clear_color=Color(1, 0.956863, 0.839216, 1)

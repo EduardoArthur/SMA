@@ -1,0 +1,40 @@
+# Workflow: Check Workflow Status
+# Display current progress and recommend next steps
+
+name: workflow-status
+title: Check Workflow Status
+description: View current project progress and get recommendations for next steps
+
+# Input requirements
+inputs:
+  - name: status_file
+    type: file
+    required: true
+    default: _gdks-output/gdks-workflow-status.yaml
+    description: Path to workflow status file
+
+# Output
+outputs:
+  - name: status_report
+    type: display
+    description: Formatted status report
+
+# Workflow steps
+steps:
+  - id: load-status
+    name: Load Workflow Status
+    type: read_file
+    file: "{{status_file}}"
+    
+  - id: analyze-progress
+    name: Analyze Progress
+    type: analysis
+    
+  - id: recommend-next
+    name: Recommend Next Steps
+    type: decision
+    
+  - id: display-status
+    name: Display Status Report
+    type: display
+    template: status-report.template.md

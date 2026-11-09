@@ -1,0 +1,43 @@
+name: code-prompt-godot
+description: Generate an LLM prompt for implementing a story in GDScript
+version: 1.0.0
+module: engine
+phase: 4
+
+metadata:
+  display_name: "Godot Code Generation Prompt"
+  icon: "🤖"
+  time_estimate: "20-30 minutes per story"
+  difficulty: "intermediate"
+  output_path: "_gdks-output/04-engine/llm-prompts/"
+
+agents:
+  primary: godot-gdscript-lead
+
+inputs:
+  required:
+    - stories.md
+    - godot-architecture.md
+    - scene-specs/
+
+outputs:
+  - llm-prompts/story-XXX-prompt.md
+
+steps:
+  - id: pick-story
+    name: "Pick a Story"
+    type: prompt
+
+  - id: load-context
+    name: "Assemble Project Context"
+    type: analysis
+    description: "Gather architecture, scene spec, acceptance criteria"
+
+  - id: write-rules
+    name: "Write Rejection Rules"
+    type: prompt
+    description: "What would make the LLM output unacceptable? (untyped vars, print statements, etc.)"
+
+  - id: document
+    name: "Generate the Prompt"
+    type: template

@@ -1,0 +1,27 @@
+name: sfx-catalog
+description: Create comprehensive sound effects catalog
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "SFX Catalog"
+  icon: "🔊"
+  time_estimate: "60-90 minutes"
+  output_path: "_gdks-output/02-design/audio/sfx-catalog.md"
+agents:
+  primary: audio-director
+outputs:
+  - sfx-catalog.md
+steps:
+  - id: categories
+    name: "SFX Categories"
+    type: prompt
+  - id: list
+    name: "Sound List"
+    type: prompt
+  - id: specs
+    name: "Technical Specs"
+    type: prompt
+  - id: document
+    name: "Generate Catalog"
+    type: template

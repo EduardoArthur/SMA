@@ -1,0 +1,30 @@
+name: music-direction
+description: Create comprehensive music direction and soundtrack design
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Music Direction"
+  icon: "🎵"
+  time_estimate: "60-90 minutes"
+  output_path: "_gdks-output/02-design/audio/music-direction.md"
+agents:
+  primary: audio-director
+outputs:
+  - music-direction.md
+steps:
+  - id: style
+    name: "Musical Style"
+    type: prompt
+  - id: themes
+    name: "Themes & Motifs"
+    type: prompt
+  - id: tracks
+    name: "Track List"
+    type: prompt
+  - id: dynamic
+    name: "Dynamic Music System"
+    type: prompt
+  - id: document
+    name: "Generate Music Doc"
+    type: template
