@@ -1,0 +1,30 @@
+name: store-page
+description: Create optimized store page content for Steam/Epic
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Store Page"
+  icon: "🏪"
+  time_estimate: "45-60 minutes"
+  output_path: "_gdks-output/02-design/marketing/store-page.md"
+agents:
+  primary: marketing-strategist
+outputs:
+  - store-page.md
+steps:
+  - id: headline
+    name: "Headlines & Taglines"
+    type: prompt
+  - id: description
+    name: "Full Description"
+    type: prompt
+  - id: features
+    name: "Feature List"
+    type: prompt
+  - id: tags
+    name: "Tags & Keywords"
+    type: prompt
+  - id: document
+    name: "Generate Store Page"
+    type: template

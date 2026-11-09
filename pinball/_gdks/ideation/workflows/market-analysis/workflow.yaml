@@ -1,0 +1,45 @@
+name: market-analysis
+title: "Comprehensive Market Analysis"
+description: "Research market, competitors, and audience"
+agent: market-analyst
+version: 1.0.0
+
+inputs:
+  - name: concept_brief
+    type: file
+    required: true
+    description: "Path to concept-brief.md"
+
+outputs:
+  - name: market-analysis.md
+    path: "_gdks-output/01-ideation/market-analysis.md"
+    description: "Complete market analysis"
+
+config:
+  estimated_time: "45-90 minutes"
+  difficulty: "intermediate"
+  prerequisites:
+    - "concept-brief.md"
+  next_workflows:
+    - "mechanics-exploration"
+    - "concept-synthesis"
+
+steps:
+  - id: context
+    name: "Understand Game Context"
+    type: prompt
+  - id: competitors
+    name: "Identify Competitors"
+    type: research
+  - id: analysis
+    name: "Analyze Competitors"
+    type: analysis
+  - id: audience
+    name: "Profile Target Audience"
+    type: interactive
+  - id: positioning
+    name: "Define Market Position"
+    type: analysis
+  - id: document
+    name: "Create Analysis Document"
+    type: generate

@@ -1,6 +1,6 @@
 gdks_version: 0.4.1-beta.2
-installed_at: '2026-11-09T00:28:02.951Z'
-updated_at: '2026-11-09T00:28:02.951Z'
+installed_at: '2026-11-09T01:32:04.477Z'
+updated_at: '2026-11-09T01:32:04.478Z'
 installation:
   method: npx
   node_version: v26.13.0
@@ -21,7 +21,7 @@ modules:
     - planning
     - engine
 project:
-  name: Tetris Godot
+  name: tetris-godot
   language: pt-BR
   output_folder: _gdks-output
 agents:

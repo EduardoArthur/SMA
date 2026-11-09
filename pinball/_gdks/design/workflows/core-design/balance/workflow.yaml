@@ -1,0 +1,30 @@
+name: balance-framework
+description: Design difficulty curves and flow states
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: 'Balance Framework'
+  icon: '⚖️'
+  time_estimate: '60-90 minutes'
+  output_path: '_gdks-output/02-design/core-design/balance/'
+agents:
+  primary: technical-game-designer
+  support:
+    - mechanics-designer
+outputs:
+  - balance/balance-framework.md
+  - balance/difficulty-curve.md
+steps:
+  - id: flow
+    name: 'Flow State Design'
+    type: prompt
+  - id: difficulty
+    name: 'Difficulty Curve'
+    type: prompt
+  - id: numbers
+    name: 'Balance Numbers'
+    type: prompt
+  - id: document
+    name: 'Generate Balance Framework'
+    type: template

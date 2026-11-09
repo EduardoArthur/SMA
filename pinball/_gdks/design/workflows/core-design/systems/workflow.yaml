@@ -1,0 +1,30 @@
+name: systems-design
+description: Design interconnected game systems for emergent gameplay
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: 'Systems Design'
+  icon: '🕸️'
+  time_estimate: '60-90 minutes'
+  output_path: '_gdks-output/02-design/core-design/systems/'
+agents:
+  primary: systems-designer
+  support:
+    - mechanics-designer
+outputs:
+  - systems/systems-map.md
+  - systems/interactions.md
+steps:
+  - id: systems
+    name: 'Core Systems'
+    type: prompt
+  - id: interactions
+    name: 'System Interactions'
+    type: prompt
+  - id: emergence
+    name: 'Emergent Behaviors'
+    type: prompt
+  - id: document
+    name: 'Generate Systems Spec'
+    type: template

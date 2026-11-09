@@ -1,0 +1,27 @@
+name: ui-style-guide
+description: Create comprehensive UI/UX style guide
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "UI Style Guide"
+  icon: "🎨"
+  time_estimate: "60-90 minutes"
+  output_path: "_gdks-output/02-design/art/ui-style-guide.md"
+agents:
+  primary: art-director
+outputs:
+  - ui-style-guide.md
+steps:
+  - id: principles
+    name: "Design Principles"
+    type: prompt
+  - id: components
+    name: "UI Components"
+    type: prompt
+  - id: colors
+    name: "Colors & Typography"
+    type: prompt
+  - id: document
+    name: "Generate Guide"
+    type: template

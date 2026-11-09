@@ -1,0 +1,64 @@
+# Brainstorm Concept Workflow
+# Generate and explore game concepts through guided creative session
+
+name: brainstorm-concept
+title: "Creative Brainstorming Session"
+description: "Guided brainstorming to generate and refine game concepts"
+agent: concept-brainstormer
+version: 1.0.0
+
+# Input requirements
+inputs:
+  - name: initial_idea
+    type: string
+    required: false
+    description: "Starting idea or theme (optional - can start from scratch)"
+  
+  - name: constraints
+    type: array
+    required: false
+    description: "Any constraints (platform, team size, timeline, etc.)"
+
+# Output artifacts  
+outputs:
+  - name: concept-brief.md
+    path: "_gdks-output/01-ideation/concept-brief.md"
+    template: "concept-brief.template.md"
+    description: "Complete concept brief document"
+
+# Workflow configuration
+config:
+  estimated_time: "30-60 minutes"
+  difficulty: "beginner"
+  prerequisites: []
+  next_workflows:
+    - "market-analysis"
+    - "find-hook"
+    - "mechanics-exploration"
+
+# Workflow steps
+steps:
+  - id: welcome
+    name: "Welcome & Setup"
+    type: prompt
+    
+  - id: explore-ideas
+    name: "Explore Ideas"
+    type: interactive
+    
+  - id: find-hook
+    name: "Identify Hook"
+    type: analysis
+    
+  - id: define-fantasy
+    name: "Define Core Fantasy"
+    type: interactive
+    
+  - id: create-pitch
+    name: "Create Pitch"
+    type: generate
+    
+  - id: document
+    name: "Document Concept"
+    type: generate
+    template: "concept-brief.template.md"

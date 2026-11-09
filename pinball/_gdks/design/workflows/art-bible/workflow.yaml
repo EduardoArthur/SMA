@@ -1,0 +1,6 @@
+name: art-bible
+description: art-bible workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

@@ -1,0 +1,15 @@
+project:
+  name: Pinball
+  version: 0.1.0
+settings:
+  output_folder: _gdks-output
+  communication_language: pt-BR
+  ide: chatgpt-codex
+modules:
+  installed:
+    - core
+    - core
+    - ideation
+    - design
+    - planning
+    - engine

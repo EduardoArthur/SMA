@@ -1,0 +1,28 @@
+schema_version: '1.0'
+project:
+  id: pinball
+  name: Pinball
+  created_at: '2026-11-09T01:38:38.493Z'
+  updated_at: '2026-11-09T01:38:38.493Z'
+preset: solo-indie
+target_engine: godot-4
+language: pt-BR
+current_phase: 1
+phases_completed: []
+phases_in_progress: []
+phase_progress:
+  '1':
+    status: not_started
+    deliverables: []
+  '2':
+    status: not_started
+    deliverables: []
+  '3':
+    status: not_started
+    deliverables: []
+  '4':
+    status: not_started
+    deliverables: []
+active_agents: []
+decisions: []
+open_questions: []

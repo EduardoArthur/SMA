@@ -1,0 +1,32 @@
+name: character-art-specs
+description: Create detailed visual specifications for character art
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Character Art Specs"
+  icon: "👤"
+  time_estimate: "30-45 minutes per character"
+  output_path: "_gdks-output/02-design/art/character-art/"
+agents:
+  primary: concept-artist
+  support:
+    - character-designer
+outputs:
+  - character-art/[character-name].md
+steps:
+  - id: appearance
+    name: "Physical Appearance"
+    type: prompt
+  - id: costume
+    name: "Costume & Style"
+    type: prompt
+  - id: expressions
+    name: "Expressions & Poses"
+    type: prompt
+  - id: variations
+    name: "Variations"
+    type: prompt
+  - id: document
+    name: "Generate Spec"
+    type: template

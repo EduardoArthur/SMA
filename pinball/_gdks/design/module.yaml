@@ -1,0 +1,86 @@
+# GD-KS Design Module
+# Team 2: Game Design, Art, Audio, Narrative, Marketing, and Core Design
+
+name: design
+version: 0.3.0
+description: Design Team - Complete game design documentation including core mechanics, progression, systems, and feel
+
+required: false
+default_selected: true
+
+metadata:
+  display_name: "Design Team"
+  icon: "🎨"
+  team_number: 2
+  phase: "design"
+
+# Agents in this module (18 total)
+agents:
+  # Documentation Agents (7 original)
+  - game-design-director
+  - level-designer
+  - narrative-designer
+  - technical-game-designer
+  - art-director
+  - audio-director
+  - design-coordinator
+  # Narrative/Art Agents (4 from v0.2)
+  - world-builder
+  - character-designer
+  - concept-artist
+  - marketing-strategist
+  # Core Design Agents (7 new in v0.3)
+  - mechanics-designer
+  - progression-architect
+  - core-loop-specialist
+  - systems-designer
+  - player-agency-advocate
+  - playtest-coordinator
+  - game-feel-physicist
+
+# Workflows organized by category
+workflows:
+  # Core Design (existing)
+  - create-gdd
+  - level-documentation
+  - narrative-design
+  - art-bible
+  - audio-bible
+  # Narrative (v0.2)
+  - narrative/story-bible
+  - narrative/character-profiles
+  - narrative/world-lore
+  - narrative/location-design
+  - narrative/dialogue-design
+  - narrative/quest-design
+  # Art (v0.2)
+  - art/concept-art-brief
+  - art/character-art-specs
+  - art/environment-art-specs
+  - art/ui-style-guide
+  - art/vfx-design
+  # Audio (v0.2)
+  - audio/music-direction
+  - audio/sfx-catalog
+  - audio/ambient-design
+  - audio/voice-direction
+  - audio/audio-implementation
+  # Marketing (v0.2)
+  - marketing/marketing-strategy
+  - marketing/brand-identity
+  - marketing/trailer-script
+  - marketing/store-page
+  - marketing/social-media
+  - marketing/press-kit
+  # Core Design (v0.3 - NEW)
+  - core-design/mechanics
+  - core-design/progression
+  - core-design/loops
+  - core-design/systems
+  - core-design/agency
+  - core-design/playtest
+  - core-design/feel
+  - core-design/balance
+  - core-design/pillars
+  - core-design/depth
+  - core-design/pacing
