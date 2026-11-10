@@ -1,42 +1,54 @@
 # GD-KS instructions for ChatGPT Codex
 
-This repository uses the Game Development Knowledge System (GD-KS). Treat the
-`_gdks/` directory as framework source material and save generated deliverables
-under `_gdks-output/`.
+Apply this protocol when the user invokes a GD-KS command or asks to use a
+GD-KS agent or workflow. Use the communication language and output folder
+configured in `_gdks/_config/project-config.yaml`.
 
-## Starting a GD-KS workflow
+## Load and route the request
 
-1. Read `_gdks/_config/project-config.yaml` and
-   `_gdks/_config/manifest.yaml` to understand the installed modules,
-   selected engine, language, and output directory.
-2. For a requested role or command, read the relevant agent file from
-   `_gdks/<module>/agents/*.md` and follow its instructions.
-3. For a `*` command, locate the matching workflow below
-   `_gdks/<module>/workflows/`, read its `instructions.md`, and use its
-   templates when they exist.
-4. Write workflow deliverables only in the matching phase folder beneath
-   `_gdks-output/` unless the user explicitly requests another location.
+1. Read the project configuration, `_gdks/_config/manifest.yaml`, and
+   `_gdks/_state/project-state.yaml` if present. Use installed modules, the
+   selected engine, and recorded decisions as context. Installer defaults and
+   tutorial examples are not confirmed answers to workflow questions.
+2. Start with `_gdks/core/agents/gdks-master.md` for core commands or when
+   no agent is active. Resolve the command through the active agent's menu.
+   If the compiled Markdown omits the action mapping, check the corresponding
+   `.agent.yaml`. Resolve `{module}` to the installed module directory under
+   `_gdks/`. If the active menu has no match, look for the exact trigger in
+   the installed agents' menus. If there is no match or multiple matches,
+   ask which agent or workflow to use. For `*help`, show the menu and wait
+   for the user to choose.
+3. For a workflow, read its `workflow.yaml`, `instructions.md`, and the
+   referenced files for the current step. Use the workflow's inputs, ordered
+   steps, and templates. Check prerequisites and report missing dependencies.
 
-## GD-KS command conventions
+## Run workflows interactively
 
-- `*help`: show the active agent's available commands.
-- `*init`: initialize the GD-KS project workflow.
-- `*status`: inspect the current project state.
-- `*teams`: list installed teams and agents.
-- `*tutorial`: run the guided GD-KS tutorial.
+- Start at the first pending step, using saved progress when resuming. Follow
+  the workflow's sequence and pause at each input or confirmation point.
+- Ask the questions for the current step in the chat. Reuse answers the user
+  already gave or decisions already confirmed. Ask for missing information
+  and present any choices or proposed defaults as options.
+- End the reply when waiting for input or approval. Continue in the next
+  turn after receiving the answer. Silence, sample content, and suggested
+  defaults do not count as acceptance. A request to start a workflow is not
+  permission to answer its questions on the user's behalf.
+- Complete only the authorized steps. Write deliverables to the configured
+  output folder at the workflow's generation step. Preserve existing user work
+  and wait for any required approval before saving decisions, marking steps
+  complete, or starting a handoff. Use the GD-KS contract check before a phase
+  handoff.
 
-## Project-state discipline
+## Core workflows
 
-- Use `_gdks/_state/project-state.yaml` as the source of truth for current
-  phase and established decisions.
-- Review prior-phase outputs before creating a new deliverable.
-- Run the relevant GD-KS validation or handoff command before claiming a phase
-  is ready to advance.
-- Preserve existing user work; do not rewrite prior deliverables unless asked.
-
-## Output layout
-
-- `_gdks-output/01-ideation/`: concepts and research.
-- `_gdks-output/02-design/`: game design documents and creative direction.
-- `_gdks-output/03-planning/`: epics, stories, sprints, and risks.
-- `_gdks-output/04-engine/`: implementation architecture and specifications.
+- `*init`: Follow `_gdks/core/workflows/workflow-init/`. Gather the project
+  name, genre, description, team size, timeline, experience with the selected
+  engine, and documentation needs. Ask for anything missing and wait. Then
+  recommend Quick, Standard, or Full and wait for an explicit track choice
+  before writing `gdks-workflow-status.yaml`. The installed preset does not
+  select the workflow track.
+- `*tutorial`: Follow `_gdks/core/workflows/tutorial/` and its step files.
+  In normal mode, show the current step and wait for the user's continuation
+  before presenting the next one. Use fast, resume, or skip behavior only
+  when explicitly requested according to the tutorial instructions. Keep
+  tutorial progress and sample decisions in the tutorial sandbox.

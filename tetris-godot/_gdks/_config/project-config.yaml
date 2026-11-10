@@ -1,5 +1,5 @@
 project:
-  name: tetris-godot
+  name: tetris
   version: 0.1.0
 settings:
   output_folder: _gdks-output
