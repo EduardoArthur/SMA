@@ -1,0 +1,220 @@
+[gd_scene format=3 uid="uid://dekmdm2svvapi"]
+
+[ext_resource type="Script" uid="uid://w13830h31sje" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://b1qhica1fuyh0" path="res://scripts/board_view.gd" id="2_board"]
+[ext_resource type="Script" uid="uid://biud4pl4lsxgw" path="res://scripts/hud.gd" id="3_hud"]
+[ext_resource type="Texture2D" uid="uid://dkkkc051gwu4j" path="res://assets/synthwave_horizon.svg" id="4_horizon"]
+[ext_resource type="AudioStream" uid="uid://ceonpkc8k4a03" path="res://assets/main-theme.mp3" id="5_kiw3p"]
+[ext_resource type="Script" uid="uid://cpr2x3tbchvcm" path="res://scripts/line_clear_sound.gd" id="6_line_clear"]
+[ext_resource type="Script" uid="uid://s0expavvy2kk" path="res://scripts/pause_button.gd" id="7_pause"]
+
+[node name="Game" type="Control" unique_id=504396985]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_game")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1227479016]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_horizon")
+expand_mode = 1
+
+[node name="Title" type="Label" parent="." unique_id=254552344]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 38.0
+offset_right = 350.0
+offset_bottom = 93.0
+theme_override_colors/font_color = Color(0.29, 0.91, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.9, 0.1, 0.65, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 42
+text = "TETRIS"
+
+[node name="Subtitle" type="Label" parent="." unique_id=1780869135]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 94.0
+offset_right = 355.0
+offset_bottom = 124.0
+theme_override_colors/font_color = Color(1, 0.35, 0.65, 1)
+theme_override_font_sizes/font_size = 16
+text = "HORIZONTE SYNTHWAVE"
+
+[node name="Board" type="Control" parent="." unique_id=162653949]
+anchors_preset = 0
+offset_left = 430.0
+offset_top = 52.0
+offset_right = 850.0
+offset_bottom = 668.0
+script = ExtResource("2_board")
+
+[node name="ClearFlashTimer" type="Timer" parent="Board" unique_id=136262197]
+unique_name_in_owner = true
+
+[node name="HUD" type="Control" parent="." unique_id=817650010]
+anchors_preset = 0
+offset_left = 890.0
+offset_top = 150.0
+offset_right = 1170.0
+offset_bottom = 450.0
+script = ExtResource("3_hud")
+
+[node name="ScoreLabel" type="Label" parent="HUD" unique_id=326605344]
+layout_mode = 0
+offset_right = 270.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0.29, 0.91, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "PONTOS
+000000"
+
+[node name="HighScoreLabel" type="Label" parent="HUD" unique_id=1634570099]
+layout_mode = 0
+offset_top = 66.0
+offset_right = 270.0
+offset_bottom = 121.0
+theme_override_colors/font_color = Color(1, 0.53, 0.84, 1)
+theme_override_font_sizes/font_size = 19
+text = "RECORDE
+000000"
+
+[node name="HoldLabel" type="Label" parent="HUD" unique_id=1845980300]
+layout_mode = 0
+offset_top = 125.0
+offset_right = 270.0
+offset_bottom = 200.0
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 26
+text = "RESERVA
+—"
+
+[node name="HoldStatusLabel" type="Label" parent="HUD" unique_id=138650774]
+layout_mode = 0
+offset_top = 210.0
+offset_right = 270.0
+offset_bottom = 242.0
+theme_override_colors/font_color = Color(0.46, 0.97, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "C para trocar"
+
+[node name="NextLabel" type="Label" parent="HUD" unique_id=661211736]
+layout_mode = 0
+offset_top = 254.0
+offset_right = 156.0
+offset_bottom = 286.0
+theme_override_colors/font_color = Color(0.29, 0.91, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "PRÓXIMA"
+
+[node name="Controls" type="Label" parent="." unique_id=1638459456]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 500.0
+offset_right = 360.0
+offset_bottom = 665.0
+theme_override_colors/font_color = Color(0.7, 0.77, 0.95, 1)
+theme_override_font_sizes/font_size = 17
+text = "← →  mover
+↑  girar
+↓  acelerar
+ESPAÇO  queda
+C  reserva"
+
+[node name="FallTimer" type="Timer" parent="." unique_id=260293376]
+unique_name_in_owner = true
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1412803639]
+stream = ExtResource("5_kiw3p")
+volume_db = -9.0
+autoplay = true
+
+[node name="LineClearSound" type="AudioStreamPlayer" parent="." unique_id=57816617]
+volume_db = -8.0
+script = ExtResource("6_line_clear")
+
+[node name="GameOver" type="Control" parent="." unique_id=1128286802]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="GameOver" unique_id=1020106754]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.015, 0.02, 0.08, 0.84)
+
+[node name="Message" type="Label" parent="GameOver" unique_id=707944102]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 260.0
+offset_right = 930.0
+offset_bottom = 410.0
+theme_override_colors/font_color = Color(1, 0.36, 0.65, 1)
+theme_override_font_sizes/font_size = 54
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Detail" type="Label" parent="GameOver" unique_id=1034761172]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 345.0
+offset_right = 930.0
+offset_bottom = 390.0
+theme_override_colors/font_color = Color(0.35, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Recarregue a cena para jogar novamente"
+horizontal_alignment = 1
+
+[node name="PauseShade" type="ColorRect" parent="." unique_id=644974835]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.025, 0.015, 0.1, 0.73)
+
+[node name="Message" type="Label" parent="PauseShade" unique_id=265687487]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.35, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 54
+text = "PAUSADO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseButton" type="Button" parent="." unique_id=262332226]
+process_mode = 3
+layout_mode = 0
+offset_left = 1060.0
+offset_top = 38.0
+offset_right = 1230.0
+offset_bottom = 87.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 19
+text = "Pausar  [Esc]"
+script = ExtResource("7_pause")

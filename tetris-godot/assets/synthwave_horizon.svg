@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#080b21"/><stop offset=".72" stop-color="#341343"/><stop offset="1" stop-color="#721e62"/>
+    </linearGradient>
+    <linearGradient id="sun" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#ffb286"/><stop offset=".48" stop-color="#ff638b"/><stop offset="1" stop-color="#ec287e"/>
+    </linearGradient>
+    <clipPath id="disc"><circle cx="281" cy="315" r="142"/></clipPath>
+  </defs>
+  <path fill="#0b0c23" d="M0 0h1280v720H0z"/>
+  <path fill="url(#sky)" d="M0 0h1280v462H0z"/>
+  <path clip-path="url(#disc)" fill="url(#sun)" d="M139 173h284v153H139z M139 333h284v20H139z M139 362h284v17H139z M139 391h284v15H139z M139 420h284v12H139z M139 446h284v11H139z"/>
+  <path d="M0 462h1280" stroke="#f15aab" stroke-opacity=".7" stroke-width="2"/>
+  <path fill="none" stroke="#cf3eaa" stroke-opacity=".35" d="M680 462-730 720 M680 462-430 720 M680 462-130 720 M680 462 170 720 M680 462 470 720 M680 462 770 720 M680 462 1070 720 M680 462 1370 720 M680 462 1670 720 M680 462 1970 720 M0 477h1280 M0 496h1280 M0 524h1280 M0 564h1280 M0 624h1280 M0 708h1280"/>
+</svg>

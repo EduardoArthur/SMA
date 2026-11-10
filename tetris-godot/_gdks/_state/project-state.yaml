@@ -3,25 +3,38 @@ project:
   id: tetris-godot
   name: tetris-godot
   created_at: '2026-11-09T01:20:54.145Z'
-  updated_at: '2026-11-09T01:20:54.145Z'
+  updated_at: '2026-11-10T03:15:46.059Z'
 preset: solo-indie
 target_engine: godot-4
 language: pt-BR
-current_phase: 1
-phases_completed: []
-phases_in_progress: []
+current_phase: 4
+phases_completed: [1, 2]
+phases_in_progress: [4]
 phase_progress:
   '1':
-    status: not_started
-    deliverables: []
+    status: completed
+    completion_pct: 75
+    deliverables:
+      - id: concept-brief
+        path: _gdks-output/01-ideation/concept-brief.md
+        verified: true
+      - id: mechanics-exploration
+        path: _gdks-output/01-ideation/mechanics-exploration.md
+        verified: true
+      - id: ideation-handoff
+        path: _gdks-output/01-ideation/ideation-handoff.md
+        verified: true
   '2':
-    status: not_started
-    deliverables: []
+    status: completed
+    deliverables:
+      - id: gdd-main
+        path: _gdks-output/02-design/gdd/main.md
+        verified: true
   '3':
     status: not_started
     deliverables: []
   '4':
-    status: not_started
+    status: in_progress
     deliverables: []
 active_agents: []
 decisions: []

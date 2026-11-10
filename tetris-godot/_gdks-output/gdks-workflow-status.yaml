@@ -1,0 +1,99 @@
+# GD-KS Workflow Status Template
+# This template is used to generate the initial workflow status file
+
+# Project Information
+project:
+  name: "tetris"
+  codename: "tetris-godot"
+  description: "Tetris clássico de uma fase."
+  game_type: "Puzzle de blocos"
+  created_at: "2026-11-10T02:29:42.4684764+00:00"
+  updated_at: "2026-11-10T03:15:46.059Z"
+
+# Selected Track
+track:
+  selected: "standard"  # quick, standard, or full
+  phases: [ideation, design, engine]
+
+# Team Configuration
+team:
+  size: "solo"
+  experience_level: "beginner"
+
+# Current Status
+status:
+  current_phase: "engine"
+  current_agent: null
+  current_workflow: null
+  started_at: "2026-11-10T02:29:42.4684764+00:00"
+  last_activity: "2026-11-10T03:15:46.059Z"
+
+# Phase Progress
+phases:
+  ideation:
+    status: "completed"
+    started_at: "2026-11-10T02:29:42.4684764+00:00"
+    completed_at: "2026-11-10T02:52:23.403Z"
+    deliverables:
+      concept_brief: true
+      market_analysis: false
+      mechanics_exploration: true
+      ideation_handoff: true
+
+  design:
+    status: "completed"
+    started_at: "2026-11-10T02:52:23.403Z"
+    completed_at: "2026-11-10T03:15:46.059Z"
+    deliverables:
+      gdd: true
+      level_design: false
+      narrative_design: false
+      technical_design: false
+      art_bible: false
+      audio_bible: false
+      design_handoff: false
+
+  planning:
+    status: "not_started"
+    started_at: null
+    completed_at: null
+    deliverables:
+      roadmap: false
+      epics: false
+      stories: false
+      sprint_plan: false
+      planning_handoff: false
+
+  engine:
+    status: "in_progress"
+    started_at: "2026-11-10T03:15:46.059Z"
+    completed_at: null
+    deliverables:
+      ue5_architecture: false
+      cpp_specifications: false
+      blueprint_specifications: false
+      implementation_guides: false
+      llm_prompts: false
+
+# Activity Log
+activity_log:
+  - timestamp: "2026-11-10T02:29:42.4684764+00:00"
+    action: "workflow_initialized"
+    agent: "gdks-master"
+    details: "Project initialized with standard track"
+
+  - timestamp: "2026-11-10T02:52:23.403Z"
+    action: "phase_handoff"
+    agent: "ideation-coordinator"
+    details: "Contrato Ideação → Design validado manualmente. Três entregáveis obrigatórios verificados, 75% de conclusão e nenhuma questão bloqueante."
+
+  - timestamp: "2026-11-10T03:15:46.059Z"
+    action: "phase_handoff"
+    agent: "gdks-master"
+    details: "Passagem direta de Design para Implementação no Godot 4 pela trilha Standard, autorizada pelo usuário. Checagem manual do GDD e do projeto Godot. A instalação não tem contrato direto para esta transição."
+
+# Notas do projeto
+notes:
+  - "Análise de mercado dispensada pelo usuário. Entregável opcional no contrato Ideação → Design."
+  - "Engine: Godot 4. Experiência: iniciante."
+  - "Prazo: 1 semana. Documentação: mínima."
